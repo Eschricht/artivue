@@ -1,0 +1,31 @@
+{
+  "version": "1.0.0",
+  "private": true,
+  "description": "",
+  "author": "",
+  "license": "ISC",
+  "keywords": [],
+  "main": "index.js",
+  "scripts": {
+    "dev": "vitepress dev",
+    "build": "vitepress build",
+    "serve": "vitepress serve",
+    "preview": "vitepress preview"
+  },
+  "dependencies": {
+    "@vueuse/core": "10.1.2",
+    "artivue": "workspace:*",
+    "vue": "^3.4.15"
+  },
+  "devDependencies": {
+    "@artivue/unocss": "workspace:*",
+    "@iconify-json/bx": "^1.1.6",
+    "@iconify-json/fluent-emoji": "^1.1.13",
+    "@iconify-json/logos": "^1.1.30",
+    "@unocss/preset-icons": "^0.51.13",
+    "@unocss/preset-uno": "0.51.13",
+    "@unocss/preset-web-fonts": "^0.51.13",
+    "unocss": "^0.58.5",
+    "vitepress": "^1.0.0-rc.42"
+  }
+}

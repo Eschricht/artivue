@@ -1,0 +1,44 @@
+{
+  "name": "@artivue/unocss",
+  "type": "module",
+  "version": "0.1.15",
+  "author": "Eschricht <https://github.com/eschricht>",
+  "license": "MIT",
+  "homepage": "https://artivue.vercel.app/",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Eschricht/artivue.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Eschricht/artivue/issues"
+  },
+  "keywords": [
+    "unocss",
+    "preset",
+    "theming",
+    "styling",
+    "colors",
+    "vue"
+  ],
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.cjs"
+    }
+  },
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist",
+    "package.json"
+  ],
+  "scripts": {
+    "dev": "vite",
+    "build": "unbuild",
+    "preview": "vite preview"
+  },
+  "devDependencies": {
+    "@unocss/core": "^0.58.5",
+    "@unocss/preset-mini": "^0.58.5"
+  }
+}

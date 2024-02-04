@@ -1,0 +1,62 @@
+{
+  "name": "@artivue/nuxt",
+  "type": "module",
+  "version": "0.1.15",
+  "author": "Eschricht <https://github.com/eschricht>",
+  "license": "MIT",
+  "homepage": "https://artivue.vercel.app/",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Eschricht/artivue.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Eschricht/artivue/issues"
+  },
+  "keywords": [
+    "unocss",
+    "preset",
+    "theming",
+    "styling",
+    "colors",
+    "vue",
+    "nuxt"
+  ],
+  "exports": {
+    ".": {
+      "types": "./dist/types.d.ts",
+      "import": "./dist/module.mjs",
+      "require": "./dist/module.cjs"
+    }
+  },
+  "main": "dist/module.mjs",
+  "types": "dist/types.d.ts",
+  "files": [
+    "dist",
+    "index.d.ts",
+    "package.json "
+  ],
+  "scripts": {
+    "prepack": "nuxt-module-build build",
+    "lint": "eslint .",
+    "test": "vitest run",
+    "test:watch": "vitest watch"
+  },
+  "peerDependencies": {
+    "artivue": "workspace:*"
+  },
+  "dependencies": {
+    "@nuxt/kit": "^3.10.3"
+  },
+  "devDependencies": {
+    "@nuxt/devtools": "latest",
+    "@nuxt/module-builder": "^0.5.5",
+    "@nuxt/schema": "^3.10.3",
+    "@nuxt/test-utils": "^3.11.0",
+    "@types/node": "^20.11.27",
+    "artivue": "workspace:*",
+    "changelogen": "^0.5.5",
+    "eslint": "^8.57.0",
+    "nuxt": "^3.10.3",
+    "vitest": "^1.3.1"
+  }
+}

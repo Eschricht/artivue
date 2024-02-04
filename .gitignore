@@ -1,5 +1,6 @@
 # Editor directories and files
 .vscode/*
+!.vscode/settings.json
 !.vscode/extensions.json
 .idea
 .DS_Store
@@ -21,7 +22,10 @@ lerna-debug.log*
 node_modules
 dist
 *.local
+.nuxt
 
 # VitePress
 docs/.vitepress/dist
 docs/.vitepress/cache
+.vitepress/dist
+.vitepress/cache

@@ -1,5 +1,5 @@
 {
-  "extends": "@vue/tsconfig/tsconfig.dom.json",
+  "extends": "../../tsconfig.json",
   "compilerOptions": {
     "target": "esnext",
     "jsx": "preserve",
@@ -11,12 +11,8 @@
     "module": "esnext",
     "moduleResolution": "node",
     "paths": {
-      "artivue": ["./packages/artivue/src"],
-      "artivue/*": ["./packages/artivue/src/*"],
-      "@artivue/unocss": ["./packages/unocss/src"],
-      "@artivue/unocss/*": ["./packages/unocss/src/*"],
-      "@artivue/nuxt": ["./packages/nuxt/src"],
-      "@artivue/nuxt/*": ["./packages/nuxt/src/*"]
+      "artivue/*": ["./src/*"],
+      "artivue": ["./src/index.ts"]
     },
     "resolveJsonModule": true,
     "types": [
@@ -25,17 +21,10 @@
     "strict": true,
     "strictNullChecks": true,
     "noUncheckedIndexedAccess": true,
+    "noEmit": false,
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
     "skipDefaultLibCheck": true,
     "skipLibCheck": true
-  },
-  "include": [
-    "./packages/*/src/**/*"
-  ],
-  "exclude": [
-    "**/dist/**",
-    "**/node_modules/**",
-    "**/playground/**"
-  ]
+  }
 }
