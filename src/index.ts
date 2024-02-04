@@ -54,28 +54,87 @@ export const presetHsl = definePreset(() => ({
         return undefined
 
       return {
-        [`--un-${m}-opacity`]: opacityToDecimal(opacity),
-        [`--un-${m}-hue`]: `${colorAsHsl[0]}deg`,
-        [`--un-${m}-saturation`]: `${colorAsHsl[1]}%`,
-        [`--un-${m}-lightness`]: `${colorAsHsl[2]}%`,
-        [property]: `hsl(var(--un-${m}-hue, 0) var(--un-${m}-saturation, 0) var(--un-${m}-lightness, 0) \/ var(--un-${m}-opacity, 1))`,
+        [`--un-hsl-${m}-alpha-base`]: opacityToDecimal(opacity),
+        [`--un-hsl-${m}-hue-base`]: `${colorAsHsl[0]}deg`,
+        [`--un-hsl-${m}-saturation-base`]: `${colorAsHsl[1]}%`,
+        [`--un-hsl-${m}-lightness-base`]: `${colorAsHsl[2]}%`,
+        [`--un-hsl-${m}-alpha`]: opacityToDecimal(opacity),
+        [`--un-hsl-${m}-hue`]: `${colorAsHsl[0]}deg`,
+        [`--un-hsl-${m}-saturation`]: `${colorAsHsl[1]}%`,
+        [`--un-hsl-${m}-lightness`]: `${colorAsHsl[2]}%`,
+        [property]: `hsl(var(--un-hsl-${m}-hue, 0) var(--un-hsl-${m}-saturation, 0) var(--un-hsl-${m}-lightness, 0)  / var(--un-hsl-${m}-alpha, 1))`,
       }
     }],
     [/^(bg|text|color|border)-hsl$/, ([, m]) => {
       const property = Object.keys(propertyMap).find(p => propertyMap[p as keyof typeof propertyMap].includes(m)) as string
 
       return {
-        [property]: `hsl(var(--un-${m}-hue, 0) var(--un-${m}-saturation, 0) var(--un-${m}-lightness, 0) \/ var(--un-${m}-opacity, 1))`,
+        [property]: `hsl(var(--un-hsl-${m}-hue, 0) var(--un-hsl-${m}-saturation, 0) var(--un-hsl-${m}-lightness, 0) / var(--un-hsl-${m}-alpha, 1))`,
       }
     }],
-    [/^(bg|text|color|border)-hsl-(hue|saturation|lightness|opacity)-(\d+)$/, ([, m, hsl, level]) => {
+    [/^(bg|text|color|border)-hsl-(hue|saturation|lightness|opacity|alpha)-(\d+)$/, ([, m, hsl, level]) => {
       const hslHelper = hslHelpers[hsl]
       const levelParsed = Number.parseInt(level)
-      const property = hsl === 'alpha' ? 'opacity' : hsl
+      const property = hsl === 'opacity' ? 'alpha' : hsl
 
       if (hslHelper && levelParsed >= hslHelper.range[0] && levelParsed <= hslHelper.range[1]) {
         return {
-          [`--un-${m}-${property}`]: hslHelper.formatter(levelParsed),
+          [`--un-hsl-${m}-${property}`]: hslHelper.formatter(levelParsed),
+        }
+      }
+
+      return undefined
+    }],
+    [/^(bg|text|color|border)-hsl-darken-(\d+)$/, ([, m, level]) => {
+      const levelParsed = Number.parseInt(level)
+
+      if (levelParsed >= 0 && levelParsed <= 100) {
+        return {
+          [`--un-hsl-${m}-lightness`]: `calc(var(--un-hsl-${m}-lightness-base) - ${levelParsed}%)`,
+        }
+      }
+
+      return undefined
+    }],
+    [/^(bg|text|color|border)-hsl-lighten-(\d+)$/, ([, m, level]) => {
+      const levelParsed = Number.parseInt(level)
+
+      if (levelParsed >= 0 && levelParsed <= 100) {
+        return {
+          [`--un-hsl-${m}-lightness`]: `calc(var(--un-hsl-${m}-lightness-base) + ${levelParsed}%)`,
+        }
+      }
+
+      return undefined
+    }],
+    [/^(bg|text|color|border)-hsl-spin-(\d+)$/, ([, m, level]) => {
+      const levelParsed = Number.parseInt(level)
+
+      if (levelParsed >= 0 && levelParsed <= 360) {
+        return {
+          [`--un-hsl-${m}-hue`]: `calc(var(--un-hsl-${m}-hue-base) + ${levelParsed}deg)`,
+        }
+      }
+
+      return undefined
+    }],
+    [/^(bg|text|color|border)-hsl-desaturate-(\d+)$/, ([, m, level]) => {
+      const levelParsed = Number.parseInt(level)
+
+      if (levelParsed >= 0 && levelParsed <= 100) {
+        return {
+          [`--un-hsl-${m}-saturation`]: `calc(var(--un-hsl-${m}-saturation-base) - ${levelParsed}%)`,
+        }
+      }
+
+      return undefined
+    }],
+    [/^(bg|text|color|border)-hsl-saturate-(\d+)$/, ([, m, level]) => {
+      const levelParsed = Number.parseInt(level)
+
+      if (levelParsed >= 0 && levelParsed <= 100) {
+        return {
+          [`--un-hsl-${m}-saturation`]: `calc(var(--un-hsl-${m}-saturation-base) + ${levelParsed}%)`,
         }
       }
 

@@ -1,12 +1,12 @@
 import {
   defineConfig,
-  presetUno,
+  presetMini,
 } from 'unocss'
 import presetHsl from '../../src'
 
 export default defineConfig({
   presets: [
-    presetUno(),
+    presetMini(),
     presetHsl(),
   ],
 })

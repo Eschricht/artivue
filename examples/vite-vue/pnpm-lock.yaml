@@ -16,9 +16,6 @@ devDependencies:
   '@vitejs/plugin-vue':
     specifier: ^4.5.2
     version: 4.6.2(vite@5.0.12)(vue@3.4.15)
-  typescript:
-    specifier: ^5.2.2
-    version: 5.3.3
   unocss:
     specifier: ^0.58.4
     version: 0.58.5(postcss@8.4.33)(vite@5.0.12)

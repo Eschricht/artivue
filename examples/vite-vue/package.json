@@ -14,7 +14,6 @@
   "devDependencies": {
     "@unocss/reset": "^0.58.4",
     "@vitejs/plugin-vue": "^4.5.2",
-    "typescript": "^5.2.2",
     "unocss": "^0.58.4",
     "vite": "^5.0.8",
     "vue-tsc": "^1.8.25"
