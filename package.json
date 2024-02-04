@@ -1,0 +1,48 @@
+{
+  "name": "@eschricht/preset-hsl",
+  "version": "0.0.1",
+  "description": "",
+  "author": "",
+  "license": "ISC",
+  "sideEffects": false,
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.cjs"
+    },
+    "./utils": {
+      "types": "./dist/utils.d.ts",
+      "import": "./dist/utils.mjs",
+      "require": "./dist/utils.cjs"
+    },
+    "./*": "./*"
+  },
+  "main": "dist/index.cjs",
+  "module": "dist/index.mjs",
+  "types": "dist/index.d.ts",
+  "files": [
+    "*.d.ts",
+    "dist"
+  ],
+  "scripts": {
+    "build": "unbuild"
+  },
+  "peerDependencies": {
+    "@unocss/preset-mini": ">= 0.56.0 < 1",
+    "unocss": ">= 0.56.0 < 1"
+  },
+  "devDependencies": {
+    "@antfu/eslint-config": "^2.6.4",
+    "@types/node": "^20.11.16",
+    "@unocss/core": ">= 0.58.4 < 1",
+    "@unocss/eslint-config": "^0.58.4",
+    "@unocss/preset-mini": ">= 0.58.4 < 1",
+    "eslint": "npm:eslint-ts-patch@8.56.0-0",
+    "eslint-plugin-format": "^0.1.0",
+    "eslint-ts-patch": "8.56.0-0",
+    "std-env": "^3.7.0",
+    "typescript": "^5.3.3",
+    "unbuild": "^2.0.0"
+  }
+}
