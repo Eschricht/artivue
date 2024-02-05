@@ -60,13 +60,16 @@ Get ready to unleash the power of HSL in your designs:
    </div>
  </div>
 ```
+
 ## Preset Rules
 
 | Rule | Description |
 |------|-------------|
 | `<bg\|text\|border>-hsl-<color>` | Sets a base HSL color |
 | `<bg\|text\|border>-hsl` | Apply inherited HSL CSS variables |
-| `<bg\|text\|border>-hsl-<hue\|saturation\|lightness>-<level>` | Fine-tune HSL components individually |
+| `<bg\|text\|border>-hsl-<hue\|saturation\|lightness\|alpha>-<level>` | Fine-tune HSL components individually |
 | `<bg\|text\|border>-hsl-<darken\|lighten\|saturate\|desaturate\|spin>-<level>` | Dynamically modify inherited HSL values |
 
-
+## TODO
+- [ ] Combine HSL colors with linear-gradient
+- [ ] Combine HSL colors with color of box-shadow
