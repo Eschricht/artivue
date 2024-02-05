@@ -13,63 +13,70 @@ Welcome to the HSL Color Preset for UnoCSS – your new best friend for crafting
 ### Installation
 
 First things first, let's add `unocss-preset-hsl` to your project:
- ```bash
- pnpm add -D unocss-preset-hsl
- ```
+
+```bash
+pnpm add -D unocss-preset-hsl
+```
 
 ### Configuration
 
 Next up, configure your uno.config.ts to include the HSL preset:
- ```typescript
- import {
-   defineConfig,
-   presetMini,
- } from 'unocss'
- import presetHsl from 'unocss-preset-hsl'
-  
- export default defineConfig({
-   presets: [
-     presetMini(), // Optional but recommended to include any preset that extends presetMini for theme color enhancements
-     presetHsl(),
-   ],
- })
- ```
+
+```typescript
+import {
+  defineConfig,
+  presetMini,
+} from 'unocss'
+import presetHsl from 'unocss-preset-hsl'
+
+export default defineConfig({
+  presets: [
+    presetMini(), // Optional but recommended to include any preset that extends presetMini for theme color enhancements
+    presetHsl(),
+  ],
+})
+```
 
 ## Usage
 
 Get ready to unleash the power of HSL in your designs:
 
 ```html
- <!-- Set base HSL colors -->
- <div
-   class="p-4 min-h-screen bg-hsl-22252e border-hsl-gray-500 text-hsl-light-100"
- >
-   <!-- Reuse HSL values and modify with darken, lighten, saturate and more -->
-   <div class="p-4 inline-block border rounded-lg bg-hsl border-hsl border-hsl-darken-20 bg-hsl-lighten-2">
-     <label>
-       <p>Hello World</p>
+<!-- Set base HSL colors -->
+<div
+  class="p-4 min-h-screen bg-hsl-22252e border-hsl-gray-500 text-hsl-light-100"
+>
+  <!-- Reuse HSL values and modify with darken, lighten, saturate and more -->
+  <div
+    class="p-4 inline-block border rounded-lg bg-hsl border-hsl border-hsl-darken-20 bg-hsl-lighten-2"
+  >
+    <label>
+      <p>Hello World</p>
 
-       <input
-         placeholder="Enter a value"
-         class="px-2 border rounded-md outline-none transition-all duration-300 bg-hsl border-hsl border-hsl-darken-10 bg-hsl-lighten-5 focus:border-hsl-teal placeholder:text-hsl focus:border-hsl-darken-20 placeholder:text-hsl-darken-50 focus:-bg-hsl-spin-100"
-       >
-       <p class="text-xs text-hsl text-hsl-darken-30">
-         Theming made easy with HSL colors
-       </p>
-     </label>
-   </div>
- </div>
+      <input
+        placeholder="Enter a value"
+        class="px-2 border rounded-md outline-none transition-all duration-300 bg-hsl border-hsl border-hsl-darken-10 bg-hsl-lighten-5 focus:border-hsl-teal placeholder:text-hsl focus:border-hsl-darken-20 placeholder:text-hsl-darken-50 focus:-bg-hsl-spin-100"
+      />
+      <p class="text-xs text-hsl text-hsl-darken-30">
+        Theming made easy with HSL colors
+      </p>
+    </label>
+  </div>
+</div>
+
 ```
 
 ## Preset Rules
 
-| Rule | Description |
-|------|-------------|
-| `<bg\|text\|border>-hsl-<color>` | Sets a base HSL color |
-| `<bg\|text\|border>-hsl` | Apply inherited HSL CSS variables |
-| `<bg\|text\|border>-hsl-<hue\|saturation\|lightness\|alpha>-<level>` | Fine-tune HSL components individually |
+| Rule                                                                           | Description                             |
+| ------------------------------------------------------------------------------ | --------------------------------------- |
+| `<bg\|text\|border>-hsl-<color>`                                               | Sets a base HSL color                   |
+| `<bg\|text\|border>-hsl`                                                       | Apply inherited HSL CSS variables       |
+| `<bg\|text\|border>-hsl-<hue\|saturation\|lightness\|alpha>-<level>`           | Fine-tune HSL components individually   |
 | `<bg\|text\|border>-hsl-<darken\|lighten\|saturate\|desaturate\|spin>-<level>` | Dynamically modify inherited HSL values |
 
 ## TODO
+
+- [ ] Add tests
 - [ ] Combine HSL colors with linear-gradient
 - [ ] Combine HSL colors with box-shadow
