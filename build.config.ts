@@ -19,6 +19,13 @@ export default defineBuildConfig({
   declaration: true,
   rollup: {
     emitCJS: true,
+    esbuild: {
+      minify: true,
+    },
+    output: {
+      compact: true,
+      minifyInternalExports: true,
+    },
     dts: {
       respectExternal: false,
     },
