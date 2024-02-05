@@ -6,6 +6,7 @@ export default defineBuildConfig({
   entries: [
     'src/index',
     'src/utils',
+    'src/types',
   ],
   externals: [
     '@unocss/core',
