@@ -19,6 +19,7 @@
         <p class="text-xs text-hsl text-hsl-darken-30">
           Theming made easy with HSL colors
         </p>
+
       </label>
     </div>
   </div>
