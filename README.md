@@ -72,4 +72,4 @@ Get ready to unleash the power of HSL in your designs:
 
 ## TODO
 - [ ] Combine HSL colors with linear-gradient
-- [ ] Combine HSL colors with color of box-shadow
+- [ ] Combine HSL colors with box-shadow
