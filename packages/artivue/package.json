@@ -1,0 +1,35 @@
+{
+  "name": "artivue",
+  "type": "module",
+  "version": "0.0.0",
+  "private": true,
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.cjs"
+    }
+  },
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist",
+    "package.json"
+  ],
+  "scripts": {
+    "dev": "vite",
+    "build": "unbuild",
+    "preview": "vite preview"
+  },
+  "peerDependencies": {
+    "@vueuse/core": ">= 9.6.0",
+    "vue": ">= 3.0.0"
+  },
+  "dependencies": {
+    "colord": "^2.9.3"
+  },
+  "devDependencies": {
+    "@vueuse/core": "^10.7.2",
+    "unbuild": "^2.0.0",
+    "vue": "^3.4.15"
+  }
+}

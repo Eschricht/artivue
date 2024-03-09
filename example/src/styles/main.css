@@ -1,0 +1,7 @@
+:root {
+  @apply min-h-screen artivue-surface-var artivue-text-var text-13px;
+}
+
+button {
+  @apply font-semibold tracking-widest;
+}

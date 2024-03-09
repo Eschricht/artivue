@@ -1,2 +1,2 @@
 // To make @unocss/eslint-plugin work
-export { default } from './examples/vite-vue/uno.config'
+export { default } from './example/uno.config'

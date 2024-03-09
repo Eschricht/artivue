@@ -1,5 +1,0 @@
-export * from './hexToHsl'
-export * from './hexToRgb'
-export * from './normalizeHex'
-export * from './rgbToHsl'
-export * from './verifyHex'
