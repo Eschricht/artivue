@@ -1,8 +1,25 @@
 {
-  "name": "artivue-test",
+  "name": "artivue",
   "type": "module",
   "version": "0.0.2",
   "private": true,
+  "description": "A Vue plugin to create layered theming and styling",
+  "author": "Eschricht <https://github.com/eschricht>",
+  "license": "MIT",
+  "homepage": "https://github.com/Eschricht/artivue/blob/main/README.md",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Eschricht/artivue.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Eschricht/artivue/issues"
+  },
+  "keywords": [
+    "theming",
+    "styling",
+    "colors",
+    "vue"
+  ],
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
@@ -25,11 +42,13 @@
     "vue": ">= 3.0.0"
   },
   "dependencies": {
-    "colord": "^2.9.3"
+    "@unhead/vue": "^1.8.12",
+    "colord": "^2.9.3",
+    "unhead": "^1.8.12"
   },
   "devDependencies": {
-    "@vueuse/core": "^10.7.2",
+    "@vueuse/core": "^10.9.0",
     "unbuild": "^2.0.0",
-    "vue": "^3.4.15"
+    "vue": "^3.4.21"
   }
 }

@@ -1,8 +1,10 @@
-import { useStyleTag } from '@vueuse/core'
-import { type Plugin, type Ref, type UnwrapNestedRefs, computed, reactive, ref } from 'vue'
+import { type Plugin, type Ref, computed, reactive, ref } from 'vue'
+import { useHead } from '@unhead/vue'
 import { resolveTheme, themeToVars, themes } from './_theme'
 import { GLOBAL_BASE_THEME_DATA, LAYER_THEME_DATA } from './symbols'
 import { themeVarsToCSS } from './_theme/themeVarsToCss'
+
+type UseHeadReturn = Exclude<ReturnType<typeof useHead>, void>
 
 const defaultOptions = {
   theme: themes.DEFAULT,
@@ -12,7 +14,7 @@ const defaultOptions = {
 
 type Options = Partial<typeof defaultOptions>
 
-export const plugin: Plugin<[_options: Options]> = {
+export const plugin: Plugin<[_options?: Options]> = {
   install(app, _options = {}) {
     const options = { ...defaultOptions, ..._options }
 
@@ -26,9 +28,17 @@ export const plugin: Plugin<[_options: Options]> = {
       ].join(' ')
     })
 
-    const baseStyleTag = useStyleTag(styleClass, { id: `${options.prefix}-base` })
+    const baseStyleTag = useHead({
+      style: [
+        {
+          id: `${options.prefix}-base`,
+          key: `${options.prefix}-base`,
+          textContent: styleClass,
+        },
+      ],
+    }) as UseHeadReturn
 
-    const layerSubscriptions = reactive<Record<string, UnwrapNestedRefs<ReturnType<typeof useStyleTag>> & {
+    const layerSubscriptions = reactive<Record<string, UseHeadReturn & {
       subscribers: number
     }>>({
       base: reactive({
@@ -40,7 +50,15 @@ export const plugin: Plugin<[_options: Options]> = {
     const subscribe = (key: string, css: Ref<string>) => {
       const entry = layerSubscriptions[key]
       if (entry === undefined) {
-        const styleTag = useStyleTag(css, { id: `${options.prefix}-${key}` })
+        const styleTag = useHead({
+          style: [
+            {
+              id: `${options.prefix}-${key}`,
+              key: `${options.prefix}-${key}`,
+              textContent: css,
+            },
+          ],
+        }) as Exclude<ReturnType<typeof useHead>, void>
 
         layerSubscriptions[key] = reactive({
           ...styleTag,
@@ -61,7 +79,7 @@ export const plugin: Plugin<[_options: Options]> = {
       entry.subscribers -= 1
 
       if (entry.subscribers === 0) {
-        entry.unload()
+        entry.dispose()
         delete layerSubscriptions[key]
       }
     }
