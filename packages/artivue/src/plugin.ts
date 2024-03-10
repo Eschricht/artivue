@@ -1,5 +1,5 @@
 import { type Plugin, type Ref, computed, reactive, ref } from 'vue'
-import { useHead } from '@unhead/vue'
+import { createHead, useHead } from '@unhead/vue'
 import { resolveTheme, themeToVars, themes } from './_theme'
 import { GLOBAL_BASE_THEME_DATA, LAYER_THEME_DATA } from './symbols'
 import { themeVarsToCSS } from './_theme/themeVarsToCss'
@@ -14,88 +14,97 @@ const defaultOptions = {
 
 type Options = Partial<typeof defaultOptions>
 
-export const plugin: Plugin<[_options?: Options]> = {
-  install(app, _options = {}) {
-    const options = { ...defaultOptions, ..._options }
+export function createArtivue(_options: Options = {}): Plugin {
+  return {
+    install(app) {
+      if (app.config.globalProperties.$unhead === undefined && app.config.globalProperties.$head === undefined) {
+        const head = createHead()
+        app.use(head)
+      }
 
-    const theme = ref(options.theme)
-    const resolvedTheme = computed(() => options.resolver(theme.value, 0))
-    const isDark = computed(() => resolvedTheme.value.surface.isDark())
+      const options = { ...defaultOptions, ..._options }
 
-    const styleClass = computed(() => {
-      return [
-        themeVarsToCSS(themeToVars(resolvedTheme.value, `-${options.prefix}`)),
-      ].join(' ')
-    })
+      const theme = ref(options.theme)
+      const resolvedTheme = computed(() => options.resolver(theme.value, 0))
+      const isDark = computed(() => resolvedTheme.value.surface.isDark())
 
-    const baseStyleTag = useHead({
-      style: [
-        {
-          id: `${options.prefix}-base`,
-          key: `${options.prefix}-base`,
-          textContent: styleClass,
-        },
-      ],
-    }) as UseHeadReturn
+      const styleClass = computed(() => {
+        return [
+          themeVarsToCSS(themeToVars(resolvedTheme.value, `-${options.prefix}`)),
+        ].join(' ')
+      })
 
-    const layerSubscriptions = reactive<Record<string, UseHeadReturn & {
-      subscribers: number
-    }>>({
-      base: reactive({
-        ...baseStyleTag,
-        subscribers: 1,
-      }),
-    })
-
-    const subscribe = (key: string, css: Ref<string>) => {
-      const entry = layerSubscriptions[key]
-      if (entry === undefined) {
-        const styleTag = useHead({
+      app.runWithContext(() => {
+        const baseStyleTag = useHead({
           style: [
             {
-              id: `${options.prefix}-${key}`,
-              key: `${options.prefix}-${key}`,
-              textContent: css,
+              id: `${options.prefix}-base`,
+              key: `${options.prefix}-base`,
+              textContent: styleClass,
             },
           ],
-        }) as Exclude<ReturnType<typeof useHead>, void>
+        }) as UseHeadReturn
 
-        layerSubscriptions[key] = reactive({
-          ...styleTag,
-          subscribers: 1,
+        const layerSubscriptions = reactive<Record<string, UseHeadReturn & {
+          subscribers: number
+        }>>({
+          base: reactive({
+            ...baseStyleTag,
+            subscribers: 1,
+          }),
         })
-      }
-      else {
-        entry.subscribers += 1
-      }
-    }
 
-    const unsubscribe = (key: string) => {
-      const entry = layerSubscriptions[key]
+        const subscribe = (key: string, css: Ref<string>) => {
+          const entry = layerSubscriptions[key]
+          if (entry === undefined) {
+            const styleTag = useHead({
+              style: [
+                {
+                  id: `${options.prefix}-${key}`,
+                  key: `${options.prefix}-${key}`,
+                  textContent: css,
+                },
+              ],
+            }) as Exclude<ReturnType<typeof useHead>, void>
 
-      if (entry === undefined)
-        return
+            layerSubscriptions[key] = reactive({
+              ...styleTag,
+              subscribers: 1,
+            })
+          }
+          else {
+            entry.subscribers += 1
+          }
+        }
 
-      entry.subscribers -= 1
+        const unsubscribe = (key: string) => {
+          const entry = layerSubscriptions[key]
 
-      if (entry.subscribers === 0) {
-        entry.dispose()
-        delete layerSubscriptions[key]
-      }
-    }
+          if (entry === undefined)
+            return
 
-    app.provide(GLOBAL_BASE_THEME_DATA, {
-      theme,
-      resolver: options.resolver,
-      prefix: options.prefix,
-      subscribe,
-      unsubscribe,
-      isDark,
-    })
+          entry.subscribers -= 1
 
-    app.provide(LAYER_THEME_DATA, {
-      layer: ref(0),
-      resolvedTheme,
-    })
-  },
+          if (entry.subscribers === 0) {
+            entry.dispose()
+            delete layerSubscriptions[key]
+          }
+        }
+
+        app.provide(GLOBAL_BASE_THEME_DATA, {
+          theme,
+          resolver: options.resolver,
+          prefix: options.prefix,
+          subscribe,
+          unsubscribe,
+          isDark,
+        })
+      })
+
+      app.provide(LAYER_THEME_DATA, {
+        layer: ref(0),
+        resolvedTheme,
+      })
+    },
+  }
 }
