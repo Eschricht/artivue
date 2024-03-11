@@ -1,1 +1,0 @@
-export { default } from "/home/johannes-nortic/private/unocss/node_modules/.pnpm/@nuxt+ui-templates@1.3.1/node_modules/@nuxt/ui-templates/dist/templates/welcome.vue";

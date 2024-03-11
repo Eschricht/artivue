@@ -22,11 +22,10 @@ lerna-debug.log*
 node_modules
 dist
 *.local
+.nuxt
 
 # VitePress
 docs/.vitepress/dist
 docs/.vitepress/cache
 .vitepress/dist
 .vitepress/cache
-
-.nuxt
