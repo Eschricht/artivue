@@ -1,7 +1,7 @@
 {
   "name": "@artivue/nuxt",
   "type": "module",
-  "version": "0.0.2",
+  "version": "0.0.1",
   "author": "Eschricht <https://github.com/eschricht>",
   "license": "MIT",
   "homepage": "https://github.com/Eschricht/artivue/blob/main/README.md",
@@ -43,7 +43,7 @@
   },
   "dependencies": {
     "@nuxt/kit": "^3.10.3",
-    "artivue": "file:/home/johannes-nortic/private/artivue-0.0.0.tgz"
+    "artivue": "workspace:*"
   },
   "devDependencies": {
     "@nuxt/devtools": "latest",
