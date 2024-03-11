@@ -8,10 +8,10 @@
     "moduleResolution": "bundler",
     "paths": {
       "~/*": ["src/*"],
-      "@artivue/unocss": ["../packages/unocss/src/index.ts"],
-      "@artivue/unocss/*": ["../packages/uno-theme-maker/src/*"],
-      "artivue": ["../packages/artivue/src/index.ts"],
-      "artivue/*": ["../packages/artivue/src/*"]
+      "@artivue/unocss": ["../..rc/index.ts"],
+      "@artivue/unocss/*": ["../../packages/uno-theme-maker/src/*"],
+      "artivue": ["../../packages/artivue/src/index.ts"],
+      "artivue/*": ["../../packages/artivue/src/*"]
     },
     "resolveJsonModule": true,
     "types": [

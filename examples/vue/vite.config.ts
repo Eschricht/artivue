@@ -14,8 +14,8 @@ export default defineConfig({
   resolve: {
     alias: {
       '~/': `${path.resolve(__dirname, 'src')}/`,
-      '@artivue/unocss': `${path.resolve(__dirname, '../packages/unocss/src')}/`,
-      'artivue': `${path.resolve(__dirname, '../packages/artivue/src')}/`,
+      '@artivue/unocss': `${path.resolve(__dirname, '../../packages/unocss/src')}/`,
+      'artivue': `${path.resolve(__dirname, '../../packages/artivue/src')}/`,
     },
   },
 
