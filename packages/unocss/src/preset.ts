@@ -63,7 +63,7 @@ export function presetArtivue(_options: Partial<Options> = {}): Preset<Theme> {
       }],
 
       // UI Shortcuts
-      [`${prefix}-button`, `px-1em h-2.5em rounded-md text-center border inline-flex items-center disabled:opacity-50 disabled:cursor-not-allowed ${prefix}-border-var transition-property-[background-color,border-color,color] duration-300`],
+      [`${prefix}-button`, `px-1em h-2em rounded-md text-center border inline-flex items-center disabled:opacity-50 disabled:cursor-not-allowed ${prefix}-border-var transition-property-[background-color,border-color,color] duration-300`],
 
       [`${prefix}-button-solid`, [
         `${prefix}-button bg-[rgba(var(--${prefix}-btn-bg,var(--${prefix}-action)))]`,
@@ -95,7 +95,7 @@ export function presetArtivue(_options: Partial<Options> = {}): Preset<Theme> {
       [`${prefix}-card`, `${prefix}-surface-var border ${prefix}-border-var`],
 
       // Input
-      [`${prefix}-input-base`, `w-64 ${prefix}-border-var rounded-md inline-flex border outline-none min-h-2.5em focus:border-${prefix}-accent-var focus-within:border-${prefix}-accent-var transition-colors duration-300`],
+      [`${prefix}-input-base`, `w-64 ${prefix}-border-var rounded-md inline-flex border outline-none min-h-2em focus:border-${prefix}-accent-var focus-within:border-${prefix}-accent-var transition-colors duration-300`],
 
       [`${prefix}-input`, `${prefix}-input-base ${prefix}-input-var focus:${prefix}-input-focus-var focus-within:${prefix}-input-focus-var`],
     ],

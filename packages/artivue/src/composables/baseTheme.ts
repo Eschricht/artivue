@@ -1,6 +1,6 @@
 import { type MaybeRef, type UnwrapRef, inject, unref } from 'vue'
 import { GLOBAL_BASE_THEME_DATA } from '../symbols'
-import { themes } from '..'
+import { themes } from '../_theme'
 
 export function useBaseTheme() {
   const globalData = inject(GLOBAL_BASE_THEME_DATA)
@@ -10,6 +10,7 @@ export function useBaseTheme() {
 
   const {
     theme,
+    isDark,
   } = globalData
 
   const setGlobalTheme = (newTheme: MaybeRef<UnwrapRef<typeof theme>> = themes.DEFAULT) => {
@@ -19,5 +20,6 @@ export function useBaseTheme() {
   return {
     setGlobalTheme,
     theme,
+    isDark,
   }
 }

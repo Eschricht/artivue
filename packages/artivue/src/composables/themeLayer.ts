@@ -1,4 +1,4 @@
-import { type MaybeRef, computed, inject, onUnmounted, provide, unref, watch } from 'vue'
+import { type MaybeRef, computed, inject, onUnmounted, provide, unref } from 'vue'
 import { GLOBAL_BASE_THEME_DATA, LAYER_THEME_DATA } from '../symbols'
 import type { BaseTheme } from '../_theme'
 import { resolvedToBase, themeToVars } from '../_theme'

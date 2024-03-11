@@ -12,7 +12,7 @@ const defaultOptions = {
   prefix: 'artivue',
 }
 
-type Options = Partial<typeof defaultOptions>
+export type Options = Partial<typeof defaultOptions>
 
 export function createArtivue(_options: Options = {}): Plugin {
   return {
