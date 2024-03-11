@@ -1,6 +1,5 @@
 {
   "name": "artivue",
-  "version": "0.0.0",
   "private": true,
   "packageManager": "pnpm@8.14.2",
   "description": "Say goodbye to the endless cycle of picking shades like bg-dark-200 and hello to a world where creating the perfect color is a breeze",
