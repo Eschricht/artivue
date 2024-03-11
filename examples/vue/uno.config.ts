@@ -6,7 +6,7 @@ import {
   presetWebFonts,
   transformerDirectives,
 } from 'unocss'
-import { presetArtivue } from '../packages/unocss/src'
+import { presetArtivue } from '../../packages/unocss/src'
 
 export default defineConfig({
   shortcuts: [
