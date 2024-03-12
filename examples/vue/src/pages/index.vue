@@ -4,12 +4,12 @@ import { themes, useBaseTheme } from 'artivue'
 const currentTheme = ref<keyof typeof themes | undefined>()
 
 const {
-  setGlobalTheme,
+  setBaseTheme,
 } = useBaseTheme()
 
 watch(currentTheme, (newTheme) => {
   if (newTheme)
-    setGlobalTheme(themes[newTheme])
+    setBaseTheme(themes[newTheme])
 })
 </script>
 

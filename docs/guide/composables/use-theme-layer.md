@@ -7,7 +7,7 @@ import { useBaseTheme, themes } from 'artivue'
 import { useData } from 'vitepress'
 
 const {
-  setGlobalTheme,
+  setBaseTheme,
   isDark,
 } = useBaseTheme()
 

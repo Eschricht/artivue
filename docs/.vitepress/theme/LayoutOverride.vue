@@ -9,12 +9,12 @@ const {
   isDark: isVitepressDark,
 } = useData()
 const {
-  setGlobalTheme,
+  setBaseTheme,
   isDark,
 } = useBaseTheme()
 
 watch(isVitepressDark, (val) => {
-  setGlobalTheme(val ? themes.dark : themes.light)
+  setBaseTheme(val ? themes.dark : themes.light)
 })
 
 watch(isDark, (val) => {

@@ -13,12 +13,12 @@ export function useBaseTheme() {
     isDark,
   } = globalData
 
-  const setGlobalTheme = (newTheme: MaybeRef<UnwrapRef<typeof theme>> = themes.DEFAULT) => {
+  const setBaseTheme = (newTheme: MaybeRef<UnwrapRef<typeof theme>> = themes.DEFAULT) => {
     theme.value = { ...unref(newTheme) }
   }
 
   return {
-    setGlobalTheme,
+    setBaseTheme,
     theme,
     isDark,
   }

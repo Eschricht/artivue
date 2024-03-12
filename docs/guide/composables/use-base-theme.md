@@ -11,11 +11,11 @@ import { themes, useBaseTheme } from 'artivue'
 const {
   theme,
   isDark,
-  setGlobalTheme,
+  setBaseTheme,
 } = useBaseTheme()
 
 function switchTheme() {
-  setGlobalTheme(isDark.value ? themes.light : themes.dark)
+  setBaseTheme(isDark.value ? themes.light : themes.dark)
 }
 </script>
 ```

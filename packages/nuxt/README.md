@@ -50,10 +50,10 @@ Here's how you can toggle themes in a component:
 <script setup>
 import { themes } from 'artivue';
 
-const { setGlobalTheme, isDark } = useBaseTheme();
+const { setBaseTheme, isDark } = useBaseTheme();
 
 function toggleTheme() {
-  setGlobalTheme(isDark.value ? themes.light : themes.dark);
+  setBaseTheme(isDark.value ? themes.light : themes.dark);
 }
 </script>
 ```

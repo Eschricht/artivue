@@ -57,17 +57,19 @@ Allow users to switch themes dynamically using `useBaseTheme`:
 
 ```vue
 <script setup>
-import { useBaseTheme, themes } from 'artivue';
+import { themes, useBaseTheme } from 'artivue'
 
-const { setGlobalTheme, isDark } = useBaseTheme();
+const { setBaseTheme, isDark } = useBaseTheme()
 
-const toggleTheme = () => {
-  setGlobalTheme(isDark.value ? themes.light : themes.dark);
-};
+function toggleTheme() {
+  setBaseTheme(isDark.value ? themes.light : themes.dark)
+}
 </script>
 
 <template>
-  <button @click="toggleTheme">Toggle Theme</button>
+  <button @click="toggleTheme">
+    Toggle Theme
+  </button>
 </template>
 ```
 
@@ -77,9 +79,9 @@ Enhance component visuals with layered themes using `useThemeLayer`:
 
 ```vue
 <script setup>
-import { useThemeLayer } from 'artivue';
+import { useThemeLayer } from 'artivue'
 
-const { className } = useThemeLayer(1.5); // Adjust the layer intensity
+const { className } = useThemeLayer(1.5) // Adjust the layer intensity
 </script>
 
 <template>

@@ -4,7 +4,7 @@ import { themes, useBaseTheme } from 'artivue'
 const {
   theme: defaultTheme,
   isDark: isCurrentDark,
-  setGlobalTheme,
+  setBaseTheme,
 } = useBaseTheme()
 
 const keys = ['surfaceColor', 'surfaceTextColor', 'accentColor', 'accentTextColor'] as const
@@ -19,7 +19,7 @@ const keyMap: Record<typeof keys[number], string> = {
 const themeKeys = Object.keys(themes).filter(_theme => _theme !== 'DEFAULT') as Array<keyof typeof themes>
 
 function onSelectingTheme(themeName: keyof typeof themes) {
-  setGlobalTheme(themes[themeName])
+  setBaseTheme(themes[themeName])
 }
 </script>
 
