@@ -15,10 +15,15 @@ hero:
     alt: Artivue
 
 features:
-  - title: Feature A
-    details: Lorem ipsum dolor sit amet, consectetur adipiscing elit
-  - title: Feature B
-    details: Lorem ipsum dolor sit amet, consectetur adipiscing elit
-  - title: Feature C
-    details: Lorem ipsum dolor sit amet, consectetur adipiscing elit
+  - icon: 🎨
+    title: Dynamic Theme Switching
+    details: Toggle themes on-the-fly for light/dark mode or custom palettes, enhancing UX with minimal code.
+
+  - icon: ⚙️
+    title: Easy Theme Customization
+    details: Define custom themes to align with your brand, using a simple and intuitive API.
+
+  - icon: 🚀
+    title: SSR Support
+    details: Built for SSR compatibility, ensuring consistent, fast loading themes in Nuxt projects.
 ---
