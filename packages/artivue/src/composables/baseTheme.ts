@@ -6,7 +6,7 @@ export function useBaseTheme() {
   const globalData = inject(GLOBAL_BASE_THEME_DATA)
 
   if (!globalData)
-    throw new Error('Nortic UI is not installed')
+    throw new Error('Artivue is not installed')
 
   const {
     theme,

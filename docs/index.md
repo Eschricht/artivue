@@ -3,16 +3,16 @@
 layout: home
 
 hero:
-  name: "Nortic UI"
-  text: "A collection of Nortic Vue Components"
-  tagline: My great project tagline
+  name: "Artivue"
+  text: "Dynamic nuanced theming"
+  tagline: Streamline Theming in Vue with Ease
   actions:
     - theme: brand
-      text: Markdown Examples
-      link: /markdown-examples
-    - theme: alt
-      text: API Examples
-      link: /api-examples
+      text: Getting started
+      link: /guide/
+  image:
+    src: /logo.svg
+    alt: Artivue
 
 features:
   - title: Feature A
@@ -22,4 +22,3 @@ features:
   - title: Feature C
     details: Lorem ipsum dolor sit amet, consectetur adipiscing elit
 ---
-

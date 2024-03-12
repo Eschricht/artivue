@@ -1,4 +1,5 @@
 import { type MaybeRef, computed, inject, onUnmounted, provide, unref } from 'vue'
+import { useHead } from '@unhead/vue'
 import { GLOBAL_BASE_THEME_DATA, LAYER_THEME_DATA } from '../symbols'
 import type { BaseTheme } from '../_theme'
 import { resolvedToBase, themeToVars } from '../_theme'
@@ -15,31 +16,37 @@ export function useThemeLayer(levelIncrease: MaybeRef<number> = 0, customTheme: 
   const globalConfig = inject(GLOBAL_BASE_THEME_DATA)
 
   if (!themeLevel || !globalConfig)
-    throw new Error('Nortic UI is not installed')
+    throw new Error('Artivue is not installed')
 
-  const { layer: parentLevel, resolvedTheme } = themeLevel
+  const { layer: parentLevel, resolvedTheme, id: parentId } = themeLevel
   const currentLevel = computed(() => parentLevel.value + unref(levelIncrease))
 
-  const _id = customTheme ? getId() : `${currentLevel.value}`
+  const uniqueId = getId()
 
-  const id = computed(() => `${globalConfig.prefix}-${_id}`)
+  const id = computed(() => customTheme ? `${globalConfig.prefix}-${uniqueId}` : `${globalConfig.prefix}-${unref(parentId)}-${currentLevel.value}`)
 
-  const toBaseTheme = computed<BaseTheme>(() => customTheme ?? resolvedToBase(resolvedTheme.value))
+  const toBaseTheme = computed<BaseTheme>(() => customTheme ?? resolvedToBase({ ...resolvedTheme.value }))
   const localTheme = computed(() => globalConfig.resolver(toBaseTheme.value, unref(levelIncrease)))
   const isDark = computed(() => localTheme.value.surface.isDark())
   const cssVars = computed(() => {
     return themeVarsToCSS(themeToVars(localTheme.value, `-${globalConfig.prefix}`), `.${id.value}`)
   })
+  const providerId = computed(() => customTheme ? uniqueId : unref(parentId))
 
-  globalConfig.subscribe(_id, cssVars)
-
-  onUnmounted(() => {
-    globalConfig.unsubscribe(_id)
+  useHead({
+    style: [
+      {
+        id,
+        key: id,
+        textContent: cssVars,
+      },
+    ],
   })
 
   provide(LAYER_THEME_DATA, {
     layer: currentLevel,
     resolvedTheme: localTheme,
+    id: providerId,
   })
 
   return {

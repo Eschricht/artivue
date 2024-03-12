@@ -35,6 +35,7 @@
     "dev": "vite",
     "build": "unbuild",
     "preview": "vite preview"
+
   },
   "peerDependencies": {
     "@vueuse/core": ">= 9.6.0",

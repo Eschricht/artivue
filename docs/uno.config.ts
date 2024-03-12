@@ -1,6 +1,7 @@
-import { presetNortic } from '@nortic/vue-ui'
+import { presetArtivue } from '@artivue/unocss'
 import {
   defineConfig,
+  presetAttributify,
   presetIcons,
   presetUno,
   presetWebFonts,
@@ -22,12 +23,21 @@ export default defineConfig({
       },
     }),
 
-    // nortic-vue preset
-    presetNortic(),
+    // Artivue preset
+    presetArtivue(),
+    presetAttributify({
+      prefix: 'un-',
+      prefixedOnly: true,
+    }),
   ],
   transformers: [
     transformerVariantGroup(),
     transformerDirectives(),
   ],
-  include: [/.*\/nortic-vue-ui\.js(.*)?$/, './**/*.vue', './**/*.md'],
+
+  content: {
+    pipeline: {
+      include: ['./**/*.vue', './**/*.md'],
+    },
+  },
 })

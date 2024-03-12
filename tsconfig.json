@@ -10,14 +10,6 @@
     "baseUrl": ".",
     "module": "esnext",
     "moduleResolution": "node",
-    "paths": {
-      "@nortic/vue-ui": [
-        "./packages/nortic-vue-ui/src/index.ts"
-      ],
-      "@/*": [
-        "./packages/nortic-vue-ui/src/*"
-      ]
-    },
     "resolveJsonModule": true,
     "types": [
       "node"

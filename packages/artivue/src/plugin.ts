@@ -35,7 +35,7 @@ export function createArtivue(_options: Options = {}): Plugin {
       })
 
       app.runWithContext(() => {
-        const baseStyleTag = useHead({
+        useHead({
           style: [
             {
               id: `${options.prefix}-base`,
@@ -45,58 +45,10 @@ export function createArtivue(_options: Options = {}): Plugin {
           ],
         }) as UseHeadReturn
 
-        const layerSubscriptions = reactive<Record<string, UseHeadReturn & {
-          subscribers: number
-        }>>({
-          base: reactive({
-            ...baseStyleTag,
-            subscribers: 1,
-          }),
-        })
-
-        const subscribe = (key: string, css: Ref<string>) => {
-          const entry = layerSubscriptions[key]
-          if (entry === undefined) {
-            const styleTag = useHead({
-              style: [
-                {
-                  id: `${options.prefix}-${key}`,
-                  key: `${options.prefix}-${key}`,
-                  textContent: css,
-                },
-              ],
-            }) as Exclude<ReturnType<typeof useHead>, void>
-
-            layerSubscriptions[key] = reactive({
-              ...styleTag,
-              subscribers: 1,
-            })
-          }
-          else {
-            entry.subscribers += 1
-          }
-        }
-
-        const unsubscribe = (key: string) => {
-          const entry = layerSubscriptions[key]
-
-          if (entry === undefined)
-            return
-
-          entry.subscribers -= 1
-
-          if (entry.subscribers === 0) {
-            entry.dispose()
-            delete layerSubscriptions[key]
-          }
-        }
-
         app.provide(GLOBAL_BASE_THEME_DATA, {
           theme,
           resolver: options.resolver,
           prefix: options.prefix,
-          subscribe,
-          unsubscribe,
           isDark,
         })
       })
@@ -104,6 +56,7 @@ export function createArtivue(_options: Options = {}): Plugin {
       app.provide(LAYER_THEME_DATA, {
         layer: ref(0),
         resolvedTheme,
+        id: 'base',
       })
     },
   }

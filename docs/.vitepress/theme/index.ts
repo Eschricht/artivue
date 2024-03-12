@@ -1,10 +1,18 @@
 import DefaultTheme from 'vitepress/theme'
+import { createArtivue, themes } from 'artivue'
+import LayoutOverride from './LayoutOverride.vue'
+
+import './custom.css'
+
 import 'virtual:uno.css'
 
-import { plugin } from '@nortic/vue-ui'
-
 DefaultTheme.enhanceApp = ({ app }) => {
-  app.use(plugin)
+  app.use(createArtivue({
+    theme: themes.dark,
+  }))
 }
 
-export default DefaultTheme
+export default {
+  extends: DefaultTheme,
+  Layout: LayoutOverride,
+}

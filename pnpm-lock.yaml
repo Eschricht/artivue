@@ -53,6 +53,9 @@ importers:
 
   docs:
     dependencies:
+      '@artivue/unocss':
+        specifier: workspace:*
+        version: link:../packages/unocss
       '@vueuse/core':
         specifier: 10.1.2
         version: 10.1.2(vue@3.4.21)

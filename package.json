@@ -48,14 +48,14 @@
     "dist"
   ],
   "scripts": {
-    "build": "tsx ./scripts/build.ts",
+    "build": "tsx ./scripts/build.ts && pnpm docs:build",
     "clean": "rimraf packages/*/dist",
     "lint": "eslint .",
     "lint:fix": "eslint --fix .",
     "ts-check": "vue-tsc --noEmit",
-    "docs:dev": "vitepress dev docs",
-    "docs:build": "vitepress build docs",
-    "docs:preview": "vitepress preview docs",
+    "docs:preview": "pnpm -r --filter=./docs preview",
+    "docs:build": "pnpm -r --filter=./docs build",
+    "docs:dev": "pnpm -r --filter=./docs dev",
     "release": "bumpp packages/**/package.json"
   },
   "devDependencies": {
