@@ -27,7 +27,7 @@ Based on your current theme configuration, Artivue generates a set of CSS variab
 ```
 
 > [!NOTE]
-> This is automatically injected to your application, powered by `@unhead/vue`.
+> This is automatically injected to your application, powered by [`@unhead/vue`](https://unhead.unjs.io/).
 
 ## Usage
 

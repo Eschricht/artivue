@@ -12,7 +12,7 @@ const {
 } = useBaseTheme()
 
 const { isDark: isVitepressDark } = useData()
- 
+
 function switchTheme() {
   isVitepressDark.value = !isVitepressDark.value
 }
@@ -49,11 +49,16 @@ const {
   background-color: rgba(var(--artivue-surface), 1);
   border: 1px solid rgba(var(--artivue-border), 1);
   border-radius: 0.5em;
-  padding: 0.5em;
+  padding: 1em;
   color: rgba(var(--artivue-text), 1);
 }
 </style>
 ```
+
+Output:
+<Card un-p="4">
+Hello world!
+</Card>
 
 ## How does it work?
 
@@ -76,7 +81,7 @@ It is possible to nest the composable, the generated variables will be based on 
 
 Example:
 <Card un-m="y-4" un-p="4">
-  I'm in a layer!
+I'm in a layer!
 </Card>
 
 <Card class="[&_p]:(m-0)" un-p="4">
@@ -86,11 +91,13 @@ Example:
     <Card un-p="4">
       <p>Hello world</p>
       <div class="mb-6">
-        <ArtivueInput class="" />
+        <ArtivueInput un-w="full" un-min="w-0" un-max="w-xs" placeholder="Themed input!" />
       </div>
-      <p>Is dark: {{ isVitepressDark }}</p>
+      <div class="vp-doc" un-m="y-2">
+        <p>Is dark: <code>{{ isVitepressDark }}</code></p>
+      </div>
       <button class="artivue-button artivue-button-accent artivue-button-solid" @click="switchTheme()">
-        Click me
+        Click me to toggle stuff
       </button>
     </Card>
   </Card>
@@ -120,6 +127,7 @@ const {
 
 Example:
 <CustomThemedLayer v-slot="{ className }">
+
   <div :class="className" un-text="artivue-text">
     <Card class="[&_p]:(m-0)" un-p="4">
       <p un-m="b-4!">I have a custom theme</p>

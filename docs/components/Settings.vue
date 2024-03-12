@@ -25,9 +25,9 @@ function onSelectingTheme(themeName: keyof typeof themes) {
 
 <template>
   <div>
-    <div un-inline="flex" un-gap="4">
+    <div un-inline="flex" un-flex="wrap" un-gap="4">
       <label v-for="key in keys" :key="key">
-        <p un-text="xs" un-m="b-1!">{{ keyMap[key] }}</p>
+        <p un-text="xs" un-m="b-1! t-0!">{{ keyMap[key] }}</p>
         <label un-artivue="input" un-p="x-2" un-inline="flex" un-items="center" un-gap="2" un-w="fit">
           <input v-model="defaultTheme[key]" un-h="1.5em" un-bg="transparent" type="color">
           <span un-text="artivue-text-alt-3 sm">{{ defaultTheme[key] }}</span>
@@ -38,7 +38,7 @@ function onSelectingTheme(themeName: keyof typeof themes) {
     <p un-text="xs" un-m="t-4 b-1!">
       Presets
     </p>
-    <div un-m="b-4" un-inline="flex" un-gap="4">
+    <div un-m="b-4" un-inline="flex" un-flex="wrap" un-gap="4">
       <button v-for="theme in themeKeys" :key="theme" un-artivue-button="~ solid" un-p="l-0" un-flex="~" un-overflow="hidden" un-gap="1em" @click="onSelectingTheme(theme)">
         <div un-h="full" un-border="r artivue-action">
           <div :style="{ background: themes[theme].surfaceColor }" un-p="2" un-w="2em" un-h="full">
