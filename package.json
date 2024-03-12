@@ -53,9 +53,9 @@
     "lint": "eslint .",
     "lint:fix": "eslint --fix .",
     "ts-check": "vue-tsc --noEmit",
-    "docs:preview": "pnpm -r --filter=./docs preview",
+    "docs:preview": "vitepress preview docs",
     "docs:build": "vitepress build docs",
-    "docs:dev": "pnpm -r --filter=./docs dev",
+    "docs:dev": "vitepress dev docs",
     "release": "bumpp packages/**/package.json"
   },
   "devDependencies": {
