@@ -13,12 +13,12 @@
     "preview": "vitepress preview"
   },
   "dependencies": {
-    "@artivue/unocss": "workspace:*",
     "@vueuse/core": "10.1.2",
     "artivue": "workspace:*",
     "vue": "^3.4.15"
   },
   "devDependencies": {
+    "@artivue/unocss": "workspace:*",
     "@iconify-json/bx": "^1.1.6",
     "@iconify-json/fluent-emoji": "^1.1.13",
     "@iconify-json/logos": "^1.1.30",
