@@ -11,7 +11,7 @@ function getId() {
   return Array.from({ length: 6 }, () => idGen[Math.floor(Math.random() * idGen.length)]).join('')
 }
 
-export function useThemeLayer(multiplier?: MaybeRef<number>, customTheme: BaseTheme | undefined = undefined) {
+export function useThemeLayer(multiplier?: MaybeRef<number | undefined>, customTheme: BaseTheme | undefined = undefined) {
   const levelIncrease = computed(() => {
     const _multiplier = unref(multiplier)
 
