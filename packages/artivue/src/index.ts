@@ -1,3 +1,4 @@
+import type { Options } from './plugin'
 import { createArtivue } from './plugin'
 
 export * from './types'
@@ -9,3 +10,5 @@ export {
 }
 
 export default createArtivue
+
+export type { Options }

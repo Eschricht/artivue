@@ -10,6 +10,7 @@ import 'virtual:uno.css'
 DefaultTheme.enhanceApp = ({ app }) => {
   app.use(createArtivue({
     theme: themes.dark,
+    registerComponents: true,
   }))
 }
 

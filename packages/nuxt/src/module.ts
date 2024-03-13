@@ -1,14 +1,21 @@
-import { addComponent, addImports, addPluginTemplate, createResolver, defineNuxtModule } from '@nuxt/kit'
-import type { Options } from 'artivue'
+import { addComponent, addImports, addPlugin, addPluginTemplate, createResolver, defineNuxtModule } from '@nuxt/kit'
 
-export default defineNuxtModule<Omit<Options, 'registerComponents'>>({
+import type { ModuleOptions } from '@nuxt/schema'
+
+export default defineNuxtModule<ModuleOptions>({
   meta: {
     name: 'artivue',
     configKey: 'artivue',
   },
   defaults: {},
-  setup(moduleOptions) {
+  setup(moduleOptions, nuxt) {
     const resolver = createResolver(import.meta.url)
+
+    // Add plugin
+    nuxt.options.runtimeConfig.public.artivue = {
+      ...moduleOptions,
+      registerComponents: false,
+    }
 
     addImports([{
       name: 'useThemeLayer',
@@ -26,11 +33,6 @@ export default defineNuxtModule<Omit<Options, 'registerComponents'>>({
       filePath: 'artivue/components',
     })
 
-    addPluginTemplate({
-      src: resolver.resolve('runtime/plugin.ts'),
-      options: {
-        ...moduleOptions,
-      },
-    })
+    addPlugin(resolver.resolve('./runtime/plugin'))
   },
 })

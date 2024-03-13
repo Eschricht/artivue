@@ -1,6 +1,6 @@
 import { type Plugin, computed, ref } from 'vue'
 import { createHead, useHead } from '@unhead/vue'
-import { resolveTheme, themeToVars, themes, type BaseTheme, type ColordTheme } from './_theme'
+import { type BaseTheme, type ColordTheme, resolveTheme, themeToVars, themes } from './_theme'
 import { GLOBAL_BASE_THEME_DATA, LAYER_THEME_DATA } from './symbols'
 import { themeVarsToCSS } from './_theme/themeVarsToCss'
 import * as components from './components'
@@ -8,10 +8,10 @@ import * as components from './components'
 type UseHeadReturn = Exclude<ReturnType<typeof useHead>, void>
 
 export type Options = Partial<{
-  theme: BaseTheme,
-  resolver: (theme: BaseTheme, layer: number) => ColordTheme,
-  prefix: string,
-  registerComponents: boolean,
+  theme: BaseTheme
+  resolver: (theme: BaseTheme, layer: number) => ColordTheme
+  prefix: string
+  registerComponents: boolean
 }>
 
 const defaultOptions: Required<Options> = {
@@ -20,7 +20,6 @@ const defaultOptions: Required<Options> = {
   prefix: 'artivue',
   registerComponents: true,
 }
-
 
 export function createArtivue(_options: Options = {}): Plugin {
   return {
@@ -33,7 +32,7 @@ export function createArtivue(_options: Options = {}): Plugin {
       const options = { ...defaultOptions, ..._options }
 
       if (options.registerComponents) {
-        for (const key of Object.keys(components))
+        for (const [key] of Object.entries(components))
           app.component(key, components[key as keyof typeof components])
       }
 

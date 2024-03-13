@@ -23,15 +23,17 @@
   ],
   "exports": {
     ".": {
-      "types": "./dist/module.d.ts",
+      "types": "./dist/types.d.ts",
       "import": "./dist/module.mjs",
       "require": "./dist/module.cjs"
     }
   },
-  "types": "./dist/types.d.ts",
+  "main": "dist/module.mjs",
+  "types": "dist/types.d.ts",
   "files": [
     "dist",
-    "package.json"
+    "index.d.ts",
+    "package.json "
   ],
   "scripts": {
     "build": "nuxt-module-build build",

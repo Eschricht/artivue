@@ -1,15 +1,14 @@
-import type { Options, themes } from 'artivue'
-import { createArtivue } from 'artivue'
-import { defineNuxtPlugin, useCookie } from '#app'
+import { type BaseTheme, createArtivue, themes } from 'artivue'
+import { defineNuxtPlugin, useCookie, useRuntimeConfig } from '#imports'
 
 export default defineNuxtPlugin(({ vueApp }) => {
-  const options = JSON.parse('<%= JSON.stringify(options) %>') as unknown as Options
+  const { artivue } = useRuntimeConfig().public
 
-  const theme = useCookie<typeof themes['DEFAULT'] | undefined>('artivue-custom-theme', { default: undefined })
+  const theme = useCookie<BaseTheme | undefined>('artivue-custom-theme', { default: undefined })
 
   const plugin = createArtivue({
-    ...options,
-    theme: theme.value || options.theme,
+    ...artivue,
+    theme: theme.value || artivue.theme || themes.DEFAULT,
     registerComponents: false,
   })
 

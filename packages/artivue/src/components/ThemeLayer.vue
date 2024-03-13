@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { type Component, toRefs } from 'vue'
-import { useThemeLayer } from 'artivue'
-import type { BaseTheme } from 'artivue'
+import { type BaseTheme, useThemeLayer } from '../index'
 
 defineOptions({
   inheritAttrs: false,
