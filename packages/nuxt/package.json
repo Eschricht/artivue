@@ -1,7 +1,7 @@
 {
   "name": "@artivue/nuxt",
   "type": "module",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "author": "Eschricht <https://github.com/eschricht>",
   "license": "MIT",
   "homepage": "https://github.com/Eschricht/artivue/blob/main/README.md",
@@ -36,9 +36,9 @@
     "package.json "
   ],
   "scripts": {
+    "prepack": "nuxt-module-build",
     "build": "nuxt-module-build build",
     "prepare": "nuxt-module-build build --stub && nuxt-module-build prepare",
-    "release": "npm run lint && npm run test && npm run prepack && changelogen --release && npm publish && git push --follow-tags",
     "lint": "eslint .",
     "test": "vitest run",
     "test:watch": "vitest watch"
