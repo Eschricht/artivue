@@ -1,4 +1,4 @@
-import { type MaybeRef, computed, inject, onUnmounted, provide, unref } from 'vue'
+import { type MaybeRef, computed, inject, provide, unref } from 'vue'
 import { useHead } from '@unhead/vue'
 import { GLOBAL_BASE_THEME_DATA, LAYER_THEME_DATA } from '../symbols'
 import type { BaseTheme } from '../_theme'
@@ -11,7 +11,15 @@ function getId() {
   return Array.from({ length: 6 }, () => idGen[Math.floor(Math.random() * idGen.length)]).join('')
 }
 
-export function useThemeLayer(levelIncrease: MaybeRef<number> = 0, customTheme: BaseTheme | undefined = undefined) {
+export function useThemeLayer(multiplier?: MaybeRef<number>, customTheme: BaseTheme | undefined = undefined) {
+  const levelIncrease = computed(() => {
+    const _multiplier = unref(multiplier)
+
+    if (_multiplier === undefined)
+      return customTheme ? 0 : 1
+
+    return _multiplier
+  })
   const themeLevel = inject(LAYER_THEME_DATA)
   const globalConfig = inject(GLOBAL_BASE_THEME_DATA)
 
@@ -19,7 +27,7 @@ export function useThemeLayer(levelIncrease: MaybeRef<number> = 0, customTheme: 
     throw new Error('Artivue is not installed')
 
   const { layer: parentLevel, resolvedTheme, id: parentId } = themeLevel
-  const currentLevel = computed(() => parentLevel.value + unref(levelIncrease))
+  const currentLevel = computed(() => parentLevel.value + levelIncrease.value)
 
   const uniqueId = getId()
 

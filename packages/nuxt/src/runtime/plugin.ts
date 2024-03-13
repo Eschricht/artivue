@@ -10,6 +10,7 @@ export default defineNuxtPlugin(({ vueApp }) => {
   const plugin = createArtivue({
     ...options,
     theme: theme.value || options.theme,
+    registerComponents: false,
   })
 
   vueApp.use(plugin)

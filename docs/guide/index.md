@@ -24,7 +24,7 @@ npm install artivue
 
 Then, install add the plugin in your entry file
 
-```ts
+```typescript
 // main.ts
 import { createApp } from 'vue'
 import { createArtivue, themes } from 'artivue'
@@ -41,13 +41,14 @@ app.mount('#app')
 
 You can optionally specify the initial theme to use, either with your own definitions or use a provided theme
 
-```ts
+```typescript
 import { themes } from 'artivue'
 
 const artivuePlugin = createArtivue({ theme: themes.dark })
+
 ```
 
-```ts
+```typescript
 const artivuePlugin = createArtivue({
   theme: {
     accentColor: '#2b6be3',

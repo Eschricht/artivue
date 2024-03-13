@@ -40,4 +40,8 @@ export default defineConfig({
       include: ['./**/*.vue', './**/*.md'],
     },
   },
+
+  shortcuts: [
+    ['card', 'bg-artivue-surface border border-solid border-artivue-border rounded-lg p-4 [&>p]:my-0'],
+  ],
 })

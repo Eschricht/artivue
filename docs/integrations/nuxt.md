@@ -22,7 +22,7 @@ npm install @artivue/nuxt
 
 Add the module
 
-```ts
+```typescript
 // nuxt.config.ts
 export default defineNuxtConfig({
   modules: [

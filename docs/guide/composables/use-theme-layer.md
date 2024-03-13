@@ -32,7 +32,7 @@ const {
   isDark,
   // The current theme variables (ComputedRef)
   theme,
-} = useThemeLayer(1)
+} = useThemeLayer()
 </script>
 
 <template>
@@ -105,16 +105,15 @@ I'm in a layer!
 
 ## Advanced
 
-It's also possible to ignore the base theme completely and pass a custom theme
+It's also possible to override the base theme completely and pass a custom theme.
+
+The first argument can also be used without overriding the theme and is a tint/shade multiplier. If a custom theme isn't provided the default value is 1 otherwise it's 0.
 
 ```vue
 <script setup>
 const {
-  // Use this on the element where you want to start overriding
   className,
-  // A computed which tells if the current theme is dark or not
   isDark,
-  // The current theme variables
   theme,
 } = useThemeLayer(0, {
   surfaceColor: '#589edf',
@@ -137,3 +136,16 @@ Example:
     </Card>
   </div>
 </CustomThemedLayer>
+
+## Type reference
+
+```typescript
+function useThemeLayer(
+  multiplier?: MaybeRef<number>,
+  customTheme?: BaseTheme
+): {
+  className: ComputedRef<string>;
+  theme: ComputedRef<ColordTheme>;
+  isDark: ComputedRef<boolean>;
+};
+```

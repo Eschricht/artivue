@@ -20,6 +20,11 @@ const mainSideBar = [{
     { text: 'useThemeLayer', link: '/guide/composables/use-theme-layer' },
   ],
 }, {
+  text: 'Components',
+  items: [
+    { text: 'ThemeLayer', link: '/guide/components/theme-layer' },
+  ],
+}, {
   text: 'Integrations',
   items: [
     { text: 'Nuxt', link: '/integrations/nuxt' },
@@ -50,6 +55,7 @@ export default defineConfig({
   themeConfig: {
     // https://vitepress.dev/reference/default-theme-config
     logo: '/logo.svg',
+
     nav: [
       { text: 'Guide', link: '/guide/index' },
       { text: 'Theme settings', link: '/settings' },
@@ -58,6 +64,7 @@ export default defineConfig({
     sidebar: {
       '/guide/': mainSideBar,
       '/integrations/': mainSideBar,
+      '/components/': mainSideBar,
     },
 
     socialLinks: [

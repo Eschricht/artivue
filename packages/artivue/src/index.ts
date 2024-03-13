@@ -7,3 +7,5 @@ export * from './composables'
 export {
   createArtivue,
 }
+
+export default createArtivue

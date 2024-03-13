@@ -10,6 +10,10 @@
     "baseUrl": ".",
     "module": "esnext",
     "moduleResolution": "node",
+    "paths": {
+      "artivue/*": ["./packages/artivue/src/*"],
+      "artivue": ["./packages/artivue/src/index.ts"]
+    },
     "resolveJsonModule": true,
     "types": [
       "node"

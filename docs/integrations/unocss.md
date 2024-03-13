@@ -22,7 +22,7 @@ npm install @artivue/unocss
 
 ## Add preset
 
-```ts
+```typescript
 // uno.config.ts
 import { presetArtivue } from '@artivue/unocss'
 import {
