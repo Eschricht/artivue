@@ -1,6 +1,6 @@
 # `ThemeLayer` component
 
-The `ThemeLayer` is a component that simply wraps [useThemeLayer composable](/guides/composables/use-theme-layer).
+The `ThemeLayer` is a component that simply wraps [useThemeLayer composable](/guide/composables/use-theme-layer).
 
 ## Props
 
@@ -40,7 +40,7 @@ The slot passes the values returned from `useThemeLayer`:
 
 ```vue
 <template>
-  <ThemeLayer v-slot="{ className }"">
+  <ThemeLayer v-slot="{ className }">
     <div :class="className" class="card">
       <p>Hello world</p>
     </div>
