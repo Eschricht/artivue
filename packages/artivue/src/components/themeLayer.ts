@@ -1,5 +1,6 @@
-import { type Component, type PropType, type SlotsType, defineComponent, h, toRefs } from 'vue'
-import { type BaseTheme, useThemeLayer } from '..'
+import { type Component, type PropType, type SlotsType, type UnwrapNestedRefs, defineComponent, h, toRefs } from 'vue'
+import type { BaseTheme } from '..'
+import { useThemeLayer } from '../composables'
 
 interface Props {
   is?: string | Component
@@ -28,7 +29,7 @@ export const ThemeLayer = defineComponent({
     },
   },
   slots: Object as SlotsType<{
-    default: ReturnType<typeof useThemeLayer>
+    default: UnwrapNestedRefs<ReturnType<typeof useThemeLayer>>
   }>,
   setup(props, { slots, attrs }) {
     const { multiplier, theme } = toRefs(props)
@@ -39,21 +40,23 @@ export const ThemeLayer = defineComponent({
       isDark,
     } = useThemeLayer(multiplier, theme.value)
 
-    const slotContent = slots.default({
-      theme: newTheme,
-      isDark,
-      className,
-    })
-
     return () => {
       if (props.is) {
         return h(props.is, {
-          className,
+          className: className.value,
           ...attrs,
-        }, slotContent)
+        }, slots.default({
+          theme: newTheme.value,
+          isDark: isDark.value,
+          className: className.value,
+        }))
       }
       else {
-        return slotContent
+        return slots.default({
+          theme: newTheme.value,
+          isDark: isDark.value,
+          className: className.value,
+        })
       }
     }
   },

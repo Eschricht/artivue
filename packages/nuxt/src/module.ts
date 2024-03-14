@@ -31,9 +31,9 @@ export default defineNuxtModule<ModuleOptions>({
     addComponent({
       name: 'ThemeLayer',
       export: 'ThemeLayer',
-      filePath: 'artivue/components',
+      filePath: 'artivue',
     })
 
-    addPlugin(resolver.resolve('runtime', 'plugin'))
+    addPlugin(resolver.resolve('runtime/plugin'))
   },
 })

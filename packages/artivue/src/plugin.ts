@@ -73,7 +73,7 @@ export function createArtivue(_options: Options = {}): Plugin {
         id: 'base',
       })
 
-      console.log('Theme data is provided', GLOBAL_BASE_THEME_DATA)
+      console.log('Theme data is provided')
     },
   }
 }
