@@ -34,6 +34,10 @@ export default defineNuxtModule<ModuleOptions>({
       filePath: 'artivue',
     })
 
-    addPlugin(resolver.resolve('runtime/plugin'))
+    addPlugin({
+      src: resolver.resolve('runtime/plugin'),
+      name: 'artivue',
+      mode: 'all',
+    })
   },
 })

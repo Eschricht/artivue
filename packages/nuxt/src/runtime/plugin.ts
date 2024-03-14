@@ -10,4 +10,6 @@ export default defineNuxtPlugin(({ vueApp }) => {
   })
 
   vueApp.use(plugin)
+
+  console.info('Artivue plugin has been installed. Is server?', import.meta.server)
 })
