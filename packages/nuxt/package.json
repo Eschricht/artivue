@@ -4,7 +4,7 @@
   "version": "0.1.14",
   "author": "Eschricht <https://github.com/eschricht>",
   "license": "MIT",
-  "homepage": "https://github.com/Eschricht/artivue/blob/main/README.md",
+  "homepage": "https://artivue.vercel.app/",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Eschricht/artivue.git"
@@ -41,9 +41,11 @@
     "test": "vitest run",
     "test:watch": "vitest watch"
   },
-  "dependencies": {
-    "@nuxt/kit": "^3.10.3",
+  "peerDependencies": {
     "artivue": "workspace:*"
+  },
+  "dependencies": {
+    "@nuxt/kit": "^3.10.3"
   },
   "devDependencies": {
     "@nuxt/devtools": "latest",
@@ -51,6 +53,7 @@
     "@nuxt/schema": "^3.10.3",
     "@nuxt/test-utils": "^3.11.0",
     "@types/node": "^20.11.27",
+    "artivue": "workspace:*",
     "changelogen": "^0.5.5",
     "eslint": "^8.57.0",
     "nuxt": "^3.10.3",
