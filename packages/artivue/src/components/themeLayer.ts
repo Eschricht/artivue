@@ -43,8 +43,8 @@ export const ThemeLayer = defineComponent({
     return () => {
       if (props.is) {
         return h(props.is, {
-          className: className.value,
           ...attrs,
+          class: [className.value, attrs.class],
         }, slots.default({
           theme: newTheme.value,
           isDark: isDark.value,
