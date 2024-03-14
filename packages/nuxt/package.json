@@ -37,7 +37,6 @@
   ],
   "scripts": {
     "prepack": "nuxt-module-build build",
-    "prepare": "nuxt-module-build build --stub && nuxt-module-build prepare",
     "lint": "eslint .",
     "test": "vitest run",
     "test:watch": "vitest watch"
