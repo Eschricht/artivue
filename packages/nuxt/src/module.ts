@@ -1,6 +1,7 @@
-import { addComponent, addImports, addPlugin, addPluginTemplate, createResolver, defineNuxtModule } from '@nuxt/kit'
+import { addComponent, addImports, addPlugin, createResolver, defineNuxtModule } from '@nuxt/kit'
+import type { Options } from 'artivue'
 
-import type { ModuleOptions } from '@nuxt/schema'
+export type ModuleOptions = Omit<Options, 'registerComponents'>
 
 export default defineNuxtModule<ModuleOptions>({
   meta: {
@@ -33,6 +34,6 @@ export default defineNuxtModule<ModuleOptions>({
       filePath: 'artivue/components',
     })
 
-    addPlugin(resolver.resolve('./runtime/plugin'))
+    addPlugin(resolver.resolve('runtime', 'plugin'))
   },
 })

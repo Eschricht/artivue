@@ -21,6 +21,7 @@
     "strict": true,
     "strictNullChecks": true,
     "noUncheckedIndexedAccess": true,
+    "noEmit": false,
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
     "skipDefaultLibCheck": true,

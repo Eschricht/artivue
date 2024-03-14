@@ -23,14 +23,21 @@
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
-      "import": "./dist/index.mjs"
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.js"
     },
     "./components": {
       "types": "./dist/components/index.d.ts",
-      "import": "./dist/components/index.mjs"
+      "import": "./dist/components/index.mjs",
+      "require": "./dist/components/index.js"
+    },
+    "./composables": {
+      "types": "./dist/composables/index.d.ts",
+      "import": "./dist/composables/index.mjs",
+      "require": "./dist/composables/index.js"
     }
   },
-  "main": "./dist/index.mjs",
+  "main": "./dist/index.js",
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.ts",
   "typesVersions": {
@@ -63,8 +70,10 @@
     "unhead": "^1.8.12"
   },
   "devDependencies": {
+    "@vue/tsconfig": "^0.5.1",
     "@vueuse/core": "^10.9.0",
     "unbuild": "^2.0.0",
-    "vue": "^3.4.21"
+    "vue": "^3.4.21",
+    "vue-tsc": "^1.8.0"
   }
 }

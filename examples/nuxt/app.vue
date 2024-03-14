@@ -3,7 +3,7 @@
     <NuxtWelcome />
 
     <ThemeLayer is="div">
-      Hello world
+      <p>In the div</p>
     </ThemeLayer>
   </div>
 </template>

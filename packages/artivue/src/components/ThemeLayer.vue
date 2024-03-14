@@ -1,3 +1,10 @@
+<template>
+  <Component :is="props.is" v-if="props.is" :class="className" v-bind="$attrs">
+    <slot :theme="newTheme" :is-dark="isDark" :class-name="className" />
+  </Component>
+  <slot v-else :theme="newTheme" :is-dark="isDark" :class-name="className" />
+</template>
+
 <script setup lang="ts">
 import { type Component, toRefs } from 'vue'
 import { type BaseTheme, useThemeLayer } from '../index'
@@ -24,10 +31,3 @@ const {
   isDark,
 } = useThemeLayer(multiplier, theme.value)
 </script>
-
-<template>
-  <Component :is="props.is" v-if="props.is" :class="className" v-bind="$attrs">
-    <slot :theme="newTheme" :is-dark="isDark" :class-name="className" />
-  </Component>
-  <slot v-else :theme="newTheme" :is-dark="isDark" :class-name="className" />
-</template>
