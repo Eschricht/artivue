@@ -56,18 +56,20 @@ export function createArtivue(_options: Options = {}): Plugin {
             },
           ],
         }) as UseHeadReturn
+      })
 
-        app.provide(GLOBAL_BASE_THEME_DATA, {
-          theme,
-          resolver: options.resolver,
-          prefix: options.prefix,
-          isDark,
-        })
+      app.provide(GLOBAL_BASE_THEME_DATA, {
+        theme,
+        generatedTheme: resolvedTheme,
+        resolver: options.resolver,
+        prefix: options.prefix,
+        isDark,
       })
 
       app.provide(LAYER_THEME_DATA, {
         layer: ref(0),
-        resolvedTheme,
+        theme: computed(() => theme.value),
+        generatedTheme: resolvedTheme,
         id: 'base',
       })
     },

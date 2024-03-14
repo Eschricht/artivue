@@ -11,7 +11,7 @@ function getId() {
   return Array.from({ length: 6 }, () => idGen[Math.floor(Math.random() * idGen.length)]).join('')
 }
 
-export function useThemeLayer(multiplier?: MaybeRef<number | undefined>, customTheme: BaseTheme | undefined = undefined) {
+export function useThemeLayer(multiplier?: MaybeRef<number | undefined>, customTheme: MaybeRef<BaseTheme | undefined> = undefined) {
   const levelIncrease = computed(() => {
     const _multiplier = unref(multiplier)
 
@@ -26,14 +26,14 @@ export function useThemeLayer(multiplier?: MaybeRef<number | undefined>, customT
   if (!themeLevel || !globalConfig)
     throw new Error('Artivue is not installed')
 
-  const { layer: parentLevel, resolvedTheme, id: parentId } = themeLevel
+  const { layer: parentLevel, generatedTheme, id: parentId } = themeLevel
   const currentLevel = computed(() => parentLevel.value + levelIncrease.value)
 
   const uniqueId = getId()
 
-  const id = computed(() => customTheme ? `${globalConfig.prefix}-${uniqueId}` : `${globalConfig.prefix}-${unref(parentId)}-${currentLevel.value}`)
+  const id = computed(() => unref(customTheme) ? `${globalConfig.prefix}-${uniqueId}` : `${globalConfig.prefix}-${unref(parentId)}-${currentLevel.value}`)
 
-  const toBaseTheme = computed<BaseTheme>(() => customTheme ?? resolvedToBase({ ...resolvedTheme.value }))
+  const toBaseTheme = computed<BaseTheme>(() => unref(customTheme) ?? resolvedToBase({ ...generatedTheme.value }))
   const localTheme = computed(() => globalConfig.resolver(toBaseTheme.value, unref(levelIncrease)))
   const isDark = computed(() => localTheme.value.surface.isDark())
   const cssVars = computed(() => {
@@ -53,13 +53,15 @@ export function useThemeLayer(multiplier?: MaybeRef<number | undefined>, customT
 
   provide(LAYER_THEME_DATA, {
     layer: currentLevel,
-    resolvedTheme: localTheme,
+    generatedTheme: localTheme,
+    theme: toBaseTheme,
     id: providerId,
   })
 
   return {
     className: id,
-    theme: localTheme,
+    theme: toBaseTheme,
+    generatedTheme: localTheme,
     isDark,
   }
 }
