@@ -2,8 +2,10 @@
   <div>
     <NuxtWelcome />
 
-    <ThemeLayer is="div">
-      <p>In the div</p>
+    <ThemeLayer v-slot="{ className }">
+      <p :class="className">
+        In the div
+      </p>
     </ThemeLayer>
   </div>
 </template>

@@ -1,5 +1,1 @@
-import ThemeLayer from './ThemeLayer.vue'
-
-export {
-  ThemeLayer,
-}
+export * from './themeLayer'

@@ -63,6 +63,8 @@ export function createArtivue(_options: Options = {}): Plugin {
           prefix: options.prefix,
           isDark,
         })
+
+        console.log('Global theme data is installed', GLOBAL_BASE_THEME_DATA)
       })
 
       app.provide(LAYER_THEME_DATA, {
@@ -70,6 +72,8 @@ export function createArtivue(_options: Options = {}): Plugin {
         resolvedTheme,
         id: 'base',
       })
+
+      console.log('Theme data is provided', GLOBAL_BASE_THEME_DATA)
     },
   }
 }

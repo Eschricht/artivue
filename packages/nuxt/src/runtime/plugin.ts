@@ -1,4 +1,4 @@
-import createArtivue, { type Options } from 'artivue'
+import { createArtivue } from 'artivue'
 import { defineNuxtPlugin, useRuntimeConfig } from '#imports'
 
 export default defineNuxtPlugin(({ vueApp }) => {
