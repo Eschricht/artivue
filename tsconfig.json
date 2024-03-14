@@ -9,7 +9,15 @@
     ],
     "baseUrl": ".",
     "module": "esnext",
-    "moduleResolution": "node",
+    "moduleResolution": "NodeNext",
+    "paths": {
+      "artivue": ["./packages/artivue/src"],
+      "artivue/*": ["./packages/artivue/src/*"],
+      "@artivue/unocss": ["./packages/unocss/src"],
+      "@artivue/unocss/*": ["./packages/unocss/src/*"],
+      "@artivue/nuxt": ["./packages/nuxt/src"],
+      "@artivue/nuxt/*": ["./packages/nuxt/src/*"]
+    },
     "resolveJsonModule": true,
     "types": [
       "node"
