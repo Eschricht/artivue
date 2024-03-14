@@ -37,7 +37,11 @@ export default defineNuxtConfig({
 
 ### Auto Imports
 
-The composables are auto imported
+#### Components
 
-- `useBaseTheme`
-- `useThemeLayer`
+- [`LayerTheme`](/guide/components/theme-layer)
+
+#### Composables
+
+- [`useBaseTheme`](/guide/composables/use-base-theme)
+- [`useThemeLayer`](/guide/composables/use-theme-layer)
