@@ -48,13 +48,13 @@
     "dist"
   ],
   "scripts": {
-    "build": "tsx ./scripts/build.ts",
+    "build": "tsx ./scripts/build.ts && pnpm -r --filter=./packages/nuxt prepack",
     "clean": "rimraf packages/*/dist",
     "lint": "eslint .",
     "lint:fix": "eslint --fix .",
     "ts-check": "vue-tsc --noEmit",
     "docs:preview": "vitepress preview docs",
-    "docs:build": "pnpm build && vitepress build docs",
+    "docs:build": "tsx ./scripts/build.ts && vitepress build docs",
     "docs:dev": "vitepress dev docs",
     "release": "bumpp packages/**/package.json"
   },
