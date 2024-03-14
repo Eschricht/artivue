@@ -1,7 +1,7 @@
 {
   "name": "artivue",
   "type": "module",
-  "version": "0.1.7",
+  "version": "0.1.8",
   "description": "A Vue plugin to create layered theming and styling",
   "author": "Eschricht <https://github.com/eschricht>",
   "license": "MIT",
