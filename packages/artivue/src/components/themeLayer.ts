@@ -36,6 +36,7 @@ export const ThemeLayer = defineComponent({
 
     const {
       theme: newTheme,
+      generatedTheme,
       className,
       isDark,
     } = useThemeLayer(multiplier, theme.value)
@@ -47,6 +48,7 @@ export const ThemeLayer = defineComponent({
           class: [className.value, attrs.class],
         }, slots.default({
           theme: newTheme.value,
+          generatedTheme: generatedTheme.value,
           isDark: isDark.value,
           className: className.value,
         }))
@@ -54,6 +56,7 @@ export const ThemeLayer = defineComponent({
       else {
         return slots.default({
           theme: newTheme.value,
+          generatedTheme: generatedTheme.value,
           isDark: isDark.value,
           className: className.value,
         })

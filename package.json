@@ -64,6 +64,7 @@
     "@unocss/eslint-plugin": "^0.58.5",
     "@vue/tsconfig": "^0.5.1",
     "bumpp": "^9.3.0",
+    "changelogen": "^0.5.5",
     "eslint": "npm:eslint-ts-patch@8.57.0-0",
     "eslint-plugin-format": "^0.1.0",
     "eslint-ts-patch": "8.57.0-0",
