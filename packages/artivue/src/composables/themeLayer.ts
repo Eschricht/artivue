@@ -11,35 +11,58 @@ function getId() {
   return Array.from({ length: 6 }, () => idGen[Math.floor(Math.random() * idGen.length)]).join('')
 }
 
-export function useThemeLayer(multiplier?: MaybeRef<number | undefined>, customTheme: MaybeRef<BaseTheme | undefined> = undefined) {
-  const levelIncrease = computed(() => {
-    const _multiplier = unref(multiplier)
+function isThemeOverride(arg: number | undefined | BaseTheme): arg is BaseTheme {
+  return typeof unref(arg) === 'object'
+}
 
-    if (_multiplier === undefined)
-      return customTheme ? 0 : 1
+function isMultiplier(arg: number | undefined | BaseTheme): arg is number {
+  return typeof unref(arg) === 'number'
+}
 
-    return _multiplier
-  })
+export function useThemeLayer(arg: MaybeRef<number | undefined | BaseTheme> = undefined) {
   const themeLevel = inject(LAYER_THEME_DATA)
   const globalConfig = inject(GLOBAL_BASE_THEME_DATA)
 
   if (!themeLevel || !globalConfig)
     throw new Error('Artivue is not installed')
 
-  const { layer: parentLevel, generatedTheme, id: parentId } = themeLevel
-  const currentLevel = computed(() => parentLevel.value + levelIncrease.value)
-
   const uniqueId = getId()
 
-  const id = computed(() => unref(customTheme) ? `${globalConfig.prefix}-${uniqueId}` : `${globalConfig.prefix}-${unref(parentId)}-${currentLevel.value}`)
+  const { layer: parentLevel, id: parentId, theme } = themeLevel
 
-  const toBaseTheme = computed<BaseTheme>(() => unref(customTheme) ?? resolvedToBase({ ...generatedTheme.value }))
-  const localTheme = computed(() => globalConfig.resolver(toBaseTheme.value, unref(levelIncrease)))
+  const isCustomTheme = computed(() => isThemeOverride(unref(arg)))
+
+  const baseTheme = computed(() => {
+    const _arg = unref(arg)
+
+    if (isThemeOverride(_arg))
+      return { ..._arg }
+
+    return { ...theme.value }
+  })
+
+  const multiplier = computed(() => {
+    const _arg = unref(arg)
+
+    if (isMultiplier(_arg))
+      return _arg
+
+    if (isThemeOverride(_arg))
+      return 0
+
+    return 1
+  })
+
+  const currentLevel = computed(() => parentLevel.value + multiplier.value)
+
+  // TODO: Make the string acceptable as CSS name
+  const id = computed(() => (isCustomTheme.value ? `${globalConfig.prefix}-${uniqueId}` : `${globalConfig.prefix}-${unref(parentId)}-${currentLevel.value}`))
+  const localTheme = computed(() => globalConfig.resolver(baseTheme.value, unref(currentLevel)))
   const isDark = computed(() => localTheme.value.surface.isDark())
   const cssVars = computed(() => {
     return themeVarsToCSS(themeToVars(localTheme.value, `-${globalConfig.prefix}`), `.${id.value}`)
   })
-  const providerId = computed(() => customTheme ? uniqueId : unref(parentId))
+  const providerId = computed(() => isCustomTheme.value ? uniqueId : unref(parentId))
 
   useHead({
     style: [
@@ -54,13 +77,13 @@ export function useThemeLayer(multiplier?: MaybeRef<number | undefined>, customT
   provide(LAYER_THEME_DATA, {
     layer: currentLevel,
     generatedTheme: localTheme,
-    theme: toBaseTheme,
+    theme: baseTheme,
     id: providerId,
   })
 
   return {
     className: id,
-    theme: toBaseTheme,
+    theme: baseTheme,
     generatedTheme: localTheme,
     isDark,
   }

@@ -1,4 +1,4 @@
-import { type Component, type PropType, type SlotsType, type UnwrapNestedRefs, defineComponent, h, toRefs } from 'vue'
+import { type Component, type PropType, type SlotsType, type UnwrapNestedRefs, computed, defineComponent, h, toRefs } from 'vue'
 import type { BaseTheme } from '..'
 import { useThemeLayer } from '../composables'
 
@@ -34,12 +34,14 @@ export const ThemeLayer = defineComponent({
   setup(props, { slots, attrs }) {
     const { multiplier, theme } = toRefs(props)
 
+    const arg = computed(() => theme.value ? theme.value : multiplier.value)
+
     const {
       theme: newTheme,
       generatedTheme,
       className,
       isDark,
-    } = useThemeLayer(multiplier, theme.value)
+    } = useThemeLayer(arg)
 
     return () => {
       if (props.is) {
