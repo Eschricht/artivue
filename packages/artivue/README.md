@@ -4,7 +4,7 @@ Vue plugin to create **beautiful themes** with **layers and nuances** with ease.
 
 ## Documentation
 
-Please refer to the [documentation](https://artivue.vercel.app/settings.html).
+Please refer to the [documentation](https://artivue.vercel.app/).
 
 ## License
 
