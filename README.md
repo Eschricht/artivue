@@ -1,37 +1,47 @@
-# Artivue Project
+<br>
 
-Artivue is a powerful theming plugin for Vue.js applications, designed to make creating and managing themes easy and efficient. With support for Nuxt.js and integration with UnoCSS, Artivue offers a flexible solution for your styling needs across different Vue-based projects.
+<p align="center">
+<img src="https://raw.githubusercontent.com/Eschricht/artivue/main/docs/public/logo.svg" style="width:100px;" />
+</p>
+
+<h1 align="center">Artivue</h1>
+
+<p align="center">
+Created nuanced / layered themes with ease for Vue applications
+</p>
+
+<p align="center">
+<a href="https://www.npmjs.com/package/artivue"><img src="https://img.shields.io/npm/v/artivue?color=2b6be3&amp;label=Artivue" alt="NPM version"></a></p>
 
 ## Features
 
-- Simple and intuitive API for theme management.
-- SSR compatibility for seamless server-side rendering.
-- Integration with Nuxt.js for enhanced Nuxt applications.
-- UnoCSS preset for dynamic, utility-first styling.
+- Layered themes
+- Simple API
+- SSR friendly thanks to [Unhead](https://unhead.unjs.io/)
+- [Nuxt module](https://artivue.vercel.app/integrations/nuxt.html) - a Nuxt wrapper with auto imports
+- [Unocss Preset](https://artivue.vercel.app/integrations/unocss.html) - focus on your application logic, not CSS
 
-## Getting Started
+## Documentation
 
-To get started with [Artivue in a Vue project](/packages/artivue/README.md):
-```bash
-pnpm add artivue
-```
+Read the [documentation](https://artivue.vercel.app/) for more details.
 
-For [Nuxt.js integration](/packages/nuxt/README.md):
+## Installation
 
-```bash
-pnpm add @artivue/nuxt
-```
+- [Vue](https://artivue.vercel.app/guide/)
+- [Nuxt](https://artivue.vercel.app/integrations/nuxt.html)
+- [UnoCSS](https://artivue.vercel.app/integrations/unocss.html)
 
-And to [use with UnoCSS](/packages/unocss/README.md):
+## Acknowledgement
 
-```bash
-pnpm add @artivue/unocss
-```
+Artivue is made possible thanks to the inspirations from the following projects:
 
-## Contributing
+> in alphabetical order
 
-We welcome contributions of all kinds, from documentation improvements to new features
+- [Colord](https://colord.omgovich.ru/)
+- [Linear](https://linear.app/)
+- [Unhead](https://unhead.unjs.io/)
+- [UnoCSS](https://unocss.dev/)
 
-## Community and Support
+## License
 
-Join our [Discord server](#) or participate in [GitHub Discussions](#) to ask questions, share your ideas, and connect with other users.
+MIT License &copy; 2024-PRESENT [Johannes Eschricht](https://github.com/eschricht)
