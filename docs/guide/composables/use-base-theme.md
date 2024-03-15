@@ -11,6 +11,8 @@ import { themes, useBaseTheme } from 'artivue'
 const {
   // A Ref containing the current theme config
   theme,
+  // A ComputedRef with the full generated theme config
+  generatedTheme,
   // A ComputedRef which tells if the current theme is dark or not
   isDark,
   // A function to set a new base theme. (It's also possible to modify `theme ref`)
@@ -26,9 +28,10 @@ function switchTheme() {
 ## Type reference
 
 ```typescript
-function useBaseTheme(): {
-  setBaseTheme: (newTheme?: MaybeRef<BaseTheme>) => void;
-  theme: Ref<BaseTheme>;
-  isDark: ComputedRef<boolean>;
+declare function useBaseTheme(): {
+    setBaseTheme: (newTheme?: MaybeRef<BaseTheme>) => void;
+    theme: Ref<BaseTheme>;
+    isDark: ComputedRef<boolean>;
+    generatedTheme: ComputedRef<ColordTheme>;
 };
 ```

@@ -30,8 +30,10 @@ const {
   className,
   // A computed which tells if the current theme is dark or not
   isDark,
-  // The current theme variables (ComputedRef)
+  // The current theme configuration
   theme,
+  // The current generated full theme configuration
+  generatedTheme
 } = useThemeLayer()
 </script>
 
@@ -105,9 +107,9 @@ I'm in a layer!
 
 ## Advanced
 
-It's also possible to override the base theme completely and pass a custom theme.
+You can pass a multiplier for the tint / shade of the parent theme (default is 1). To create darker shades you can pass negative values.
 
-The first argument can also be used without overriding the theme and is a tint/shade multiplier. If a custom theme isn't provided the default value is 1 otherwise it's 0.
+Usage:
 
 ```vue
 <script setup>
@@ -115,7 +117,34 @@ const {
   className,
   isDark,
   theme,
-} = useThemeLayer(0, {
+} = useThemeLayer(2)
+</script>
+```
+
+Example:
+<Card v-slot="{ className }" :multiplier="2">
+
+  <div :class="className" un-text="artivue-text">
+    <Card class="[&_p]:(m-0)" un-p="4">
+      <p un-m="b-4!">I have a slightly brighter layer than default</p>
+      <Card un-p="4">
+        <p>And I'm still nestable</p>
+      </Card>
+    </Card>
+  </div>
+</Card>
+
+You can also override the base theme completely and pass a custom theme.
+
+Usage:
+
+```vue
+<script setup>
+const {
+  className,
+  isDark,
+  theme,
+} = useThemeLayer({
   surfaceColor: '#589edf',
   surfaceTextColor: '#000000',
   accentColor: '#5c72ff',
@@ -140,12 +169,15 @@ Example:
 ## Type reference
 
 ```typescript
-function useThemeLayer(
-  multiplier?: MaybeRef<number>,
-  customTheme?: BaseTheme
-): {
-  className: ComputedRef<string>;
-  theme: ComputedRef<ColordTheme>;
-  isDark: ComputedRef<boolean>;
+function useThemeLayer(arg?: MaybeRef<number | undefined | BaseTheme>): {
+    className: ComputedRef<string>;
+    theme: ComputedRef<{
+        surfaceColor: string;
+        surfaceTextColor: string;
+        accentColor: string;
+        accentTextColor: string;
+    }>;
+    generatedTheme: ComputedRef<ColordTheme>;
+    isDark: ComputedRef<boolean>;
 };
 ```

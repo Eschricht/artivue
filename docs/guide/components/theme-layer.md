@@ -12,19 +12,19 @@ By default, `ThemeLayer` is a functional component, not adding any DOM elements.
 
 ---
 
-#### multiplier - `number` - _optional_
-
-Default: `undefined`
-
-The multiplier passed to `useThemeLayer` which controls how much tint/shade to apply from the parent theme
-
----
-
 #### theme - `object (BaseTheme)` - _optional_
 
 Default: `undefined`
 
 Lets you completely change the theme from it's parent theme
+
+---
+
+#### multiplier - `number` - _optional_
+
+Default: `undefined`
+
+The multiplier passed to `useThemeLayer` which controls how much tint/shade to apply from the parent theme. This will be omitted if `theme` prop is passed.
 
 ## Slot props
 
@@ -32,7 +32,8 @@ The slot passes the values returned from `useThemeLayer`:
 
 - `className`: The generated class name which contains the CSS variables
 - `isDark`: A boolean which tells if the theme is dark or not
-- `theme`: The current generated theme configuration
+- `theme`: The current theme configuration
+- `generatedTheme` - The full generated theme configuration
 
 ## Examples
 
@@ -72,6 +73,28 @@ Output:
 
 <ThemeLayer is="div" class="card">
   <p>Hello world</p>
+</ThemeLayer>
+
+---
+
+### Nesting
+
+```vue
+<template>
+  <ThemeLayer is="div" class="card">
+    <ThemeLayer is="div" class="card">
+      <p>Hello world</p>
+    </ThemeLayer>
+  </ThemeLayer>
+</template>
+```
+
+Output:
+
+<ThemeLayer is="div" class="card">
+  <ThemeLayer is="div" class="card">
+    <p>Hello world</p>
+  </ThemeLayer>
 </ThemeLayer>
 
 ---
