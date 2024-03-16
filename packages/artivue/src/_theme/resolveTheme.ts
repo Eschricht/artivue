@@ -40,7 +40,7 @@ export function resolveTheme(theme: BaseTheme, _level = 0) {
 
   const text = colord(theme.surfaceTextColor)
 
-  const accent = colord(theme.accentColor)
+  const accent = changeLightnessBy(colord(theme.accentColor), _level * 2)
   const accentText = colord(theme.accentTextColor)
   const accentHover = changeLightnessBy(colord(accent), 5)
   const accentLight = accent.lighten(0.1)
