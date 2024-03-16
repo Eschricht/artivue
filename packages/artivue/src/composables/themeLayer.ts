@@ -5,10 +5,8 @@ import type { BaseTheme } from '../_theme'
 import { resolvedToBase, themeToVars } from '../_theme'
 import { themeVarsToCSS } from '../_theme/themeVarsToCss'
 
-function getId() {
-  const idGen = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'
-
-  return Array.from({ length: 6 }, () => idGen[Math.floor(Math.random() * idGen.length)]).join('')
+function getId(theme: BaseTheme) {
+  return Object.keys(theme).map(key => theme[key as keyof BaseTheme].replace('#', '')).join('-')
 }
 
 function isThemeOverride(arg: number | undefined | BaseTheme): arg is BaseTheme {
@@ -26,8 +24,6 @@ export function useThemeLayer(arg: MaybeRef<number | undefined | BaseTheme> = un
   if (!themeLevel || !globalConfig)
     throw new Error('Artivue is not installed')
 
-  const uniqueId = getId()
-
   const { layer: parentLevel, id: parentId, theme } = themeLevel
 
   const isCustomTheme = computed(() => isThemeOverride(unref(arg)))
@@ -41,6 +37,8 @@ export function useThemeLayer(arg: MaybeRef<number | undefined | BaseTheme> = un
     return { ...theme.value }
   })
 
+  const id = computed(() => isCustomTheme.value ? unref(getId(theme.value)) : unref(parentId))
+
   const multiplier = computed(() => {
     const _arg = unref(arg)
 
@@ -53,22 +51,22 @@ export function useThemeLayer(arg: MaybeRef<number | undefined | BaseTheme> = un
     return 1
   })
 
-  const currentLevel = computed(() => parentLevel.value + multiplier.value)
+  const currentLevel = computed(() => (isCustomTheme.value ? 0 : parentLevel.value) + multiplier.value)
 
   // TODO: Make the string acceptable as CSS name
-  const id = computed(() => (isCustomTheme.value ? `${globalConfig.prefix}-${uniqueId}` : `${globalConfig.prefix}-${unref(parentId)}-${currentLevel.value}`))
+  const uniqueId = computed(() => isCustomTheme.value ? `${globalConfig.prefix}-${unref(id)}` : `${globalConfig.prefix}-${unref(id)}-${currentLevel.value}`)
   const localTheme = computed(() => globalConfig.resolver(baseTheme.value, unref(currentLevel)))
   const isDark = computed(() => localTheme.value.surface.isDark())
   const cssVars = computed(() => {
-    return themeVarsToCSS(themeToVars(localTheme.value, `-${globalConfig.prefix}`), `.${id.value}`)
+    return themeVarsToCSS(themeToVars(localTheme.value, `-${globalConfig.prefix}`), `.${uniqueId.value}`)
   })
-  const providerId = computed(() => isCustomTheme.value ? uniqueId : unref(parentId))
+  const localThemeBaseConfig = computed(() => resolvedToBase(localTheme.value))
 
   useHead({
     style: [
       {
-        id,
-        key: id,
+        id: uniqueId,
+        key: uniqueId,
         textContent: cssVars,
       },
     ],
@@ -78,12 +76,12 @@ export function useThemeLayer(arg: MaybeRef<number | undefined | BaseTheme> = un
     layer: currentLevel,
     generatedTheme: localTheme,
     theme: baseTheme,
-    id: providerId,
+    id,
   })
 
   return {
-    className: id,
-    theme: baseTheme,
+    className: uniqueId,
+    theme: localThemeBaseConfig,
     generatedTheme: localTheme,
     isDark,
   }
