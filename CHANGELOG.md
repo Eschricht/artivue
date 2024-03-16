@@ -1,6 +1,22 @@
 # Changelog
 
 
+## v0.2.1
+
+[compare changes](https://github.com/Eschricht/unocss-preset-hsl/compare/v0.2.0...v0.2.1)
+
+### 🚀 Enhancements
+
+- Moved site to my private domain - update links and configs with new url ([902e0b3](https://github.com/Eschricht/unocss-preset-hsl/commit/902e0b3))
+
+### 🩹 Fixes
+
+- Add changelog ([e8026ef](https://github.com/Eschricht/unocss-preset-hsl/commit/e8026ef))
+
+### ❤️ Contributors
+
+- Johannes Eschricht <johannes@nortic.se>
+
 ## v0.2.0
 
 
