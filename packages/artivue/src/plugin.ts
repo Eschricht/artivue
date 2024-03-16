@@ -39,10 +39,11 @@ export function createArtivue(_options: Options = {}): Plugin {
       const theme = ref(options.theme)
       const resolvedTheme = computed(() => options.resolver(theme.value, 0))
       const isDark = computed(() => resolvedTheme.value.surface.isDark())
+      const cssVars = computed(() => themeToVars(resolvedTheme.value, `-${options.prefix}`))
 
       const styleClass = computed(() => {
         return [
-          themeVarsToCSS(themeToVars(resolvedTheme.value, `-${options.prefix}`)),
+          themeVarsToCSS(cssVars.value),
         ].join(' ')
       })
 
@@ -64,6 +65,7 @@ export function createArtivue(_options: Options = {}): Plugin {
         resolver: options.resolver,
         prefix: options.prefix,
         isDark,
+        cssVars,
       })
 
       app.provide(LAYER_THEME_DATA, {

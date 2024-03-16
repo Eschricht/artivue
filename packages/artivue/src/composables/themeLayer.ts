@@ -57,8 +57,9 @@ export function useThemeLayer(arg: MaybeRef<number | undefined | BaseTheme> = un
   const uniqueId = computed(() => isCustomTheme.value ? `${globalConfig.prefix}-${unref(id)}` : `${globalConfig.prefix}-${unref(id)}-${currentLevel.value}`)
   const localTheme = computed(() => globalConfig.resolver(baseTheme.value, unref(currentLevel)))
   const isDark = computed(() => localTheme.value.surface.isDark())
-  const cssVars = computed(() => {
-    return themeVarsToCSS(themeToVars(localTheme.value, `-${globalConfig.prefix}`), `.${uniqueId.value}`)
+  const cssVars = computed(() => themeToVars(localTheme.value, `-${globalConfig.prefix}`))
+  const cssTextContent = computed(() => {
+    return themeVarsToCSS(cssVars.value, `.${uniqueId.value}`)
   })
   const localThemeBaseConfig = computed(() => resolvedToBase(localTheme.value))
 
@@ -67,7 +68,7 @@ export function useThemeLayer(arg: MaybeRef<number | undefined | BaseTheme> = un
       {
         id: uniqueId,
         key: uniqueId,
-        textContent: cssVars,
+        textContent: cssTextContent,
       },
     ],
   })
@@ -84,5 +85,6 @@ export function useThemeLayer(arg: MaybeRef<number | undefined | BaseTheme> = un
     theme: localThemeBaseConfig,
     generatedTheme: localTheme,
     isDark,
+    cssVars,
   }
 }

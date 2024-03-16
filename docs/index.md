@@ -15,13 +15,17 @@ hero:
     alt: Artivue
 
 features:
-  - icon: 🎨
-    title: Dynamic Theme Switching
-    details: Toggle themes on-the-fly for light/dark mode or custom palettes, enhancing UX with minimal code.
-
   - icon: ⚙️
     title: Easy Theme Customization
     details: Define custom themes to align with your brand, using a simple and intuitive API.
+
+  - icon: 🔨
+    title: Layered themes
+    details: Creating nuances of your theme is a breeze!
+
+  - icon: 🎨
+    title: Dynamic Theme Switching
+    details: Toggle themes on-the-fly for light/dark mode or custom palettes, enhancing UX with minimal code.
 
   - icon: 🚀
     title: SSR Support

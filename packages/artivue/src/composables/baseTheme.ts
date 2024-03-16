@@ -12,6 +12,7 @@ export function useBaseTheme() {
     theme,
     isDark,
     generatedTheme,
+    cssVars,
   } = globalData
 
   const setBaseTheme = (newTheme: MaybeRef<UnwrapRef<typeof theme>> = themes.DEFAULT) => {
@@ -23,5 +24,6 @@ export function useBaseTheme() {
     theme,
     isDark,
     generatedTheme,
+    cssVars,
   }
 }

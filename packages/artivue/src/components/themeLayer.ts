@@ -41,6 +41,7 @@ export const ThemeLayer = defineComponent({
       generatedTheme,
       className,
       isDark,
+      cssVars,
     } = useThemeLayer(arg)
 
     return () => {
@@ -53,6 +54,7 @@ export const ThemeLayer = defineComponent({
           generatedTheme: generatedTheme.value,
           isDark: isDark.value,
           className: className.value,
+          cssVars: cssVars.value,
         }))
       }
       else {
@@ -61,6 +63,7 @@ export const ThemeLayer = defineComponent({
           generatedTheme: generatedTheme.value,
           isDark: isDark.value,
           className: className.value,
+          cssVars: cssVars.value,
         })
       }
     }

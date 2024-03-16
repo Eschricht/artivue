@@ -31,7 +31,7 @@ Based on your current theme configuration, Artivue generates a set of CSS variab
 
 ## Usage
 
-I highly recommend using [`@artivue/unocss`](/integrations/unocss) to simplify styling. If that's not an option, the CSS variables are available throughout the application and may be used as you see fit. Example:
+Artivue doesn't utilize the CSS variables out-of-the-box. I highly recommend using [`@artivue/unocss`](/integrations/unocss) to simplify styling. If that's not an option, the CSS variables are available throughout the application and may be used as you see fit. Example:
 
 ```css
 /* src/assets/main.css */

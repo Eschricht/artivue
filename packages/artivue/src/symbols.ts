@@ -7,6 +7,7 @@ export const GLOBAL_BASE_THEME_DATA = Symbol('GLOBAL_BASE_THEME') as InjectionKe
   resolver: typeof resolveTheme
   prefix: string
   isDark: ComputedRef<boolean>
+  cssVars: ComputedRef<Record<string, string>>
 }>
 
 export const LAYER_THEME_DATA = Symbol('LAYER_THEME') as InjectionKey<{
