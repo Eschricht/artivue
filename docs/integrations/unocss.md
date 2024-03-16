@@ -41,4 +41,4 @@ export default defineConfig({
 The preset adds a bunch of new theme colors to UnoCSS that is based on the CSS variables.
 For example, you may use classes as `text-artivue-text`, `bg-artivue-accent`, `border-artivue-border`, simplifying theming.
 
-The preset also includes a bunch of UnoCSS rules. Check out the [source code](https://github.com/Eschricht/artivue/blob/main/packages/unocss/src/preset.ts) to see the available rules.
+The preset also includes a bunch of useful UnoCSS rules and shortcuts. Check out the [source code](https://github.com/Eschricht/artivue/blob/main/packages/unocss/src/preset.ts) to see the available rules.

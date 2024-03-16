@@ -1,7 +1,7 @@
 <template>
   <input
     type="text"
-    class="artivue-input px-2 outline-none focus:outline-none"
+    class="border-solid px-2 outline-none artivue-input focus:outline-none"
   >
 </template>
 
