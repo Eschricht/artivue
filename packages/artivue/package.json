@@ -5,7 +5,7 @@
   "description": "A Vue plugin to create layered theming and styling",
   "author": "Eschricht <https://github.com/eschricht>",
   "license": "MIT",
-  "homepage": "https://artivue.vercel.app/",
+  "homepage": "https://artivue.eschricht.dev/",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Eschricht/artivue.git"

@@ -1,4 +1,4 @@
 User-agent: *
 Disallow: 
 
-Sitemap: https://artivue.vercel.app/sitemap.xml
+Sitemap: https://artivue.eschricht.dev/sitemap.xml

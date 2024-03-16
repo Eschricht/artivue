@@ -18,18 +18,18 @@ Created nuanced / layered themes with ease for Vue applications
 - Layered themes
 - Simple API
 - SSR friendly thanks to [Unhead](https://unhead.unjs.io/)
-- [Nuxt module](https://artivue.vercel.app/integrations/nuxt.html) - a Nuxt wrapper with auto imports
-- [Unocss Preset](https://artivue.vercel.app/integrations/unocss.html) - focus on your application logic, not CSS
+- [Nuxt module](https://artivue.eschricht.dev/integrations/nuxt.html) - a Nuxt wrapper with auto imports
+- [Unocss Preset](https://artivue.eschricht.dev/integrations/unocss.html) - focus on your application logic, not CSS
 
 ## Documentation
 
-Read the [documentation](https://artivue.vercel.app/) for more details.
+Read the [documentation](https://artivue.eschricht.dev/) for more details.
 
 ## Installation
 
-- [Vue](https://artivue.vercel.app/guide/)
-- [Nuxt](https://artivue.vercel.app/integrations/nuxt.html)
-- [UnoCSS](https://artivue.vercel.app/integrations/unocss.html)
+- [Vue](https://artivue.eschricht.dev/guide/)
+- [Nuxt](https://artivue.eschricht.dev/integrations/nuxt.html)
+- [UnoCSS](https://artivue.eschricht.dev/integrations/unocss.html)
 
 ## Acknowledgement
 

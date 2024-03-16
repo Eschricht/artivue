@@ -6,7 +6,7 @@
   "description": "Say goodbye to the endless cycle of picking shades like bg-dark-200 and hello to a world where creating the perfect color is a breeze",
   "author": "Eschricht <https://github.com/eschricht>",
   "license": "MIT",
-  "homepage": "https://artivue.vercel.app/",
+  "homepage": "https://artivue.eschricht.dev/",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Eschricht/unocss-preset-hsl.git"

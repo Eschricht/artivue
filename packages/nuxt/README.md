@@ -4,7 +4,7 @@ Nuxt module that wraps [Artivue Vue Plugin](https://github.com/Eschricht/artivue
 
 ## Documentation
 
-Please refer to the [documentation](https://artivue.vercel.app/integrations/nuxt.html).
+Please refer to the [documentation](https://artivue.eschricht.dev/integrations/nuxt.html).
 
 ## License
 

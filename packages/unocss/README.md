@@ -4,7 +4,7 @@ UnoCSS preset to simplify CSS usage together with the [Artivue Vue Plugin](https
 
 ## Documentation
 
-Please refer to the [documentation](https://artivue.vercel.app/integrations/unocss.html).
+Please refer to the [documentation](https://artivue.eschricht.dev/integrations/unocss.html).
 
 ## License
 
