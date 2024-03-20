@@ -3,7 +3,7 @@
 </p>
 
 <h6 align='center'>
-<a href="https://vitesse-lite.netlify.app/">Live Demo</a>
+<a href="https://vitesse-lite.eschricht.dev/">Live Demo</a>
 </h6>
 
 <h5 align='center'>
@@ -57,7 +57,7 @@ See [Vitesse](https://github.com/antfu/vitesse) for full featureset.
 
 ### Icons
 
-- [Iconify](https://iconify.design) - use icons from any icon sets [🔍Icônes](https://icones.netlify.app/)
+- [Iconify](https://iconify.design) - use icons from any icon sets [🔍Icônes](https://icones.eschricht.dev/)
 - [Pure CSS Icons via UnoCSS](https://github.com/antfu/unocss/tree/main/packages/preset-icons)
 
 ### Plugins

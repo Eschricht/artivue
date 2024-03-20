@@ -36,7 +36,7 @@ const mainSideBar = [{
 export default defineConfig({
   title: 'Artivue',
   sitemap: {
-    hostname: 'https://artivue.netlify.app/',
+    hostname: 'https://artivue.eschricht.dev/',
   },
   head: [
     ['link', { rel: 'icon', href: '/favicon.ico' }],
@@ -45,7 +45,7 @@ export default defineConfig({
     ['meta', { name: 'og:title', content: 'Artivue' }],
     ['meta', { name: 'og:description', content: 'Simplify theme creation and management in your Vue applications. Artivue combines dynamic theming with an intuitive API, making it easier than ever to design outstanding user interfaces.' }],
     ['meta', { name: 'og:image', content: '/og-image.png' }],
-    ['meta', { name: 'og:url', content: 'https://artivue.netlify.app/' }],
+    ['meta', { name: 'og:url', content: 'https://artivue.eschricht.dev/' }],
     ['meta', { name: 'twitter:card', content: 'summary_large_image' }],
     ['meta', { name: 'twitter:title', content: 'Artivue' }],
     ['meta', { name: 'twitter:description', content: 'Simplify theme creation and management in your Vue applications. Artivue combines dynamic theming with an intuitive API, making it easier than ever to design outstanding user interfaces.' }],

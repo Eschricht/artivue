@@ -3,7 +3,7 @@
 </p>
 
 <h6 align='center'>
-<a href="https://vitesse-lite.netlify.app/">在线 Demo</a>
+<a href="https://vitesse-lite.eschricht.dev/">在线 Demo</a>
 </h6>
 
 <h5 align='center'>
@@ -58,7 +58,7 @@
 
 ### Icons
 
-- [Iconify](https://iconify.design) - 使用任意的图标集，浏览：[🔍Icônes](https://icones.netlify.app/)
+- [Iconify](https://iconify.design) - 使用任意的图标集，浏览：[🔍Icônes](https://icones.eschricht.dev/)
 - [UnoCSS 的纯 CSS 图标方案](https://github.com/antfu/unocss/tree/main/packages/preset-icons)
 
 ### 插件
