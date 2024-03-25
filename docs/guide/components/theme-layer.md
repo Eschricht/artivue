@@ -63,7 +63,7 @@ Output:
 
 ```vue
 <template>
-  <ThemeLayer is="div" class="card">
+  <ThemeLayer as="div" class="card">
     <p>Hello world</p>
   </ThemeLayer>
 </template>
@@ -71,7 +71,7 @@ Output:
 
 Output:
 
-<ThemeLayer is="div" class="card">
+<ThemeLayer as="div" class="card">
   <p>Hello world</p>
 </ThemeLayer>
 
@@ -81,8 +81,8 @@ Output:
 
 ```vue
 <template>
-  <ThemeLayer is="div" class="card">
-    <ThemeLayer is="div" class="card">
+  <ThemeLayer as="div" class="card">
+    <ThemeLayer as="div" class="card">
       <p>Hello world</p>
     </ThemeLayer>
   </ThemeLayer>
@@ -91,8 +91,8 @@ Output:
 
 Output:
 
-<ThemeLayer is="div" class="card">
-  <ThemeLayer is="div" class="card">
+<ThemeLayer as="div" class="card">
+  <ThemeLayer as="div" class="card">
     <p>Hello world</p>
   </ThemeLayer>
 </ThemeLayer>
@@ -103,7 +103,7 @@ Output:
 
 ```vue
 <template>
-  <ThemeLayer is="div" class="card" :multiplier="8">
+  <ThemeLayer as="div" class="card" :multiplier="8">
     <p>Hello world</p>
   </ThemeLayer>
 </template>
@@ -111,7 +111,7 @@ Output:
 
 Output:
 
-<ThemeLayer is="div" class="card" :multiplier="8">
+<ThemeLayer as="div" class="card" :multiplier="8">
   <p>Hello world</p>
 </ThemeLayer>
 
@@ -122,7 +122,7 @@ Output:
 ```vue
 <template>
   <ThemeLayer
-    is="div"
+    as="div"
     class="card"
     :theme="{
       surfaceColor: '#589edf',
@@ -138,12 +138,16 @@ Output:
 
 Output:
 
-<ThemeLayer is="div" class="card"
+<ThemeLayer as="div" class="card"
   :theme="{
-    surfaceColor: '#589edf',
-    surfaceTextColor: '#000000',
-    accentColor: '#5c72ff',
-    accentTextColor: '#ffffff',
+    surface: {
+      background: '#589edf',
+      text: '#000000',
+    },
+    accent: {
+      background: '#5c72ff',
+      text: '#ffffff',
+    }
   }">
 
 <p>Hello world</p>
@@ -172,7 +176,7 @@ Output:
 <ThemeLayer v-slot="{ className, isDark, theme }">
   <div :class="className" class="card">
     <p>The theme is {{ isDark ? 'dark' : 'light' }} and has the following configuration:</p>
-    <div un-max="h-32" un-overflow="auto" un-text="xs artivue-text-alt-1" un-border="~ solid artivue-border" un-rounded="xl" un-p="x-4 y-0" un-bg="artivue-surface-dark">
+    <div un-max="h-32" un-overflow="auto" un-text="xs artivue-surface-text-alt-1" un-border="~ solid artivue-surface-border" un-rounded="xl" un-p="x-4 y-0" un-bg="artivue-surface-action">
       <pre un-m="t-0!"><code>{{ theme }}</code></pre>
     </div>
   </div>

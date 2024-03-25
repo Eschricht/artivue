@@ -7,7 +7,7 @@ withDefaults(defineProps<{
 </script>
 
 <template>
-  <ThemeLayer is="div" :multiplier="multiplier" un-artivue="surface-var" un-border="~ solid artivue-border" un-rounded="lg">
+  <ThemeLayer as="div" :multiplier="multiplier" un-artivue="surface" un-border="~ solid artivue-surface-border" un-rounded="lg">
     <slot />
   </ThemeLayer>
 </template>

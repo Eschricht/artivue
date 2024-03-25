@@ -33,5 +33,6 @@ declare function useBaseTheme(): {
     theme: Ref<BaseTheme>;
     isDark: ComputedRef<boolean>;
     generatedTheme: ComputedRef<ColordTheme>;
+    cssVars: ComputedRef<Record<string, string>>;
 };
 ```

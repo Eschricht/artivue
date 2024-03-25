@@ -1,19 +1,19 @@
 import { type Component, type PropType, type SlotsType, type UnwrapNestedRefs, computed, defineComponent, h, toRefs } from 'vue'
-import type { BaseTheme } from '..'
+import type { PartialTheme, Theme } from '../types'
 import { useThemeLayer } from '../composables'
 
 interface Props {
-  is?: string | Component
+  as?: string | Component
   multiplier?: number
-  theme?: BaseTheme
+  theme?: PartialTheme | ((parent: Theme, isParentDark: boolean) => PartialTheme)
 }
 
 export const ThemeLayer = defineComponent({
   name: 'ThemeLayer',
   inheritAttrs: false,
   props: {
-    is: {
-      type: [String, Object] as PropType<Props['is']>,
+    as: {
+      type: [String, Object] as PropType<Props['as']>,
       default: undefined,
       required: false,
     },
@@ -23,7 +23,7 @@ export const ThemeLayer = defineComponent({
       required: false,
     },
     theme: {
-      type: Object as PropType<Props['theme']>,
+      type: [Object, Function] as PropType<Props['theme']>,
       default: undefined,
       required: false,
     },
@@ -41,12 +41,13 @@ export const ThemeLayer = defineComponent({
       generatedTheme,
       className,
       isDark,
-      cssVars,
-    } = useThemeLayer(arg)
+      id,
+      _multiplier,
+    } = useThemeLayer(arg, multiplier)
 
     return () => {
-      if (props.is) {
-        return h(props.is, {
+      if (props.as) {
+        return h(props.as, {
           ...attrs,
           class: [className.value, attrs.class],
         }, slots.default({
@@ -54,7 +55,8 @@ export const ThemeLayer = defineComponent({
           generatedTheme: generatedTheme.value,
           isDark: isDark.value,
           className: className.value,
-          cssVars: cssVars.value,
+          id: id.value,
+          _multiplier: _multiplier.value,
         }))
       }
       else {
@@ -63,7 +65,9 @@ export const ThemeLayer = defineComponent({
           generatedTheme: generatedTheme.value,
           isDark: isDark.value,
           className: className.value,
-          cssVars: cssVars.value,
+          id: id.value,
+          _multiplier: _multiplier.value,
+
         })
       }
     }

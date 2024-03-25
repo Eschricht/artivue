@@ -2,6 +2,7 @@
   "name": "@artivue/nuxt",
   "type": "module",
   "version": "0.2.4",
+  "private": true,
   "author": "Eschricht <https://github.com/eschricht>",
   "license": "MIT",
   "homepage": "https://artivue.eschricht.dev/",

@@ -1,5 +1,5 @@
 :root {
-  @apply min-h-screen artivue-surface-var artivue-text-var text-13px;
+  @apply min-h-screen bg-artivue-surface-bg text-artivue-surface-text text-13px;
 }
 
 button {

@@ -2,6 +2,7 @@
   "name": "artivue",
   "type": "module",
   "version": "0.2.4",
+  "private": true,
   "description": "A Vue plugin to create layered theming and styling",
   "author": "Eschricht <https://github.com/eschricht>",
   "license": "MIT",
@@ -24,10 +25,25 @@
     ".": {
       "types": "./dist/index.d.ts",
       "import": "./dist/index.mjs",
-      "require": "./dist/index.mjs"
+      "require": "./dist/index.js"
+    },
+    "./composables": {
+      "types": "./dist/composables/index.d.ts",
+      "import": "./dist/composables/index.mjs",
+      "require": "./dist/composables/index.js"
+    },
+    "./components": {
+      "types": "./dist/components/index.d.ts",
+      "import": "./dist/components/index.mjs",
+      "require": "./dist/components/index.js"
+    },
+    "./themes": {
+      "types": "./dist/themes/index.d.ts",
+      "import": "./dist/themes/index.mjs",
+      "require": "./dist/themes/index.js"
     }
   },
-  "main": "./dist/index.mjs",
+  "main": "./dist/index.js",
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.ts",
   "typesVersions": {
@@ -41,7 +57,6 @@
     }
   },
   "files": [
-    "components.d.ts",
     "dist",
     "package.json"
   ],

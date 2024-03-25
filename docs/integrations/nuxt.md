@@ -45,3 +45,4 @@ export default defineNuxtConfig({
 
 - [`useBaseTheme`](/guide/composables/use-base-theme)
 - [`useThemeLayer`](/guide/composables/use-theme-layer)
+- [`useCurrentTheme`](/guide/composables/use-current-theme)

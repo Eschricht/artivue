@@ -169,15 +169,12 @@ Example:
 ## Type reference
 
 ```typescript
-function useThemeLayer(arg?: MaybeRef<number | undefined | BaseTheme>): {
+declare function useThemeLayer(arg?: MaybeRef<number | undefined | BaseTheme>): {
     className: ComputedRef<string>;
-    theme: ComputedRef<{
-        surfaceColor: string;
-        surfaceTextColor: string;
-        accentColor: string;
-        accentTextColor: string;
-    }>;
+    parentTheme: ComputedRef<BaseTheme>;
+    theme: ComputedRef<BaseTheme>;
     generatedTheme: ComputedRef<ColordTheme>;
     isDark: ComputedRef<boolean>;
+    cssVars: ComputedRef<Record<string, string>>;
 };
 ```

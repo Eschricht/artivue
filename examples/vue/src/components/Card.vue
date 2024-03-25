@@ -1,13 +1,21 @@
-<template>
-  <div :class="className" class="artivue-surface-var border artivue-border-var p-4 rounded-xl">
-    <slot />
-  </div>
-</template>
-
 <script setup lang="ts">
 import { useThemeLayer } from 'artivue'
 
+const result = useThemeLayer()
+
 const {
   className,
-} = useThemeLayer(1)
+} = result
 </script>
+
+<template>
+  <div
+    :class="className"
+    un-artivue-surface="~ border"
+    un-border="~"
+    un-rounded="lg"
+    un-p="6"
+  >
+    <slot />
+  </div>
+</template>

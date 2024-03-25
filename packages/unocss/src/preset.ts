@@ -1,6 +1,8 @@
 import type { Preset } from '@unocss/core'
 import type { Theme } from '@unocss/preset-mini'
 
+// TODO: Write tests for this preset
+
 interface Options {
   // TODO
   prefix: string
@@ -10,35 +12,26 @@ const defaultOptions: Options = {
   prefix: 'artivue',
 }
 
-const specifierUtilMap: Record<string, string | undefined> = {
-  'text-alt': 'text-',
-  'surface': 'bg-',
-  'border': 'border-',
-  'text': 'text-',
-  'action': 'bg-',
-  'action-hover': 'hover:bg-',
-  'input': 'bg-',
-  'text-alt-1': 'text-',
-  'text-alt-2': 'text-',
-  'text-alt-3': 'text-',
-  'surface-hover': 'hover:bg-',
-  'surface-light': 'light:bg-',
-  'surface-dark': 'dark:bg-',
-  'input-focus': 'bg-',
-  'accent': 'bg-',
-  'accent-text': 'text-',
-  'accent-hover': 'bg-',
-  'accent-light': 'bg-',
-  'accent-dark': 'bg-',
+const specifierUtilMap = {
+  'bg': 'bg',
+  'text': 'text',
+  'text-alt-1': 'text',
+  'text-alt-2': 'text',
+  'text-alt-3': 'text',
+  'border': 'border',
+  'action': 'bg',
+  'action-hover': 'bg',
+  'hover': 'bg',
+  'light': 'bg',
+  'dark': 'bg',
+  'light-hover': 'bg',
+  'dark-hover': 'bg',
 }
 
 export function presetArtivue(_options: Partial<Options> = {}): Preset<Theme> {
   const options = { ...defaultOptions, ..._options }
 
   const prefix = options.prefix ?? defaultOptions.prefix
-
-  const baseUtilityRegexString = `^((bg|text|border|shadow|ring|outline)-)?${prefix}-(.*?)-var(\/(\d+))?$`
-  const baseUtilityRegex = new RegExp(baseUtilityRegexString)
 
   return {
     name: 'unocss-preset-theme-maker',
@@ -49,78 +42,148 @@ export function presetArtivue(_options: Partial<Options> = {}): Preset<Theme> {
         }
       }],
     ],
+
     shortcuts: [
-      // Base utility
-      [baseUtilityRegex, ([, utility,, specifier, alpha]) => {
-        const utilityFallback = specifierUtilMap[specifier as keyof typeof specifierUtilMap]
+      /**
+       * Assign background / text quick shortcut
+       *
+       * @example "artivue-surface" -> "bg-artivue-surface-bg text-artivue-surface-text"
+       */
+      [
+        new RegExp(`^${prefix}-(surface|accent)`),
+        ([, type]) => {
+          return `${prefix}-${type}-bg ${prefix}-${type}-text`
+        },
+      ],
 
-        if (!utilityFallback)
-          return
+      /**
+       * Base utility
+       *
+       * @example "artivue-surface-bg" -> "bg-artivue-surface-bg text-artivue-surface-text"
+       * @example "artivue-accent-text/10" -> "bg-artivue-accent-bg text-artivue-accent-text"
+       */
+      [
+        new RegExp(`^${prefix}-(surface|accent)-(.*?)(/(\\d+))?$`),
+        ([, type, specifier, alphaSuffix]) => {
+          const utilityFallback = specifierUtilMap[specifier as keyof typeof specifierUtilMap]
 
-        const result = `${utility || utilityFallback}[rgba(var(--${prefix}-${specifier}))]${alpha || ''}`
+          if (!utilityFallback || !specifier)
+            return
 
-        return result
-      }],
+          return `${utilityFallback}-${prefix}-${type}-${specifier}${alphaSuffix ?? ''}`
+        },
+      ],
 
-      // UI Shortcuts
-      [`${prefix}-button`, `px-1em h-2em rounded-md text-center border inline-flex items-center disabled:opacity-50 disabled:cursor-not-allowed ${prefix}-border-var transition-property-[background-color,border-color,color] duration-300`],
+      // Element utilities
+
+      /**
+       * Input
+       *
+       * @example "artivue-input" -> "bg-artivue-input-bg border-artivue-surface-border text-artivue-surface-text focus:bg-artivue-input-focus focus:text-artivue-surface-text-alt focus:border-artivue-accent-border"
+       * @example "artivue-input-within" -> "bg-artivue-input-bg border-artivue-surface-border text-artivue-surface-text focus-within:bg-artivue-input-focus focus-within:text-artivue-surface-text-alt focus-within:border-artivue-accent-border"
+       */
+      [
+        new RegExp(`${prefix}-input(-within)?`),
+        ([, within = '']) => `
+          bg-${prefix}-input-bg
+          border
+          border-${prefix}-surface-border
+          text-${prefix}-surface-text
+          focus${within}:bg-${prefix}-input-focus
+          placeholder:text-${prefix}-surface-text-alt-2
+          focus${within}:border-${prefix}-accent-border
+          rounded-md
+        `,
+      ],
+
+      /**
+       * Button
+       */
+      [`${prefix}-button`, [
+        `border`,
+        `border-solid`,
+        `disabled:opacity-50`,
+        `disabled:cursor-not-allowed`,
+        `transition-property-[background-color,border-color,color]`,
+        `duration-300`,
+        `rounded-md`,
+        `px-2`,
+      ].join(' ')],
 
       [`${prefix}-button-solid`, [
-        `${prefix}-button bg-[rgba(var(--${prefix}-btn-bg,var(--${prefix}-action)))]`,
-        `text-[rgba(var(--${prefix}-btn-text,var(--${prefix}-text)))]`,
-        `hover:bg-[rgba(var(--${prefix}-btn-bg-hover,var(--${prefix}-action-hover)))]`,
-        `border-[rgba(var(--${prefix}-btn-border,var(--${prefix}-action)))]`,
+        `${prefix}-button`,
+        `bg-[rgba(var(--${prefix}-btn-bg,var(--${prefix}-surface-action)))]`,
+        `text-[rgba(var(--${prefix}-btn-text,var(--${prefix}-surface-text)))]`,
+        `hover:bg-[rgba(var(--${prefix}-btn-bg-hover,var(--${prefix}-surface-action-hover)))]`,
+        `border-[rgba(var(--${prefix}-btn-border,var(--${prefix}-surface-action)))]`,
       ].join(' ')],
       [`${prefix}-button-outline`, [
-        `${prefix}-button bg-[rgba(var(--${prefix}-btn-bg-hover,var(--${prefix}-action-hover)))]/0`,
-        `text-[rgba(var(--${prefix}-btn-bg,var(--${prefix}-text)))]`,
-        `border-[rgba(var(--${prefix}-btn-bg,var(--${prefix}-border)))]`,
-        `hover:bg-[rgba(var(--${prefix}-btn-bg-hover,var(--${prefix}-action-hover)))]/20`,
+        `${prefix}-button bg-[rgba(var(--${prefix}-btn-bg-hover,var(--${prefix}-surface-action-hover)))]/0`,
+        `text-[rgba(var(--${prefix}-btn-bg,var(--${prefix}-surface-text)))]`,
+        `border-[rgba(var(--${prefix}-btn-bg,var(--${prefix}-surface-border)))]`,
+        `hover:bg-[rgba(var(--${prefix}-btn-bg-hover,var(--${prefix}-surface-action-hover)))]/20`,
       ].join(' ')],
       [`${prefix}-button-text`, [
-        `${prefix}-button bg-[rgba(var(--${prefix}-btn-bg-hover,var(--${prefix}-action-hover)))]/0`,
-        `text-[rgba(var(--${prefix}-btn-bg,var(--${prefix}-text)))]`,
+        `${prefix}-button bg-[rgba(var(--${prefix}-btn-bg-hover,var(--${prefix}-surface-action-hover)))]/0`,
+        `text-[rgba(var(--${prefix}-btn-bg,var(--${prefix}-surface-text)))]`,
         'border-transparent',
-        `hover:bg-[rgba(var(--${prefix}-btn-bg-hover,var(--${prefix}-action-hover)))]/20`,
+        `hover:bg-[rgba(var(--${prefix}-btn-bg-hover,var(--${prefix}-surface-action-hover)))]/20`,
       ].join(' ')],
 
       [`${prefix}-button-accent`, [
-        `var-btn-bg-[var(--${prefix}-accent)]`,
+        `var-btn-bg-[var(--${prefix}-accent-action)]`,
         `var-btn-text-[var(--${prefix}-accent-text)]`,
-        `var-btn-bg-hover-[var(--${prefix}-accent-hover)]`,
-        `var-btn-border-[var(--${prefix}-accent)]`,
+        `var-btn-bg-hover-[var(--${prefix}-accent-action-hover)]`,
+        `var-btn-border-[var(--${prefix}-accent-action)]`,
       ].join(' ')],
-
-      // Card
-      [`${prefix}-card`, `${prefix}-surface-var border ${prefix}-border-var`],
-
-      // Input
-      [`${prefix}-input-base`, `w-64 ${prefix}-border-var rounded-md inline-flex border outline-none min-h-2em focus:border-${prefix}-accent-var focus-within:border-${prefix}-accent-var transition-colors duration-300`],
-
-      [`${prefix}-input`, `${prefix}-input-base ${prefix}-input-var focus:${prefix}-input-focus-var focus-within:${prefix}-input-focus-var`],
     ],
 
     theme: {
       colors: {
-        [`${prefix}-surface`]: `rgba(var(--${prefix}-surface))`,
+        [`${prefix}-surface`]: `rgba(var(--${prefix}-surface-bg))`,
+        [`${prefix}-surface-bg`]: `rgba(var(--${prefix}-surface-bg))`,
+
+        [`${prefix}-surface-text`]: `rgba(var(--${prefix}-surface-text))`,
+        [`${prefix}-surface-text-alt`]: `rgba(var(--${prefix}-surface-text-alt))`,
+        [`${prefix}-surface-text-alt-1`]: `rgba(var(--${prefix}-surface-text-alt-1))`,
+        [`${prefix}-surface-text-alt-2`]: `rgba(var(--${prefix}-surface-text-alt-2))`,
+        [`${prefix}-surface-text-alt-3`]: `rgba(var(--${prefix}-surface-text-alt-3))`,
+
+        [`${prefix}-surface-border`]: `rgba(var(--${prefix}-surface-border))`,
+
+        [`${prefix}-surface-action`]: `rgba(var(--${prefix}-surface-action))`,
+        [`${prefix}-surface-action-hover`]: `rgba(var(--${prefix}-surface-action-hover))`,
+
         [`${prefix}-surface-hover`]: `rgba(var(--${prefix}-surface-hover))`,
+
         [`${prefix}-surface-light`]: `rgba(var(--${prefix}-surface-light))`,
+        [`${prefix}-surface-light-hover`]: `rgba(var(--${prefix}-surface-light-hover))`,
         [`${prefix}-surface-dark`]: `rgba(var(--${prefix}-surface-dark))`,
-        [`${prefix}-text`]: `rgba(var(--${prefix}-text))`,
-        [`${prefix}-text-alt`]: `rgba(var(--${prefix}-text-alt))`,
-        [`${prefix}-text-alt-1`]: `rgba(var(--${prefix}-text-alt-1))`,
-        [`${prefix}-text-alt-2`]: `rgba(var(--${prefix}-text-alt-2))`,
-        [`${prefix}-text-alt-3`]: `rgba(var(--${prefix}-text-alt-3))`,
-        [`${prefix}-action`]: `rgba(var(--${prefix}-action))`,
-        [`${prefix}-action-hover`]: `rgba(var(--${prefix}-action-hover))`,
-        [`${prefix}-input`]: `rgba(var(--${prefix}-input))`,
-        [`${prefix}-input-focus`]: `rgba(var(--${prefix}-input-focus))`,
-        [`${prefix}-accent`]: `rgba(var(--${prefix}-accent))`,
+        [`${prefix}-surface-dark-hover`]: `rgba(var(--${prefix}-surface-dark-hover))`,
+
+        [`${prefix}-accent`]: `rgba(var(--${prefix}-accent-bg))`,
+        [`${prefix}-accent-bg`]: `rgba(var(--${prefix}-accent-bg))`,
+
         [`${prefix}-accent-text`]: `rgba(var(--${prefix}-accent-text))`,
+        [`${prefix}-accent-text-alt`]: `rgba(var(--${prefix}-accent-text-alt))`,
+        [`${prefix}-accent-text-alt-1`]: `rgba(var(--${prefix}-accent-text-alt-1))`,
+        [`${prefix}-accent-text-alt-2`]: `rgba(var(--${prefix}-accent-text-alt-2))`,
+        [`${prefix}-accent-text-alt-3`]: `rgba(var(--${prefix}-accent-text-alt-3))`,
+
+        [`${prefix}-accent-border`]: `rgba(var(--${prefix}-accent-border))`,
+
+        [`${prefix}-accent-action`]: `rgba(var(--${prefix}-accent-action))`,
+        [`${prefix}-accent-action-hover`]: `rgba(var(--${prefix}-accent-action-hover))`,
+
         [`${prefix}-accent-hover`]: `rgba(var(--${prefix}-accent-hover))`,
+
         [`${prefix}-accent-light`]: `rgba(var(--${prefix}-accent-light))`,
+        [`${prefix}-accent-light-hover`]: `rgba(var(--${prefix}-accent-light-hover))`,
         [`${prefix}-accent-dark`]: `rgba(var(--${prefix}-accent-dark))`,
-        [`${prefix}-border`]: `rgba(var(--${prefix}-border))`,
+        [`${prefix}-accent-dark-hover`]: `rgba(var(--${prefix}-accent-dark-hover))`,
+
+        [`${prefix}-input-bg`]: `rgba(var(--${prefix}-input-bg))`,
+        [`${prefix}-input-focus`]: `rgba(var(--${prefix}-input-focus))`,
       },
     },
   }

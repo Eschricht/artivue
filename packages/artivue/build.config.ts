@@ -2,7 +2,8 @@ import { defineBuildConfig } from 'unbuild'
 
 export default defineBuildConfig({
   entries: [
-    './src/index.ts',
+    { input: './src/', outDir: 'dist', format: 'cjs' },
+    { input: './src/', outDir: 'dist', format: 'esm' },
   ],
   declaration: true,
   clean: true,
