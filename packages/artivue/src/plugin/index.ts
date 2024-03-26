@@ -37,11 +37,6 @@ export function createArtivue(options: Partial<Options> = {}): Plugin {
         app.use(head)
       }
 
-      const head = getActiveHead()
-
-      if (!head)
-        throw new Error('Artivue: Unhead is not installed. Unhead should have been installed with Artivue. Something went wrong - please report this issue.')
-
       if (_options.registerComponents) {
         // Register components
         Object.entries(components).forEach(([name, component]) => {
