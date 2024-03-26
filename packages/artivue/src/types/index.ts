@@ -1,4 +1,4 @@
-import type { ComputedRef, Ref } from 'vue'
+import type { ComputedRef, MaybeRef } from 'vue'
 import type { generateFullTheme } from '../utils/generateTheme'
 
 export interface ThemeProperty {
@@ -37,4 +37,17 @@ export interface UseThemeLayerReturn {
   isDark: ComputedRef<boolean>
   id: ComputedRef<string>
   _multiplier: ComputedRef<number>
+}
+
+export interface ThemeData {
+  theme: ComputedRef<Theme>
+  generatedTheme: ComputedRef<GeneratedTheme>
+  className: ComputedRef<string> | null
+  id: ComputedRef<string> | null
+  isDark: ComputedRef<boolean>
+  parentThemeData: ThemeData | null
+  baseThemeData: Omit<ThemeData, 'parentThemeData' | 'baseThemeData'> & {
+    setBaseTheme: (theme: MaybeRef<Theme>) => void
+    options: Options
+  }
 }

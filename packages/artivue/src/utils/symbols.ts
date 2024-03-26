@@ -1,17 +1,4 @@
-import type { ComputedRef, InjectionKey, MaybeRef, Ref } from 'vue'
-import type { GeneratedTheme, Options, Theme } from '../types'
-
-interface ThemeData {
-  theme: ComputedRef<Theme>
-  generatedTheme: ComputedRef<GeneratedTheme>
-  className: ComputedRef<string> | null
-  id: ComputedRef<string> | null
-  isDark: ComputedRef<boolean>
-  parentThemeData: ThemeData | null
-  baseThemeData: Omit<ThemeData, 'parentThemeData' | 'baseThemeData'> & {
-    setBaseTheme: (theme: MaybeRef<Theme>) => void
-    options: Options
-  }
-}
+import type { InjectionKey } from 'vue'
+import type { ThemeData } from '../types'
 
 export const THEME_DATA = Symbol('BASE_THEME') as InjectionKey<ThemeData>
