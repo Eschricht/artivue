@@ -4,11 +4,11 @@ The `ThemeLayer` is a component that simply wraps [useThemeLayer composable](/gu
 
 ## Props
 
-#### is - `string | Component` - _optional_
+#### as - `string | Component` - _optional_
 
 Default: `undefined`
 
-By default, `ThemeLayer` is a functional component, not adding any DOM elements. You can disable this behavior by setting this prop to a tag- or component name. The class name will be added to the root component class list
+By default, `ThemeLayer` is a simple wrapper component, not adding any DOM elements. You can disable this behavior by setting this prop to a tag or component name. The class name will be added to the root component class list
 
 ---
 
@@ -24,7 +24,7 @@ Lets you completely change the theme from it's parent theme
 
 Default: `undefined`
 
-The multiplier passed to `useThemeLayer` which controls how much tint/shade to apply from the parent theme. This will be omitted if `theme` prop is passed.
+The multiplier passed to `useThemeLayer` which controls how much tint/shade to apply from the parent theme.
 
 ## Slot props
 
@@ -59,7 +59,7 @@ Output:
 
 ---
 
-### Setting `is` prop
+### Setting `as` prop
 
 ```vue
 <template>
@@ -125,10 +125,14 @@ Output:
     as="div"
     class="card"
     :theme="{
-      surfaceColor: '#589edf',
-      surfaceTextColor: '#000000',
-      accentColor: '#5c72ff',
-      accentTextColor: '#ffffff',
+      surface: {
+        background: '#589edf',
+        text: '#000000',
+      },
+      accent: {
+        background: '#5c72ff',
+        text: '#ffffff',
+      },
     }"
   >
     <p>Hello world</p>

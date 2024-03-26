@@ -7,7 +7,7 @@ const theme: Theme = {
   },
   surface: {
     background: '#292c3d',
-    text: '#000000',
+    text: '#ffffff',
   },
 }
 

@@ -1,4 +1,4 @@
-import type { ComputedRef } from 'vue'
+import type { ComputedRef, Ref } from 'vue'
 import type { generateFullTheme } from '../utils/generateTheme'
 
 export interface ThemeProperty {

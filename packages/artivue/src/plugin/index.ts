@@ -1,5 +1,6 @@
-import { type MaybeRef, type Plugin, computed, ref, unref } from 'vue'
+import { type MaybeRef, type Plugin, computed, nextTick, ref, unref } from 'vue'
 import { createHead, useHead } from '@unhead/vue'
+import { getActiveHead } from 'unhead'
 import { generateFullTheme } from '../utils/generateTheme'
 import { THEME_DATA } from '../utils/symbols'
 import { themeToCssContent, themesToVars } from '../utils/themeToCssContent'
@@ -35,6 +36,11 @@ export function createArtivue(options: Partial<Options> = {}): Plugin {
         const head = createHead()
         app.use(head)
       }
+
+      const head = getActiveHead()
+
+      if (!head)
+        throw new Error('Artivue: Unhead is not installed. Unhead should have been installed with Artivue. Something went wrong - please report this issue.')
 
       if (_options.registerComponents) {
         // Register components

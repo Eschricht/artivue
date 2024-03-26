@@ -4,30 +4,42 @@ Based on your current theme configuration, Artivue generates a set of CSS variab
 
 ```css
 :root {
-  --artivue-text-alt: var(--artivue-text-alt-2);
-  --artivue-surface: 23, 23, 23;
-  --artivue-border: 42, 42, 42;
-  --artivue-text: 255, 255, 255;
-  --artivue-action: 36, 36, 36;
-  --artivue-input: 14, 14, 14;
-  --artivue-action-hover: 48, 48, 48;
-  --artivue-text-alt-1: 204, 204, 204;
-  --artivue-text-alt-2: 179, 179, 179;
-  --artivue-text-alt-3: 153, 153, 153;
-  --artivue-surface-hover: 36, 36, 36;
-  --artivue-surface-light: 48, 48, 48;
-  --artivue-surface-dark: 0, 0, 0;
-  --artivue-input-focus: 25, 20, 29;
-  --artivue-accent: 158, 76, 240;
+  --artivue-accent-text-alt: var(--artivue-accent-text-alt-2);
+  --artivue-accent-bg: 43, 107, 227;
   --artivue-accent-text: 255, 255, 255;
-  --artivue-accent-hover: 171, 99, 242;
-  --artivue-accent-light: 184, 123, 244;
-  --artivue-accent-dark: 133, 29, 236;
+  --artivue-accent-text-alt-1: 204, 204, 204;
+  --artivue-accent-text-alt-2: 153, 153, 153;
+  --artivue-accent-text-alt-3: 102, 102, 102;
+  --artivue-accent-border: 77, 131, 232;
+  --artivue-accent-action: 65, 123, 230;
+  --artivue-accent-action-hover: 111, 155, 236;
+  --artivue-accent-hover: 88, 139, 233;
+  --artivue-accent-light: 133, 170, 239;
+  --artivue-accent-dark: 19, 65, 149;
+  --artivue-accent-light-hover: 178, 202, 245;
+  --artivue-accent-dark-hover: 13, 45, 104;
+  --artivue-surface-text-alt: var(--artivue-surface-text-alt-2);
+  --artivue-surface-bg: 25, 26, 36;
+  --artivue-surface-text: 255, 255, 255;
+  --artivue-surface-text-alt-1: 204, 204, 204;
+  --artivue-surface-text-alt-2: 153, 153, 153;
+  --artivue-surface-text-alt-3: 102, 102, 102;
+  --artivue-surface-border: 41, 43, 58;
+  --artivue-surface-action: 36, 37, 51;
+  --artivue-surface-action-hover: 57, 59, 81;
+  --artivue-surface-hover: 47, 48, 66;
+  --artivue-surface-light: 68, 71, 95;
+  --artivue-surface-dark: 0, 0, 0;
+  --artivue-surface-light-hover: 89, 93, 125;
+  --artivue-surface-dark-hover: 0, 0, 0;
+  --artivue-input-text-alt: var(--artivue-input-text-alt-2);
+  --artivue-input-bg: 16, 16, 22;
+  --artivue-input-focus: 21, 23, 35;
 }
 ```
 
 > [!NOTE]
-> This is automatically injected to your application, powered by [`@unhead/vue`](https://unhead.unjs.io/).
+> This is automatically injected in runtime to your application, powered by [`@unhead/vue`](https://unhead.unjs.io/). Depending on your configuration, there might be a brief flash of incorrect colors. Using Nuxt in SSR or SSG mode is recommended to avoid this.
 
 ## Usage
 
@@ -37,34 +49,33 @@ Artivue doesn't utilize the CSS variables out-of-the-box. I highly recommend usi
 /* src/assets/main.css */
 
 :root {
-  background-color: rgba(var(--artivue-surface), 1);
-  color: rgba(var(--artivue-text), 1);
+  background-color: rgba(var(--artivue-surface-bg), 1);
+  color: rgba(var(--artivue-surface-text), 1);
 }
 
 button {
-  border: 1px solid rgba(var(--artivue-border), 1);
+  border: 1px solid rgba(var(--artivue-surface-border), 1);
   border-radius: 0.5em;
-
-  background-color: rgba(var(--artivue-action)), 1);
-  color: rgba(var(--artivue-text)), 1);
-
+  background-color: rgba(var(--artivue-surface-action)), 1);
+  color: rgba(var(--artivue-suface-text)), 1);
   padding: 1em;
 }
 
 button .accent {
-  border: 1px solid rgba(var(--artivue-accent), 1);
+  border: 1px solid rgba(var(--artivue-accent-border), 1);
   border-radius: 0.5em;
-
-  background-color: rgba(var(--artivue-accent)), 1);
+  background-color: rgba(var(--artivue-accent-bg)), 1);
   color: rgba(var(--artivue-accent-text)), 1);
 }
 
 input {
-    border: 1px solid rgba(var(--artivue-border), 1);
-    border-radius: 0.5em;
+  border: 1px solid rgba(var(--artivue-surface-border), 1);
+  border-radius: 0.5em;
+  background-color: rgba(var(--artivue-input-bg), 1);
+  padding: 1em;
+}
 
-    background-color: rgba(var(--artivue-input), 1);
-    
-    padding: 1em;
+input:focus {
+  background-color: rgba(var(--artivue-input-focus), 1);
 }
 ```

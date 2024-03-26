@@ -12,8 +12,6 @@ function generateFullThemeProperty(themeProperty: ThemeProperty, multiplier = 0)
     background: changeLightnessBy(colord(themeProperty.background), multiplier * 2),
   }
 
-  console.log(background.toHex())
-
   const isDark = background.isDark()
   // TODO: Check if text color should be modified
   const text = colord(themeProperty.text)

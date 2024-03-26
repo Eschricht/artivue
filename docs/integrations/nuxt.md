@@ -7,15 +7,15 @@ For your Nuxt projects, Artivue is shipped with a Nuxt module
 ::: code-group
 
 ```bash [pnpm]
-pnpm add artivue @artivue/nuxt
+pnpm add @artivue/nuxt
 ```
 
 ```bash [yarn]
-yarn add artivue @artivue/nuxt
+yarn add @artivue/nuxt
 ```
 
 ```bash [npm]
-npm install artivue @artivue/nuxt
+npm install @artivue/nuxt
 ```
 
 :::

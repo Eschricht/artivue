@@ -48,11 +48,11 @@ const {
 
 <style>
 .card {
-  background-color: rgba(var(--artivue-surface), 1);
-  border: 1px solid rgba(var(--artivue-border), 1);
+  background-color: rgba(var(--artivue-surface-bg), 1);
+  border: 1px solid rgba(var(--artivue-surface-border), 1);
   border-radius: 0.5em;
   padding: 1em;
-  color: rgba(var(--artivue-text), 1);
+  color: rgba(var(--artivue-surface-text), 1);
 }
 </style>
 ```
@@ -145,10 +145,14 @@ const {
   isDark,
   theme,
 } = useThemeLayer({
-  surfaceColor: '#589edf',
-  surfaceTextColor: '#000000',
-  accentColor: '#5c72ff',
-  accentTextColor: '#ffffff',
+  surface: {
+    background: '#589edf',
+    text: '#000000',
+  },
+  accent: {
+    background: '#5c72ff',
+    text: '#ffffff',
+  }
 })
 </script>
 ```
@@ -169,12 +173,16 @@ Example:
 ## Type reference
 
 ```typescript
-declare function useThemeLayer(arg?: MaybeRef<number | undefined | BaseTheme>): {
-    className: ComputedRef<string>;
-    parentTheme: ComputedRef<BaseTheme>;
-    theme: ComputedRef<BaseTheme>;
-    generatedTheme: ComputedRef<ColordTheme>;
-    isDark: ComputedRef<boolean>;
-    cssVars: ComputedRef<Record<string, string>>;
-};
+interface UseThemeLayerReturn {
+  className: ComputedRef<string>
+  theme: ComputedRef<Theme>
+  generatedTheme: ComputedRef<GeneratedTheme>
+  isDark: ComputedRef<boolean>
+  id: ComputedRef<string>
+}
+
+function useThemeLayer(multiplier?: MaybeRef<number>): UseThemeLayerReturn
+function useThemeLayer(fn: (parent: Theme, isParentDark: boolean) => PartialTheme, multiplier?: MaybeRef<number>): UseThemeLayerReturn
+function useThemeLayer(theme: MaybeRef<PartialTheme>, multiplier?: MaybeRef<number>): UseThemeLayerReturn
+function useThemeLayer(arg?: MaybeRef<PartialTheme | number | undefined | ((parent: Theme, isParentDark: boolean) => PartialTheme)>, multiplier?: MaybeRef<number | undefined>): UseThemeLayerReturn
 ```

@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ThemeLayer, themes, useBaseTheme } from 'artivue'
-import { onMounted, ref, watch } from 'vue'
+import { ref, watch } from 'vue'
 import Card from '~/components/Card.vue'
 
 const currentTheme = ref<keyof typeof themes | undefined>('dark')

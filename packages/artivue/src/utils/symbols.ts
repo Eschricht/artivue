@@ -1,4 +1,4 @@
-import type { ComputedRef, InjectionKey, MaybeRef } from 'vue'
+import type { ComputedRef, InjectionKey, MaybeRef, Ref } from 'vue'
 import type { GeneratedTheme, Options, Theme } from '../types'
 
 interface ThemeData {

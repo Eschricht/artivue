@@ -22,12 +22,13 @@ const {
 ## Type reference
 
 ```typescript
-declare function useThemeLayer(arg?: MaybeRef<number | undefined | BaseTheme>): {
-    className: ComputedRef<string>;
-    parentTheme: ComputedRef<BaseTheme>;
-    theme: ComputedRef<BaseTheme>;
-    generatedTheme: ComputedRef<ColordTheme>;
+function useCurrentTheme(): {
+    theme: ComputedRef<Theme>;
+    generatedTheme: ComputedRef<GeneratedTheme>;
+    className: ComputedRef<string> | null;
+    id: ComputedRef<string> | null;
     isDark: ComputedRef<boolean>;
-    cssVars: ComputedRef<Record<string, string>>;
-};
+    parentThemeData: ThemeData | null;
+}
+
 ```

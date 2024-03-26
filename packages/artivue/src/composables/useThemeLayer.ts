@@ -1,7 +1,8 @@
-import { type MaybeRef, computed, inject, provide, unref } from 'vue'
-import { type ActiveHeadEntry, type MergeHead, type UseHeadInput, useHead } from '@unhead/vue'
+import { type MaybeRef, computed, inject, provide, ref, unref } from 'vue'
+import { useHead } from '@unhead/vue'
+import { getActiveHead } from 'unhead'
 import { THEME_DATA } from '../utils/symbols'
-import type { GeneratedTheme, PartialTheme, Theme, UseThemeLayerReturn } from '../types'
+import type { PartialTheme, Theme, UseThemeLayerReturn } from '../types'
 import { generateFullTheme } from '../utils/generateTheme'
 import { resolvePartialTheme } from '../utils/resolvePartialTheme'
 import { generatedToBasic } from '../utils/generatedToBasic'
@@ -9,24 +10,26 @@ import { themeToCssContent, themesToVars } from '../utils/themeToCssContent'
 
 // TODO: Temporary solution until Vue 3.5 is released: https://x.com/youyuxi/status/1745379112456429688?s=20
 function generateId(hexColors: string[]): string {
-  const chars: string = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'
-  const hexStr: string = hexColors.map(color => color.substring(1)).join('')
-  const binStr: string = [...hexStr].map(h => Number.parseInt(h, 16).toString(2).padStart(4, '0')).join('')
+  // const chars: string = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'
+  // const hexStr: string = hexColors.map(color => color.substring(1)).join('')
+  // const binStr: string = [...hexStr].map(h => Number.parseInt(h, 16).toString(2).padStart(4, '0')).join('')
 
-  // Mixing bits to create a diverse range of values
-  let id: string = ''
-  for (let i = 0; i < 12; i++) {
-    let segmentSum: number = 0
-    for (let j = 0; j < binStr.length; j++) {
-      // Incorporating more complex operations for bit mixing
-      const bitValue: number = Number.parseInt(binStr[j] as string, 2)
-      segmentSum += bitValue * (j + 1) * (i + 1) // Use position-based weighting
-    }
+  // // Mixing bits to create a diverse range of values
+  // let id: string = ''
+  // for (let i = 0; i < 12; i++) {
+  //   let segmentSum: number = 0
+  //   for (let j = 0; j < binStr.length; j++) {
+  //     // Incorporating more complex operations for bit mixing
+  //     const bitValue: number = Number.parseInt(binStr[j] as string, 2)
+  //     segmentSum += bitValue * (j + 1) * (i + 1) // Use position-based weighting
+  //   }
 
-    // Apply a non-linear transformation to the sum before modulo operation
-    const mixedValue: number = Math.floor(Math.sin(segmentSum + i) * 10000)
-    id += chars[Math.abs(mixedValue) % 62]
-  }
+  //   // Apply a non-linear transformation to the sum before modulo operation
+  //   const mixedValue: number = Math.floor(Math.sin(segmentSum + i) * 10000)
+  //   id += chars[Math.abs(mixedValue) % 62]
+  // }
+
+  const id = hexColors.join('-').replace(/#/g, '')
 
   return id
 }
@@ -37,8 +40,9 @@ export function useThemeLayer(theme: MaybeRef<PartialTheme>, multiplier?: MaybeR
 export function useThemeLayer(arg?: MaybeRef<PartialTheme | number | undefined | ((parent: Theme, isParentDark: boolean) => PartialTheme)>, multiplier?: MaybeRef<number | undefined>): UseThemeLayerReturn
 export function useThemeLayer(arg?: MaybeRef<PartialTheme | number | undefined | ((parent: Theme, isParentDark: boolean) => PartialTheme)>, multiplier: MaybeRef<number | undefined> = 0): UseThemeLayerReturn {
   const injectedThemeData = inject(THEME_DATA)
+  const unheadInstance = getActiveHead()
 
-  if (!injectedThemeData)
+  if (!injectedThemeData || !unheadInstance)
     throw new Error('Artivue plugin is not installed.')
 
   const {

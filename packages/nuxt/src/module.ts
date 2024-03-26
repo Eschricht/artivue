@@ -1,7 +1,7 @@
 import { addComponent, addImports, addPlugin, createResolver, defineNuxtModule, extendViteConfig } from '@nuxt/kit'
 import type { Options } from 'artivue'
 
-export type ModuleOptions = Partial<Options>
+export type ModuleOptions = Omit<Partial<Options>, 'registerComponents'>
 
 export default defineNuxtModule<ModuleOptions>({
   meta: {

@@ -67,7 +67,6 @@ export const ThemeLayer = defineComponent({
           className: className.value,
           id: id.value,
           _multiplier: _multiplier.value,
-
         })
       }
     }
