@@ -40,9 +40,8 @@ export function useThemeLayer(theme: MaybeRef<PartialTheme>, multiplier?: MaybeR
 export function useThemeLayer(arg?: MaybeRef<PartialTheme | number | undefined | ((parent: Theme, isParentDark: boolean) => PartialTheme)>, multiplier?: MaybeRef<number | undefined>): UseThemeLayerReturn
 export function useThemeLayer(arg?: MaybeRef<PartialTheme | number | undefined | ((parent: Theme, isParentDark: boolean) => PartialTheme)>, multiplier: MaybeRef<number | undefined> = 0): UseThemeLayerReturn {
   const injectedThemeData = inject(THEME_DATA)
-  const unheadInstance = getActiveHead()
 
-  if (!injectedThemeData || !unheadInstance)
+  if (!injectedThemeData)
     throw new Error('Artivue plugin is not installed.')
 
   const {
