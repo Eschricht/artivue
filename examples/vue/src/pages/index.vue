@@ -1,11 +1,9 @@
 <script setup lang="ts">
-import { ThemeLayer, themes, useBaseTheme } from 'artivue'
+import { themes, useBaseTheme } from 'artivue'
 import { ref, watch } from 'vue'
 import Card from '~/components/Card.vue'
 
 const currentTheme = ref<keyof typeof themes | undefined>('dark')
-
-const multiplier = ref(1)
 
 const {
   setBaseTheme,
@@ -25,24 +23,7 @@ function toggleTheme() {
 <template>
   <div>
     <Card>
-      <ThemeLayer
-        as="div"
-        :theme="(parent, isDark) => ({
-          accent: {
-            background: parent.surface.text,
-            text: parent.surface.background,
-          },
-          surface: {
-            background: isDark ? parent.surface.background : parent.accent.background,
-            text: parent.accent.text,
-          },
-        })"
-        :multiplier="multiplier"
-        un-artivue-surface="~ border"
-        un-border="~"
-        un-rounded="lg"
-        un-p="6"
-      >
+      <Card>
         <Card>
           <p class="text-artivue-surface-text">
             Hello world
@@ -93,7 +74,7 @@ function toggleTheme() {
         <div un-m="t-4">
           <input class="interactive border pl-3 outline-none artivue-input">
         </div>
-      </ThemeLayer>
+      </Card>
 
       <div un-m="t-4">
         <button class="interactive artivue-button-accent artivue-button-solid" @click="toggleTheme">

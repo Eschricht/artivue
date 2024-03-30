@@ -15,9 +15,9 @@ function generateFullThemeProperty(themeProperty: ThemeProperty, multiplier = 0)
   const isDark = background.isDark()
   // TODO: Check if text color should be modified
   const text = colord(themeProperty.text)
-  const action = isDark ? background.lighten(0.05) : background.darken(0.05)
-  const light = background.lighten(0.2)
-  const dark = background.darken(0.2)
+  const action = isDark ? background.lighten(0.1) : background.darken(0.1)
+  const light = background.lighten(0.1)
+  const dark = background.darken(0.1)
 
   return {
     'bg': background,
@@ -27,8 +27,8 @@ function generateFullThemeProperty(themeProperty: ThemeProperty, multiplier = 0)
     'text-alt-3': isDark ? text.darken(0.6) : text.lighten(0.6),
     'border': isDark ? background.lighten(0.075) : background.darken(0.075),
     'action': action,
-    'action-hover': isDark ? action.lighten(0.1) : action.darken(0.1),
-    'hover': isDark ? background.lighten(0.1) : background.darken(0.1),
+    'action-hover': isDark ? action.lighten(0.05) : action.darken(0.05),
+    'hover': isDark ? background.lighten(0.05) : background.darken(0.05),
     'light': light,
     'dark': dark,
     'light-hover': light.lighten(0.1),
