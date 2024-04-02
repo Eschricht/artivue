@@ -18,6 +18,7 @@ const mainSideBar = [{
   items: [
     { text: 'useBaseTheme', link: '/guide/composables/use-base-theme' },
     { text: 'useThemeLayer', link: '/guide/composables/use-theme-layer' },
+    { text: 'useCurrentTheme', link: '/guide/composables/use-current-theme' },
   ],
 }, {
   text: 'Components',

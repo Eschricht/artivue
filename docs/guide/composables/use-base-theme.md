@@ -9,13 +9,13 @@ The `useBaseTheme` composable allows you to change your theme whenever you need 
 import { themes, useBaseTheme } from 'artivue'
 
 const {
-  // A Ref containing the current theme config
+  // A computed ref containing the current theme config
   theme,
-  // A ComputedRef with the full generated theme config
+  // A computed ref with the full generated theme config
   generatedTheme,
-  // A ComputedRef which tells if the current theme is dark or not
+  // A computed ref which tells if the current theme is dark or not
   isDark,
-  // A function to set a new base theme. (It's also possible to modify `theme ref`)
+  // A function to set a new base theme.
   setBaseTheme,
 } = useBaseTheme()
 
@@ -28,10 +28,10 @@ function switchTheme() {
 ## Type reference
 
 ```typescript
-declare function useBaseTheme(): {
-    setBaseTheme: (newTheme?: MaybeRef<BaseTheme>) => void;
-    theme: Ref<BaseTheme>;
+function useBaseTheme(): {
+    theme: ComputedRef<Theme>;
+    setBaseTheme: (theme: MaybeRef<Theme>) => void;
     isDark: ComputedRef<boolean>;
-    generatedTheme: ComputedRef<ColordTheme>;
-};
+    generatedTheme: ComputedRef<GeneratedTheme>;
+}
 ```

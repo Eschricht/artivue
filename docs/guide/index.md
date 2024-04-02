@@ -4,10 +4,10 @@ import Card from '../components/Card.vue'
 
 # What is Artivue?
 
-<Card un-p="4" un-m="t-6" un-inline="block" un-transition="colors" un-duration="200" class="hover:(bg-artivue-accent/25 border-artivue-accent-hover/25) [&_div]:hover:(bg-artivue-accent/25 border-artivue-accent-hover/25) [&_p>span]:hover:text-artivue-accent-text [&_p]:hover:text-artivue-accent-text">
+<Card un-p="4" un-m="t-6" un-inline="block" un-transition="colors" un-duration="200" class="hover:(bg-artivue-accent/25 border-artivue-accent-hover/25) [&_div]:hover:(bg-artivue-accent/25 border-artivue-accent-hover/25) [&_p>span]:hover:text-artivue-accent-text-alt-1 [&_p]:hover:text-artivue-accent-text">
   <Card un-p="4" un-transition="colors" un-duration="400">
       <Card un-p="4" un-transition="colors" un-duration="600">
-        <p un-m="0!" un-text="xl artivue-accent" un-transition="colors" un-duration="600"><span un-text="artivue-accent-light" un-transition="colors" un-duration="600">Layered themes</span> made easy</p>
+        <p un-m="0!" un-text="xl artivue-accent" un-transition="colors" un-duration="600"><span un-text="artivue-accent-action" un-transition="colors" un-duration="600">Layered themes</span> made easy</p>
       </Card>
   </Card>
 </Card>
@@ -39,7 +39,7 @@ Then, install add the plugin in your entry file
 ```typescript
 // main.ts
 import { createApp } from 'vue'
-import { createArtivue, themes } from 'artivue'
+import { createArtivue } from 'artivue'
 import App from './App.vue'
 
 import './styles/main.css'
@@ -51,22 +51,27 @@ app.use(artivuePlugin)
 app.mount('#app')
 ```
 
-You can optionally specify the initial theme to use, either with your own definitions or use a provided theme
+You can optionally specify the initial theme to use, either by using a provided theme
 
 ```typescript
-import { themes } from 'artivue'
+import { createArtivue, themes } from 'artivue'
 
 const artivuePlugin = createArtivue({ theme: themes.dark })
-
 ```
+
+Or with your own definitions
 
 ```typescript
 const artivuePlugin = createArtivue({
   theme: {
-    accentColor: '#2b6be3',
-    accentTextColor: '#ffffff',
-    surfaceColor: '#191A23',
-    surfaceTextColor: '#ffffff',
+    surface: {
+      background: '#191A23',
+      text: '#ffffff',
+    },
+    accent: {
+      background: '#2b6be3',
+      text: '#ffffff',
+    }
   }
 })
 ```

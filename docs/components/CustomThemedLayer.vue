@@ -2,10 +2,14 @@
 import { useThemeLayer } from 'artivue'
 
 const { className } = useThemeLayer({
-  surfaceColor: '#589edf',
-  surfaceTextColor: '#000000',
-  accentColor: '#5c72ff',
-  accentTextColor: '#ffffff',
+  accent: {
+    background: '#5c72ff',
+    text: '#ffffff',
+  },
+  surface: {
+    background: '#589edf',
+    text: '#000000',
+  },
 })
 </script>
 

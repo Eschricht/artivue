@@ -1,14 +1,6 @@
-import type { Options } from './plugin'
-import { createArtivue } from './plugin'
-
-export * from './types'
-export * from './themes'
+export * from './plugin'
 export * from './composables'
 export * from './components'
-export * from './components'
+export * as themes from './themes'
 
-export {
-  createArtivue,
-}
-
-export type { Options }
+export * from './types'

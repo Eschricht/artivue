@@ -1,7 +1,7 @@
 import { createApp } from 'vue'
 import { createRouter, createWebHistory } from 'vue-router/auto'
-
-import { createArtivue, themes } from 'artivue'
+import { createArtivue } from 'artivue'
+import { midnight } from 'artivue/themes'
 import App from './App.vue'
 
 import './styles/main.css'
@@ -13,7 +13,7 @@ const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
 })
 
-const plugin = createArtivue({ theme: themes.midnight })
+const artivue = createArtivue({ theme: midnight })
 app.use(router)
-app.use(plugin)
+app.use(artivue)
 app.mount('#app')

@@ -6,7 +6,6 @@ export default defineNuxtPlugin(({ vueApp }) => {
 
   const plugin = createArtivue({
     ...artivue,
-    registerComponents: false,
   })
 
   vueApp.use(plugin)

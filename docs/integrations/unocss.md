@@ -39,6 +39,21 @@ export default defineConfig({
 ### Why?
 
 The preset adds a bunch of new theme colors to UnoCSS that is based on the CSS variables.
-For example, you may use classes as `text-artivue-text`, `bg-artivue-accent`, `border-artivue-border`, simplifying theming.
+For example, you may use classes that match the CSS variables such as `artivue-surface-text`, `artivue-accent-bg`, `artivue-surface-border`, simplifying theming.
+If you want to go crazy, there's also utilities like `bg-artivue-surface-text` and `text-artivue-input-focus` etc.
 
-The preset also includes a bunch of useful UnoCSS rules and shortcuts. Check out the [source code](https://github.com/Eschricht/artivue/blob/main/packages/unocss/src/preset.ts) to see the available rules.
+The preset also includes a bunch of other useful UnoCSS rules and shortcuts for easy styling of elements such as buttons and inputs. Check out the [source code](https://github.com/Eschricht/artivue/blob/main/packages/unocss/src/preset.ts) to see the available rules. Example:
+
+```vue
+<template>
+  <button class="artivue-button-accent artivue-button artivue-button-solid">
+    The button
+  </button>
+</template>
+```
+
+Output:
+
+<button class="artivue-button-accent artivue-button artivue-button-solid">
+  The button
+</button>

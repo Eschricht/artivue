@@ -7,7 +7,7 @@ import Card from './Card.vue'
   <Card un-p="4" un-m="t-4">
     <Card un-p="4">
       <div>Theme nesting</div>
-      <div un-text="sm artivue-text-alt-3">
+      <div un-text="sm artivue-surface-text-alt-2">
         Theme layers is fun!
       </div>
     </Card>

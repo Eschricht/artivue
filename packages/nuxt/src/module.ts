@@ -1,21 +1,30 @@
-import { addComponent, addImports, addPlugin, createResolver, defineNuxtModule } from '@nuxt/kit'
+import { addComponent, addImports, addPlugin, createResolver, defineNuxtModule, extendViteConfig } from '@nuxt/kit'
 import type { Options } from 'artivue'
 
-export type ModuleOptions = Omit<Options, 'registerComponents'>
+export type ModuleOptions = Omit<Partial<Options>, 'registerComponents'>
 
 export default defineNuxtModule<ModuleOptions>({
   meta: {
-    name: 'artivue',
+    name: '@artivue/nuxt',
     configKey: 'artivue',
   },
   defaults: {},
+  hooks: {
+    'prepare:types': (ctx) => {
+      ctx.tsConfig.compilerOptions ||= {}
+      ctx.tsConfig.compilerOptions.types ||= []
+      ctx.tsConfig.compilerOptions!.types.push('artivue')
+      ctx.references.push({
+        types: 'artivue',
+      })
+    },
+  },
   setup(moduleOptions, nuxt) {
     const resolver = createResolver(import.meta.url)
 
     // Add plugin
     nuxt.options.runtimeConfig.public.artivue = {
       ...moduleOptions,
-      registerComponents: false,
     }
 
     addImports([{
@@ -25,6 +34,14 @@ export default defineNuxtModule<ModuleOptions>({
     }, {
       name: 'useBaseTheme',
       as: 'useBaseTheme',
+      from: 'artivue',
+    }, {
+      name: 'useCurrentTheme',
+      as: 'useCurrentTheme',
+      from: 'artivue',
+    }, {
+      name: 'useArtivue',
+      as: 'useArtivue',
       from: 'artivue',
     }])
 
@@ -38,6 +55,20 @@ export default defineNuxtModule<ModuleOptions>({
       src: resolver.resolve('runtime/plugin'),
       name: 'artivue',
       mode: 'all',
+    })
+
+    extendViteConfig((config) => {
+      config.build = config.build || {}
+      config.build.rollupOptions = config.build.rollupOptions || {}
+      config.build.rollupOptions.output = config.build.rollupOptions.output || {}
+
+      config.build.rollupOptions.output = {
+        ...config.build.rollupOptions.output,
+        manualChunks: (id) => {
+          if (id.includes('/node_modules/artivue'))
+            return 'artivue'
+        },
+      }
     })
   },
 })
