@@ -83,7 +83,7 @@ export function presetArtivue(_options: Partial<Options> = {}): Preset<Theme> {
        * @example "artivue-input-within" -> "bg-artivue-input-bg border-artivue-surface-border text-artivue-surface-text focus-within:bg-artivue-input-focus focus-within:text-artivue-surface-text-alt focus-within:border-artivue-accent-border"
        */
       [
-        new RegExp(`${prefix}-input(-within)?`),
+        new RegExp(`^${prefix}-input(-within)?$`),
         ([, within = '']) => `
           bg-${prefix}-input-bg
           border
