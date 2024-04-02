@@ -1,7 +1,7 @@
 {
   "name": "@artivue/unocss",
   "type": "module",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "private": false,
   "author": "Eschricht <https://github.com/eschricht>",
   "license": "MIT",
