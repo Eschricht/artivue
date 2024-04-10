@@ -21,10 +21,14 @@ const { theme } = useBaseTheme()
 
 ```json-vue
 {
-  "surfaceColor": "{{ theme.surfaceColor }}",
-  "surfaceTextColor": "{{ theme.surfaceTextColor }}",
-  "accentColor": "{{ theme.accentColor }}",
-  "accentTextColor": "{{ theme.accentTextColor }}"
+  "surface": {
+    "bg": "{{ theme.surface.background }}",
+    "text": "{{ theme.surface.text }}"
+  },
+  "accent": {
+    "bg": "{{ theme.accent.background }}",
+    "text": "{{ theme.accent.text }}"
+  }
 }
 ```
 
@@ -36,10 +40,14 @@ const {
 } = useBaseTheme()
 
 setBaseTheme({
-  surfaceColor: "{{ theme.surfaceColor }}",
-  surfaceTextColor: "{{ theme.surfaceTextColor }}",
-  accentColor: "{{ theme.accentColor }}",
-  accentTextColor: "{{ theme.accentTextColor }}",
+  surface: {
+    bg: "{{ theme.surface.background }}",
+    text: "{{ theme.surface.text }}",
+  },
+  accent: {
+    bg: "{{ theme.accent.background }}",
+    text: "{{ theme.accent.text }}",
+  },
 })
 ```
 
@@ -47,9 +55,13 @@ setBaseTheme({
 
 ```js-vue
 const { className } = useThemeLayer({
-  surfaceColor: "{{ theme.surfaceColor }}",
-  surfaceTextColor: "{{ theme.surfaceTextColor }}",
-  accentColor: "{{ theme.accentColor }}",
-  accentTextColor: "{{ theme.accentTextColor }}",
+  surface: {
+    bg: "{{ theme.surface.background }}",
+    text: "{{ theme.surface.text }}",
+  },
+  accent: {
+    bg: "{{ theme.accent.background }}",
+    text: "{{ theme.accent.text }}",
+  },
 })
 ```
