@@ -1,4 +1,4 @@
-import type { Preset } from '@unocss/core'
+import type { PresetOrFactory } from '@unocss/core'
 import type { Theme } from '@unocss/preset-mini'
 
 // TODO: Write tests for this preset
@@ -28,7 +28,7 @@ const specifierUtilMap = {
   'dark-hover': 'bg',
 }
 
-export function presetArtivue(_options: Partial<Options> = {}): Preset<Theme> {
+export function presetArtivue(_options: Partial<Options> = {}): PresetOrFactory<Theme> {
   const options = { ...defaultOptions, ..._options }
 
   const prefix = options.prefix ?? defaultOptions.prefix
@@ -131,10 +131,10 @@ export function presetArtivue(_options: Partial<Options> = {}): Preset<Theme> {
       ].join(' ')],
 
       [`${prefix}-button-accent`, [
-        `var-btn-bg-[var(--${prefix}-accent-action)]`,
+        `var-btn-bg-[var(--${prefix}-accent-bg)]`,
         `var-btn-text-[var(--${prefix}-accent-text)]`,
-        `var-btn-bg-hover-[var(--${prefix}-accent-action-hover)]`,
-        `var-btn-border-[var(--${prefix}-accent-action)]`,
+        `var-btn-bg-hover-[var(--${prefix}-accent-hover)]`,
+        `var-btn-border-[var(--${prefix}-accent-bg)]`,
       ].join(' ')],
     ],
 

@@ -49,7 +49,7 @@
     "dist"
   ],
   "scripts": {
-    "build": "tsx ./scripts/build.ts && pnpm -r --filter=./packages/nuxt prepack",
+    "build": "tsx ./scripts/build.ts && pnpm -r --filter=./packages/nuxt dev:prepare",
     "clean": "rimraf packages/*/dist",
     "lint": "eslint .",
     "lint:fix": "eslint --fix .",

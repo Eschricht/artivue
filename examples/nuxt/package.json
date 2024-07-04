@@ -11,8 +11,14 @@
   },
   "dependencies": {
     "@artivue/nuxt": "workspace:*",
+    "@artivue/unocss": "workspace:*",
+    "@eschricht/nuxt-color-mode": "^1.0.5",
     "nuxt": "^3.10.3",
+    "nuxt-shiki": "^0.3.0",
     "vue": "^3.4.21",
     "vue-router": "^4.3.0"
+  },
+  "devDependencies": {
+    "@unocss/nuxt": "^0.61.0"
   }
 }
