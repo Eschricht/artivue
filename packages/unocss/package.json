@@ -1,7 +1,7 @@
 {
   "name": "@artivue/unocss",
   "type": "module",
-  "version": "0.3.3",
+  "version": "0.3.4",
   "private": false,
   "author": "Eschricht <https://github.com/eschricht>",
   "license": "MIT",
@@ -38,8 +38,11 @@
     "build": "unbuild",
     "preview": "vite preview"
   },
+  "peerDependencies": {
+    "unocss": ">= 0.31.13 < 1"
+  },
   "devDependencies": {
-    "@unocss/core": "^0.58.6",
-    "@unocss/preset-mini": "^0.58.6"
+    "@unocss/core": "^0.61.5",
+    "@unocss/preset-mini": "^0.61.5"
   }
 }
