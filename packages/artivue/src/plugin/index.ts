@@ -1,6 +1,5 @@
-import { type MaybeRef, type Plugin, computed, nextTick, ref, unref } from 'vue'
+import { type MaybeRef, type Plugin, computed, ref, unref } from 'vue'
 import { createHead, useHead } from '@unhead/vue'
-import { getActiveHead } from 'unhead'
 import { generateFullTheme } from '../utils/generateTheme'
 import { THEME_DATA } from '../utils/symbols'
 import { themeToCssContent, themesToVars } from '../utils/themeToCssContent'

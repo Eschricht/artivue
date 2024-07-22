@@ -1,5 +1,4 @@
-import type { PresetOrFactory } from '@unocss/core'
-import type { Theme } from '@unocss/preset-mini'
+import type { Preset } from '@unocss/core'
 
 // TODO: Write tests for this preset
 
@@ -28,7 +27,7 @@ const specifierUtilMap = {
   'dark-hover': 'bg',
 }
 
-export function presetArtivue(_options: Partial<Options> = {}): PresetOrFactory<Theme> {
+export function presetArtivue(_options: Partial<Options> = {}): Preset {
   const options = { ...defaultOptions, ..._options }
 
   const prefix = options.prefix ?? defaultOptions.prefix

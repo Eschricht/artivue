@@ -25,7 +25,7 @@
     "@unocss/preset-icons": "^0.51.13",
     "@unocss/preset-uno": "0.51.13",
     "@unocss/preset-web-fonts": "^0.51.13",
-    "unocss": "^0.58.5",
+    "unocss": "^0.61.5",
     "vitepress": "^1.0.0-rc.42"
   }
 }

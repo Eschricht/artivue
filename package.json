@@ -1,5 +1,6 @@
 {
   "name": "artivue",
+  "type": "module",
   "version": "0.2.0",
   "private": true,
   "packageManager": "pnpm@8.14.2",
@@ -66,14 +67,21 @@
     "@vue/tsconfig": "^0.5.1",
     "bumpp": "^9.3.0",
     "changelogen": "^0.5.5",
-    "eslint": "npm:eslint-ts-patch@8.57.0-0",
+    "eslint": "^9.7.0",
     "eslint-plugin-format": "^0.1.0",
-    "eslint-ts-patch": "8.57.0-0",
     "rimraf": "^5.0.5",
     "tsx": "^4.7.1",
     "typescript": "^5.3.3",
     "unbuild": "^2.0.0",
     "vitepress": "1.0.0-rc.45",
     "vue-tsc": "^2.0.6"
+  },
+  "pnpm": {
+    "peerDependencyRules": {
+      "allowedVersions": {
+        "eslint": "9",
+        "@typescript-eslint/parser": "7"
+      }
+    }
   }
 }

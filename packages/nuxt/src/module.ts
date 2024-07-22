@@ -1,5 +1,6 @@
-import { addComponent, addImports, addPlugin, createResolver, defineNuxtModule, extendViteConfig } from '@nuxt/kit'
+import { addComponent, addImports, addPlugin, addTemplate, addTypeTemplate, createResolver, defineNuxtModule, extendViteConfig } from '@nuxt/kit'
 import type { Options } from 'artivue'
+import { light } from 'artivue/themes'
 
 export type ModuleOptions = Omit<Partial<Options>, 'registerComponents'>
 
@@ -8,7 +9,10 @@ export default defineNuxtModule<ModuleOptions>({
     name: '@artivue/nuxt',
     configKey: 'artivue',
   },
-  defaults: {},
+  defaults: {
+    prefix: 'artivue',
+    theme: light,
+  },
   hooks: {
     'prepare:types': (ctx) => {
       ctx.tsConfig.compilerOptions ||= {}
@@ -22,10 +26,21 @@ export default defineNuxtModule<ModuleOptions>({
   setup(moduleOptions, nuxt) {
     const resolver = createResolver(import.meta.url)
 
-    // Add plugin
-    nuxt.options.runtimeConfig.public.artivue = {
-      ...moduleOptions,
-    }
+    nuxt.options.alias['#artivue-options'] = addTemplate({
+      filename: 'artivue-options.mjs',
+      getContents: () => Object.entries(moduleOptions).map(([key, value]) =>
+        `export const ${key} = ${JSON.stringify(value, null, 2)}
+      `).join('\n'),
+    }).dst
+
+    addTypeTemplate({
+      filename: 'artivue-options.d.ts',
+      getContents: () => `
+declare module '#artivue-options' {
+  export const { ${Object.entries(moduleOptions).map(([key]) => key).join(', ')} }: Omit<import('artivue').Options, 'registerComponents'>
+}
+`,
+    })
 
     addImports([{
       name: 'useThemeLayer',
@@ -55,20 +70,6 @@ export default defineNuxtModule<ModuleOptions>({
       src: resolver.resolve('runtime/plugin'),
       name: 'artivue',
       mode: 'all',
-    })
-
-    extendViteConfig((config) => {
-      config.build = config.build || {}
-      config.build.rollupOptions = config.build.rollupOptions || {}
-      config.build.rollupOptions.output = config.build.rollupOptions.output || {}
-
-      config.build.rollupOptions.output = {
-        ...config.build.rollupOptions.output,
-        manualChunks: (id) => {
-          if (id.includes('/node_modules/artivue'))
-            return 'artivue'
-        },
-      }
     })
   },
 })

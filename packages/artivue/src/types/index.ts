@@ -12,7 +12,6 @@ export interface Theme {
 }
 
 export interface Options {
-  // TODO: Add options
   theme: Theme
   prefix: string
   registerComponents: boolean
@@ -20,12 +19,6 @@ export interface Options {
 
 export type PartialTheme = {
   [K in keyof Theme]?: Partial<ThemeProperty>
-}
-
-export interface Options {
-  // TODO: Add options
-  theme: Theme
-  prefix: string
 }
 
 export type GeneratedTheme = ReturnType<typeof generateFullTheme>

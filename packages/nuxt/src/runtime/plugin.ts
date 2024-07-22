@@ -1,11 +1,10 @@
 import { createArtivue } from 'artivue'
-import { defineNuxtPlugin, useRuntimeConfig } from '#imports'
+import { defineNuxtPlugin } from '#imports'
+import * as artivueOptions from '#artivue-options'
 
 export default defineNuxtPlugin(({ vueApp }) => {
-  const { artivue } = useRuntimeConfig().public
-
   const plugin = createArtivue({
-    ...artivue,
+    ...artivueOptions,
   })
 
   vueApp.use(plugin)
