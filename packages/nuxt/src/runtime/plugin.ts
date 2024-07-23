@@ -1,5 +1,4 @@
-import { createArtivue } from 'artivue'
-import { defineNuxtPlugin } from '#imports'
+import { createArtivue, defineNuxtPlugin } from '#imports'
 import * as artivueOptions from '#artivue-options'
 
 export default defineNuxtPlugin(({ vueApp }) => {

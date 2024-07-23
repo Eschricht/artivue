@@ -58,6 +58,10 @@ declare module '#artivue-options' {
       name: 'useArtivue',
       as: 'useArtivue',
       from: 'artivue',
+    }, {
+      name: 'createArtivue',
+      as: 'createArtivue',
+      from: 'artivue',
     }])
 
     addComponent({
