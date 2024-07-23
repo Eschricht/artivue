@@ -3,6 +3,10 @@
 
 ## v0.2.1
 
+[compare changes](https://github.com/Eschricht/unocss-preset-hsl/compare/v0.3.5...v0.2.1)
+
+## v0.2.1
+
 [compare changes](https://github.com/Eschricht/unocss-preset-hsl/compare/v0.2.0...v0.2.1)
 
 ### 🚀 Enhancements
