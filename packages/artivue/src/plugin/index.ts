@@ -63,7 +63,7 @@ export function createArtivue(options: Partial<Options> = {}): Plugin {
         isDark,
       }
 
-      app.provide(THEME_DATA, {
+      const themeData = {
         ...rootThemeData,
         parentThemeData: null,
         baseThemeData: {
@@ -75,7 +75,11 @@ export function createArtivue(options: Partial<Options> = {}): Plugin {
           },
           options: _options,
         },
-      })
+      }
+
+      app.config.globalProperties.$artivue = themeData
+
+      app.provide(THEME_DATA, themeData)
     },
   }
 }

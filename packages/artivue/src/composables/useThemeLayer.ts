@@ -1,12 +1,12 @@
-import { type MaybeRef, computed, inject, provide, ref, unref } from 'vue'
+import { type MaybeRef, computed, provide, unref } from 'vue'
 import { useHead } from '@unhead/vue'
-import { getActiveHead } from 'unhead'
 import { THEME_DATA } from '../utils/symbols'
 import type { PartialTheme, Theme, UseThemeLayerReturn } from '../types'
 import { generateFullTheme } from '../utils/generateTheme'
 import { resolvePartialTheme } from '../utils/resolvePartialTheme'
 import { generatedToBasic } from '../utils/generatedToBasic'
 import { themeToCssContent, themesToVars } from '../utils/themeToCssContent'
+import { useArtivue } from './useArtivue'
 
 // TODO: Temporary solution until Vue 3.5 is released: https://x.com/youyuxi/status/1745379112456429688?s=20
 function generateId(hexColors: string[]): string {
@@ -39,10 +39,7 @@ export function useThemeLayer(fn: (parent: Theme, isParentDark: boolean) => Part
 export function useThemeLayer(theme: MaybeRef<PartialTheme>, multiplier?: MaybeRef<number>): UseThemeLayerReturn
 export function useThemeLayer(arg?: MaybeRef<PartialTheme | number | undefined | ((parent: Theme, isParentDark: boolean) => PartialTheme)>, multiplier?: MaybeRef<number | undefined>): UseThemeLayerReturn
 export function useThemeLayer(arg?: MaybeRef<PartialTheme | number | undefined | ((parent: Theme, isParentDark: boolean) => PartialTheme)>, multiplier: MaybeRef<number | undefined> = 0): UseThemeLayerReturn {
-  const injectedThemeData = inject(THEME_DATA)
-
-  if (!injectedThemeData)
-    throw new Error('Artivue plugin is not installed.')
+  const injectedThemeData = useArtivue()
 
   const {
     theme: parentTheme,
