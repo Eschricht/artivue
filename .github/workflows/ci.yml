@@ -31,4 +31,4 @@ jobs:
       - name: Lint
         run: pnpm lint:fix
 
-      - uses: autofix-ci/action@v1
+      - uses: ci/action@v1
