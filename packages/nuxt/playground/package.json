@@ -12,5 +12,6 @@
   },
   "devDependencies": {
     "@unocss/nuxt": "^0.61.5"
-  }
+  },
+  "version": "0.3.8"
 }
