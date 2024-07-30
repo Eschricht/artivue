@@ -69,7 +69,9 @@
     "changelogen": "^0.5.5",
     "eslint": "^9.7.0",
     "eslint-plugin-format": "^0.1.0",
+    "lint-staged": "^15.2.7",
     "rimraf": "^5.0.5",
+    "simple-git-hooks": "^2.11.1",
     "tsx": "^4.7.1",
     "typescript": "^5.3.3",
     "unbuild": "^2.0.0",
@@ -83,5 +85,13 @@
         "@typescript-eslint/parser": "7"
       }
     }
+  },
+  "simple-git-hooks": {
+    "pre-commit": "npx lint-staged"
+  },
+  "lint-staged": {
+    "*.{js,ts,tsx,vue,md}": [
+      "eslint --cache --fix"
+    ]
   }
 }
