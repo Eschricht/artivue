@@ -1,7 +1,7 @@
 {
   "name": "my-module-playground",
   "type": "module",
-  "version": "0.3.9",
+  "version": "0.3.10",
   "private": true,
   "scripts": {
     "dev": "nuxi dev",
