@@ -1,4 +1,4 @@
-name: ci
+name: autofix.ci
 
 on:
   push:
@@ -31,4 +31,4 @@ jobs:
       - name: Lint
         run: pnpm lint:fix
 
-      - uses: ci/action@v1
+      - uses: autofix-ci/action@v1
