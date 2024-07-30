@@ -1,4 +1,3 @@
-import { presetArtivue } from '../packages/unocss/dist'
 import {
   defineConfig,
   presetAttributify,
@@ -8,6 +7,7 @@ import {
   transformerDirectives,
   transformerVariantGroup,
 } from 'unocss'
+import { presetArtivue } from '../packages/unocss'
 
 export default defineConfig({
   presets: [

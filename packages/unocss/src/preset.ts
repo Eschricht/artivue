@@ -1,9 +1,6 @@
 import type { Preset } from '@unocss/core'
 
-// TODO: Write tests for this preset
-
 interface Options {
-  // TODO
   prefix: string
 }
 
@@ -27,6 +24,13 @@ const specifierUtilMap = {
   'dark-hover': 'bg',
 }
 
+const typeResolver = {
+  surface: 'surface',
+  accent: 'accent',
+  s: 'surface',
+  a: 'accent',
+}
+
 export function presetArtivue(_options: Partial<Options> = {}): Preset {
   const options = { ...defaultOptions, ..._options }
 
@@ -43,33 +47,38 @@ export function presetArtivue(_options: Partial<Options> = {}): Preset {
     ],
 
     shortcuts: [
+      // Base utilities
+
       /**
        * Assign background / text quick shortcut
        *
        * @example "artivue-surface" -> "bg-artivue-surface-bg text-artivue-surface-text"
        */
       [
-        new RegExp(`^${prefix}-(surface|accent)`),
+        new RegExp(`^${prefix}-(surface|accent|s|a)`),
         ([, type]) => {
-          return `${prefix}-${type}-bg ${prefix}-${type}-text`
+          const resolvedType = typeResolver[type as keyof typeof typeResolver]
+
+          return `${prefix}-${resolvedType}-bg ${prefix}-${type}-text`
         },
       ],
 
       /**
        * Base utility
        *
-       * @example "artivue-surface-bg" -> "bg-artivue-surface-bg text-artivue-surface-text"
-       * @example "artivue-accent-text/10" -> "bg-artivue-accent-bg text-artivue-accent-text"
+       * @example "artivue-surface-bg" -> "bg-artivue-surface-bg"
+       * @example "artivue-accent-text/10" -> "text-artivue-accent-text/10"
        */
       [
-        new RegExp(`^${prefix}-(surface|accent)-(.*?)(/(\\d+))?$`),
+        new RegExp(`^${prefix}-(surface|accent|s|a)-(.*?)(/(\\d+))?$`),
         ([, type, specifier, alphaSuffix]) => {
           const utilityFallback = specifierUtilMap[specifier as keyof typeof specifierUtilMap]
+          const resolvedType = typeResolver[type as keyof typeof typeResolver]
 
           if (!utilityFallback || !specifier)
             return
 
-          return `${utilityFallback}-${prefix}-${type}-${specifier}${alphaSuffix ?? ''}`
+          return `${utilityFallback}-${prefix}-${resolvedType}-${specifier}${alphaSuffix ?? ''}`
         },
       ],
 

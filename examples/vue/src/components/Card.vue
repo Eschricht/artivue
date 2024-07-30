@@ -3,8 +3,6 @@ import { useThemeLayer } from 'artivue'
 
 const result = useThemeLayer()
 
-console.log(result)
-
 const {
   className,
 } = result

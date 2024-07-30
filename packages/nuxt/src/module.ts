@@ -1,4 +1,4 @@
-import { addComponent, addImports, addPlugin, addTemplate, addTypeTemplate, createResolver, defineNuxtModule, extendViteConfig } from '@nuxt/kit'
+import { addComponent, addImports, addPlugin, addTemplate, addTypeTemplate, createResolver, defineNuxtModule } from '@nuxt/kit'
 import type { Options } from 'artivue'
 import { light } from 'artivue/themes'
 

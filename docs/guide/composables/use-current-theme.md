@@ -23,12 +23,11 @@ const {
 
 ```typescript
 function useCurrentTheme(): {
-    theme: ComputedRef<Theme>;
-    generatedTheme: ComputedRef<GeneratedTheme>;
-    className: ComputedRef<string> | null;
-    id: ComputedRef<string> | null;
-    isDark: ComputedRef<boolean>;
-    parentThemeData: ThemeData | null;
+  theme: ComputedRef<Theme>
+  generatedTheme: ComputedRef<GeneratedTheme>
+  className: ComputedRef<string> | null
+  id: ComputedRef<string> | null
+  isDark: ComputedRef<boolean>
+  parentThemeData: ThemeData | null
 }
-
 ```

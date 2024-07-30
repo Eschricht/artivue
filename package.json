@@ -1,7 +1,7 @@
 {
   "name": "artivue",
   "type": "module",
-  "version": "0.2.1",
+  "version": "0.3.7",
   "private": true,
   "packageManager": "pnpm@8.14.2",
   "description": "Say goodbye to the endless cycle of picking shades like bg-dark-200 and hello to a world where creating the perfect color is a breeze",
@@ -58,7 +58,7 @@
     "docs:preview": "vitepress preview docs",
     "docs:build": "tsx ./scripts/build.ts && vitepress build docs",
     "docs:dev": "vitepress dev docs",
-    "release": "bumpp packages/**/package.json"
+    "release": "bumpp -r"
   },
   "devDependencies": {
     "@antfu/eslint-config": "^2.6.4",

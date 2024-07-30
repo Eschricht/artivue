@@ -29,9 +29,9 @@ function switchTheme() {
 
 ```typescript
 function useBaseTheme(): {
-    theme: ComputedRef<Theme>;
-    setBaseTheme: (theme: MaybeRef<Theme>) => void;
-    isDark: ComputedRef<boolean>;
-    generatedTheme: ComputedRef<GeneratedTheme>;
+  theme: ComputedRef<Theme>
+  setBaseTheme: (theme: MaybeRef<Theme>) => void
+  isDark: ComputedRef<boolean>
+  generatedTheme: ComputedRef<GeneratedTheme>
 }
 ```

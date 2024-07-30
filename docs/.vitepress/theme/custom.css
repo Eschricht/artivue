@@ -20,11 +20,14 @@
   --vp-button-alt-hover-bg: rgba(var(--artivue-surface-action-hover), 1);
   --vp-button-alt-text: rgba(var(--artivue-surface-text), 1);
 
-  --vp-home-hero-image-background-image: linear-gradient(-45deg, rgba(var(--artivue-accent-dark), 1) 0%, #90EE90);
+  --vp-home-hero-image-background-image: linear-gradient(
+    -45deg,
+    rgba(var(--artivue-accent-dark), 1) 0%,
+    #90ee90
+  );
   --vp-home-hero-image-filter: blur(120px);
 }
 
 .VPImage {
   opacity: 0.65;
 }
- 
