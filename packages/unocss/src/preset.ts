@@ -31,10 +31,49 @@ const typeResolver = {
   a: 'accent',
 }
 
+const buttonAliases = [
+  'button',
+  'btn',
+  'b',
+]
+
 export function presetArtivue(_options: Partial<Options> = {}): Preset {
   const options = { ...defaultOptions, ..._options }
 
   const prefix = options.prefix ?? defaultOptions.prefix
+
+  const colors = Object.keys(typeResolver).reduce((acc, key) => {
+    const value = typeResolver[key as keyof typeof typeResolver]
+
+    return {
+      ...acc,
+      [`${prefix}-${key}`]: `rgba(var(--${prefix}-${value}-bg))`,
+      [`${prefix}-${key}-bg`]: `rgba(var(--${prefix}-${value}-bg))`,
+
+      [`${prefix}-${key}-text`]: `rgba(var(--${prefix}-${value}-text))`,
+      [`${prefix}-${key}-text-alt`]: `rgba(var(--${prefix}-${value}-text-alt))`,
+      [`${prefix}-${key}-text-alt-1`]: `rgba(var(--${prefix}-${value}-text-alt-1))`,
+      [`${prefix}-${key}-text-alt-2`]: `rgba(var(--${prefix}-${value}-text-alt-2))`,
+      [`${prefix}-${key}-text-alt-3`]: `rgba(var(--${prefix}-${value}-text-alt-3))`,
+
+      [`${prefix}-${key}-border`]: `rgba(var(--${prefix}-${value}-border))`,
+
+      [`${prefix}-${key}-action`]: `rgba(var(--${prefix}-${value}-action))`,
+      [`${prefix}-${key}-action-hover`]: `rgba(var(--${prefix}-${value}-action-hover))`,
+
+      [`${prefix}-${key}-hover`]: `rgba(var(--${prefix}-${value}-hover))`,
+
+      [`${prefix}-${key}-light`]: `rgba(var(--${prefix}-${value}-light))`,
+      [`${prefix}-${key}-light-hover`]: `rgba(var(--${prefix}-${value}-light-hover))`,
+      [`${prefix}-${key}-dark`]: `rgba(var(--${prefix}-${value}-dark))`,
+      [`${prefix}-${key}-dark-hover`]: `rgba(var(--${prefix}-${value}-dark-hover))`,
+    }
+  }, {
+    [`${prefix}-input-bg`]: `rgba(var(--${prefix}-input-bg))`,
+    [`${prefix}-input-focus`]: `rgba(var(--${prefix}-input-focus))`,
+    [`${prefix}-i-bg`]: `rgba(var(--${prefix}-input-bg))`,
+    [`${prefix}-i-focus`]: `rgba(var(--${prefix}-input-focus))`,
+  })
 
   return {
     name: 'unocss-preset-theme-maker',
@@ -57,9 +96,7 @@ export function presetArtivue(_options: Partial<Options> = {}): Preset {
       [
         new RegExp(`^${prefix}-(surface|accent|s|a)`),
         ([, type]) => {
-          const resolvedType = typeResolver[type as keyof typeof typeResolver]
-
-          return `${prefix}-${resolvedType}-bg ${prefix}-${type}-text`
+          return `${prefix}-${type}-bg ${prefix}-${type}-text`
         },
       ],
 
@@ -73,12 +110,11 @@ export function presetArtivue(_options: Partial<Options> = {}): Preset {
         new RegExp(`^${prefix}-(surface|accent|s|a)-(.*?)(/(\\d+))?$`),
         ([, type, specifier, alphaSuffix]) => {
           const utilityFallback = specifierUtilMap[specifier as keyof typeof specifierUtilMap]
-          const resolvedType = typeResolver[type as keyof typeof typeResolver]
 
           if (!utilityFallback || !specifier)
             return
 
-          return `${utilityFallback}-${prefix}-${resolvedType}-${specifier}${alphaSuffix ?? ''}`
+          return `${utilityFallback}-${prefix}-${type}-${specifier}${alphaSuffix ?? ''}`
         },
       ],
 
@@ -91,8 +127,8 @@ export function presetArtivue(_options: Partial<Options> = {}): Preset {
        * @example "artivue-input-within" -> "bg-artivue-input-bg border-artivue-surface-border text-artivue-surface-text focus-within:bg-artivue-input-focus focus-within:text-artivue-surface-text-alt focus-within:border-artivue-accent-border"
        */
       [
-        new RegExp(`^${prefix}-input(-within)?$`),
-        ([, within = '']) => `
+        new RegExp(`^${prefix}-(input|i)(-within)?$`),
+        ([, , within = '']) => `
           bg-${prefix}-input-bg
           border
           border-${prefix}-surface-border
@@ -107,7 +143,7 @@ export function presetArtivue(_options: Partial<Options> = {}): Preset {
       /**
        * Button
        */
-      [`${prefix}-button`, [
+      ...buttonAliases.map((alias): [string, string] => [`${prefix}-${alias}`, [
         `border`,
         `border-solid`,
         `disabled:opacity-50`,
@@ -116,83 +152,38 @@ export function presetArtivue(_options: Partial<Options> = {}): Preset {
         `duration-300`,
         `rounded-md`,
         `px-2`,
-      ].join(' ')],
+      ].join(' ')]),
 
-      [`${prefix}-button-solid`, [
+      ...buttonAliases.map((alias): [string, string] => [`${prefix}-${alias}-solid`, [
         `${prefix}-button`,
         `bg-[rgba(var(--${prefix}-btn-bg,var(--${prefix}-surface-action)))]`,
         `text-[rgba(var(--${prefix}-btn-text,var(--${prefix}-surface-text)))]`,
         `hover:bg-[rgba(var(--${prefix}-btn-bg-hover,var(--${prefix}-surface-action-hover)))]`,
         `border-[rgba(var(--${prefix}-btn-border,var(--${prefix}-surface-action)))]`,
-      ].join(' ')],
-      [`${prefix}-button-outline`, [
+      ].join(' ')]),
+      ...buttonAliases.map((alias): [string, string] => [`${prefix}-${alias}-outline`, [
         `${prefix}-button bg-[rgba(var(--${prefix}-btn-bg-hover,var(--${prefix}-surface-action-hover)))]/0`,
         `text-[rgba(var(--${prefix}-btn-bg,var(--${prefix}-surface-text)))]`,
         `border-[rgba(var(--${prefix}-btn-bg,var(--${prefix}-surface-border)))]`,
         `hover:bg-[rgba(var(--${prefix}-btn-bg-hover,var(--${prefix}-surface-action-hover)))]/20`,
-      ].join(' ')],
-      [`${prefix}-button-text`, [
+      ].join(' ')]),
+      ...buttonAliases.map((alias): [string, string] => [`${prefix}-${alias}-text`, [
         `${prefix}-button bg-[rgba(var(--${prefix}-btn-bg-hover,var(--${prefix}-surface-action-hover)))]/0`,
         `text-[rgba(var(--${prefix}-btn-bg,var(--${prefix}-surface-text)))]`,
         'border-transparent',
         `hover:bg-[rgba(var(--${prefix}-btn-bg-hover,var(--${prefix}-surface-action-hover)))]/20`,
-      ].join(' ')],
+      ].join(' ')]),
 
-      [`${prefix}-button-accent`, [
+      ...buttonAliases.map((alias): [string, string] => [`${prefix}-${alias}-accent`, [
         `var-btn-bg-[var(--${prefix}-accent-bg)]`,
         `var-btn-text-[var(--${prefix}-accent-text)]`,
         `var-btn-bg-hover-[var(--${prefix}-accent-hover)]`,
         `var-btn-border-[var(--${prefix}-accent-bg)]`,
-      ].join(' ')],
+      ].join(' ')]),
     ],
 
     theme: {
-      colors: {
-        [`${prefix}-surface`]: `rgba(var(--${prefix}-surface-bg))`,
-        [`${prefix}-surface-bg`]: `rgba(var(--${prefix}-surface-bg))`,
-
-        [`${prefix}-surface-text`]: `rgba(var(--${prefix}-surface-text))`,
-        [`${prefix}-surface-text-alt`]: `rgba(var(--${prefix}-surface-text-alt))`,
-        [`${prefix}-surface-text-alt-1`]: `rgba(var(--${prefix}-surface-text-alt-1))`,
-        [`${prefix}-surface-text-alt-2`]: `rgba(var(--${prefix}-surface-text-alt-2))`,
-        [`${prefix}-surface-text-alt-3`]: `rgba(var(--${prefix}-surface-text-alt-3))`,
-
-        [`${prefix}-surface-border`]: `rgba(var(--${prefix}-surface-border))`,
-
-        [`${prefix}-surface-action`]: `rgba(var(--${prefix}-surface-action))`,
-        [`${prefix}-surface-action-hover`]: `rgba(var(--${prefix}-surface-action-hover))`,
-
-        [`${prefix}-surface-hover`]: `rgba(var(--${prefix}-surface-hover))`,
-
-        [`${prefix}-surface-light`]: `rgba(var(--${prefix}-surface-light))`,
-        [`${prefix}-surface-light-hover`]: `rgba(var(--${prefix}-surface-light-hover))`,
-        [`${prefix}-surface-dark`]: `rgba(var(--${prefix}-surface-dark))`,
-        [`${prefix}-surface-dark-hover`]: `rgba(var(--${prefix}-surface-dark-hover))`,
-
-        [`${prefix}-accent`]: `rgba(var(--${prefix}-accent-bg))`,
-        [`${prefix}-accent-bg`]: `rgba(var(--${prefix}-accent-bg))`,
-
-        [`${prefix}-accent-text`]: `rgba(var(--${prefix}-accent-text))`,
-        [`${prefix}-accent-text-alt`]: `rgba(var(--${prefix}-accent-text-alt))`,
-        [`${prefix}-accent-text-alt-1`]: `rgba(var(--${prefix}-accent-text-alt-1))`,
-        [`${prefix}-accent-text-alt-2`]: `rgba(var(--${prefix}-accent-text-alt-2))`,
-        [`${prefix}-accent-text-alt-3`]: `rgba(var(--${prefix}-accent-text-alt-3))`,
-
-        [`${prefix}-accent-border`]: `rgba(var(--${prefix}-accent-border))`,
-
-        [`${prefix}-accent-action`]: `rgba(var(--${prefix}-accent-action))`,
-        [`${prefix}-accent-action-hover`]: `rgba(var(--${prefix}-accent-action-hover))`,
-
-        [`${prefix}-accent-hover`]: `rgba(var(--${prefix}-accent-hover))`,
-
-        [`${prefix}-accent-light`]: `rgba(var(--${prefix}-accent-light))`,
-        [`${prefix}-accent-light-hover`]: `rgba(var(--${prefix}-accent-light-hover))`,
-        [`${prefix}-accent-dark`]: `rgba(var(--${prefix}-accent-dark))`,
-        [`${prefix}-accent-dark-hover`]: `rgba(var(--${prefix}-accent-dark-hover))`,
-
-        [`${prefix}-input-bg`]: `rgba(var(--${prefix}-input-bg))`,
-        [`${prefix}-input-focus`]: `rgba(var(--${prefix}-input-focus))`,
-      },
+      colors,
     },
   }
 }
