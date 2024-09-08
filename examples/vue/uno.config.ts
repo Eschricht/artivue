@@ -6,7 +6,7 @@ import {
   presetWebFonts,
   transformerDirectives,
 } from 'unocss'
-import { presetArtivue } from '../../packages/unocss'
+import { presetArtivue } from '@artivue/unocss'
 
 export default defineConfig({
   presets: [
