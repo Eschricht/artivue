@@ -26,10 +26,6 @@ export default defineNuxtModule<ModuleOptions>({
   setup(moduleOptions, nuxt) {
     const resolver = createResolver(import.meta.url)
 
-    nuxt.options.vite.optimizeDeps = nuxt.options.vite.optimizeDeps || {}
-    nuxt.options.vite.optimizeDeps.include = nuxt.options.vite.optimizeDeps.include || []
-    nuxt.options.vite.optimizeDeps.include.push('artivue')
-
     nuxt.options.alias['#artivue-options'] = addTemplate({
       filename: 'artivue-options.mjs',
       getContents: () => Object.entries(moduleOptions).map(([key, value]) =>

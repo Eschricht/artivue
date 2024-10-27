@@ -8,10 +8,8 @@
     "build": "nuxi build",
     "generate": "nuxi generate"
   },
-  "dependencies": {
-    "nuxt": "^3.12.4"
-  },
   "devDependencies": {
-    "@unocss/nuxt": "^0.61.8"
+    "@unocss/nuxt": "^0.61.9",
+    "nuxt": "^3.13.2"
   }
 }

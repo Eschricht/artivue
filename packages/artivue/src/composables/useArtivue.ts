@@ -1,11 +1,10 @@
 import { getCurrentInstance, inject } from 'vue'
-import type { ThemeData } from 'artivue/types'
 import { THEME_DATA } from '../utils/symbols'
 
 function useFallback() {
   const instance = getCurrentInstance()
 
-  return instance?.appContext.config.globalProperties.$artivue as ThemeData
+  return instance?.appContext.config.globalProperties.$artivue
 }
 
 export function useArtivue() {

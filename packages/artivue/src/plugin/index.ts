@@ -1,14 +1,14 @@
-import { type MaybeRef, type Plugin, computed, ref, unref } from 'vue'
+import { type App, type MaybeRef, type Plugin, computed, ref, unref } from 'vue'
 import { createHead, useHead } from '@unhead/vue'
 import { generateFullTheme } from '../utils/generateTheme'
 import { THEME_DATA } from '../utils/symbols'
 import { themeToCssContent, themesToVars } from '../utils/themeToCssContent'
-import type { Options, PartialTheme } from '../types'
+import type { Options, PartialTheme, ThemeData } from '../types'
 import { resolvePartialTheme } from '../utils/resolvePartialTheme'
 import { light } from '../themes'
 import * as components from '../components'
 
-export function createArtivue(options: Partial<Options> = {}): Plugin {
+export function createArtivue(options: Partial<Options> = {}): ThemeData & Plugin {
   const _options: Options = {
     prefix: 'artivue',
     theme: light,
@@ -26,8 +26,30 @@ export function createArtivue(options: Partial<Options> = {}): Plugin {
   const themeVars = computed(() => themesToVars(generatedTheme.value, _options.prefix))
   const cssTextContent = computed(() => themeToCssContent(themeVars.value))
 
-  return {
-    install(app) {
+  const rootThemeData = {
+    theme: computed(() => baseTheme.value),
+    generatedTheme,
+    className: null,
+    id: null,
+    isDark,
+  }
+
+  const themeData = {
+    ...rootThemeData,
+    parentThemeData: null,
+    baseThemeData: {
+      ...rootThemeData,
+      setBaseTheme: (theme: MaybeRef<PartialTheme>) => {
+        const newTheme = resolvePartialTheme({ ...unref(theme) }, { ...baseTheme.value })
+
+        baseTheme.value = { ...newTheme }
+      },
+      options: _options,
+    },
+  }
+
+  return Object.assign(themeData, {
+    install(app: App) {
       /**
        * Add Unhead if not already installed
        */
@@ -55,31 +77,9 @@ export function createArtivue(options: Partial<Options> = {}): Plugin {
         })
       })
 
-      const rootThemeData = {
-        theme: computed(() => baseTheme.value),
-        generatedTheme,
-        className: null,
-        id: null,
-        isDark,
-      }
-
-      const themeData = {
-        ...rootThemeData,
-        parentThemeData: null,
-        baseThemeData: {
-          ...rootThemeData,
-          setBaseTheme: (theme: MaybeRef<PartialTheme>) => {
-            const newTheme = resolvePartialTheme({ ...unref(theme) }, { ...baseTheme.value })
-
-            baseTheme.value = { ...newTheme }
-          },
-          options: _options,
-        },
-      }
-
       app.config.globalProperties.$artivue = themeData
 
       app.provide(THEME_DATA, themeData)
     },
-  }
+  })
 }
