@@ -1,7 +1,7 @@
 {
   "name": "@artivue/nuxt",
   "type": "module",
-  "version": "0.3.12",
+  "version": "0.3.13",
   "private": false,
   "author": "Eschricht <https://github.com/eschricht>",
   "license": "MIT",
