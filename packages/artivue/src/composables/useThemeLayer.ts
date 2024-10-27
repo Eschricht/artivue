@@ -8,27 +8,7 @@ import { generatedToBasic } from '../utils/generatedToBasic'
 import { themeToCssContent, themesToVars } from '../utils/themeToCssContent'
 import { useArtivue } from './useArtivue'
 
-// TODO: Temporary solution until Vue 3.5 is released: https://x.com/youyuxi/status/1745379112456429688?s=20
 function generateId(hexColors: string[]): string {
-  // const chars: string = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'
-  // const hexStr: string = hexColors.map(color => color.substring(1)).join('')
-  // const binStr: string = [...hexStr].map(h => Number.parseInt(h, 16).toString(2).padStart(4, '0')).join('')
-
-  // // Mixing bits to create a diverse range of values
-  // let id: string = ''
-  // for (let i = 0; i < 12; i++) {
-  //   let segmentSum: number = 0
-  //   for (let j = 0; j < binStr.length; j++) {
-  //     // Incorporating more complex operations for bit mixing
-  //     const bitValue: number = Number.parseInt(binStr[j] as string, 2)
-  //     segmentSum += bitValue * (j + 1) * (i + 1) // Use position-based weighting
-  //   }
-
-  //   // Apply a non-linear transformation to the sum before modulo operation
-  //   const mixedValue: number = Math.floor(Math.sin(segmentSum + i) * 10000)
-  //   id += chars[Math.abs(mixedValue) % 62]
-  // }
-
   const id = hexColors.join('-').replace(/#/g, '')
 
   return id
